@@ -13,7 +13,7 @@ def login_func():
         password = password_text.get(1.0, "end-1c")
         login_info = [username,password]
         if(login_info in users):
-            pass
+            changing_label.configure(text="Information Recognized!")
         else:
             changing_label.configure(text="No User Matches Your Input. Please Try Again.")
     root.destroy()
