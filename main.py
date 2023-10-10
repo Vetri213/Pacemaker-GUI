@@ -15,7 +15,7 @@ def login_func():
         if(login_info in users):
             pass
         else:
-            changing_label.text = "No User Matches Your Input. Please Try Again."
+            changing_label.configure(text="No User Matches Your Input. Please Try Again.")
     root.destroy()
     login = Tk()
     login.master = root
