@@ -4,6 +4,21 @@ import pygame
 from tkinter import *
 from tkinter import ttk
 
+def pacing_modes():
+    pacing_modes = Tk()
+    pacing_modes.master = root
+    pacing_modes.title("Pacemaker GUI")
+    # Changing background colour
+    pacing_modes.configure(background="black")
+
+    # Changing window size
+    width, height = pacing_modes.winfo_screenwidth(), pacing_modes.winfo_screenheight()
+    pacing_modes.geometry('%dx%d+0+0' % (width, height))
+
+    # Heading
+    label = ttk.Label(master=pacing_modes, text="Pacing Modes", background=bg, foreground=fg, font=("Arial", 80))
+    label.pack()
+
 
 #Login Function
 def login_func():
@@ -13,7 +28,10 @@ def login_func():
         password = password_text.get(1.0, "end-1c")
         login_info = [username,password]
         if(login_info in users):
+            #Go to the ACTUAL DO STUFF PAGE
             changing_label.configure(text="Information Recognized!")
+            login.destroy()
+            pacing_modes()
         else:
             changing_label.configure(text="No User Matches Your Input. Please Try Again.")
     root.destroy()
@@ -66,19 +84,23 @@ def login_func():
 #Register Function
 def register_func():
     def register_submit():
-        #Getting Username and Password from the Textboxes
-        username = user_text.get(1.0, "end-1c")
-        password = password_text.get(1.0, "end-1c")
-        #Creating a New Entry to be added to the file of Users (in the same format)
-        new_entry = "\n"+username+","+password
-        #Opening File in Append Mode (So as not to delete other users)
-        file = open("text.txt", "a")
-        #Adding Entry
-        file.write(new_entry)
-        #Closing file
-        file.close()
-        #Allow Access to the PaceMaker App
-        #DO THIS LATER!!!
+        print(len(users))
+        if (len(users) <10):
+            #Getting Username and Password from the Textboxes
+            username = user_text.get(1.0, "end-1c")
+            password = password_text.get(1.0, "end-1c")
+            #Creating a New Entry to be added to the file of Users (in the same format)
+            new_entry = "\n"+username+","+password
+            #Opening File in Append Mode (So as not to delete other users)
+            file = open("text.txt", "a")
+            #Adding Entry
+            file.write(new_entry)
+            #Closing file
+            file.close()
+            #Allow Access to the PaceMaker App
+            #DO THIS LATER!!!
+        else:
+            changing_label.configure(text="Max Users Registered. Sorry!")
 
     root.destroy()
     register = Tk()
@@ -94,6 +116,11 @@ def register_func():
     # Heading
     label = ttk.Label(master=register, text="REGISTER", background=bg, foreground=fg, font=("Arial", 80))
     label.pack()
+
+    # Changing Label
+    changing_label = ttk.Label(master=register, text="Please Enter Your Information Below:", background=bg, foreground=fg,
+                               font=("Arial", 20))
+    changing_label.pack()
 
     # Username
     user_label = ttk.Label(master=register, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
@@ -136,6 +163,8 @@ def register_func():
 #label1.place(x=0, y=0)
 #label1.lower()
 #bg_order = 0
+
+
 
 if __name__=='__main__':
     # Get Users List
@@ -187,6 +216,5 @@ if __name__=='__main__':
     button.pack()
 
     root.resizable(False, False)
-    # Application(master=root)
     root.mainloop()
 
