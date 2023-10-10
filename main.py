@@ -1,12 +1,58 @@
+import tkinter
+
 import pygame
 from tkinter import *
 from tkinter import ttk
 
+#Login Function
 def login_func():
-    pass
+    root.destroy()
+    login = Tk()
+    login.master=root
+    login.title("Pacemaker GUI")
+    # Changing background colour
+    login.configure(background="black")
 
+    # Changing window size
+    width, height = login.winfo_screenwidth(), login.winfo_screenheight()
+    login.geometry('%dx%d+0+0' % (width, height))
+
+    # Heading
+    label = ttk.Label(master=login, text="LOGIN", background=bg, foreground=fg, font=("Arial", 80))
+    label.pack()
+
+    if (count == 0):
+        pass
+
+#Register Function
 def register_func():
-    pass
+    root.destroy()
+    register = Tk()
+    register.master = root
+    register.title("Pacemaker GUI")
+    # Changing background colour
+    register.configure(background="black")
+
+    # Changing window size
+    width, height = register.winfo_screenwidth(), register.winfo_screenheight()
+    register.geometry('%dx%d+0+0' % (width, height))
+
+    # Heading
+    label = ttk.Label(master=register, text="REGISTER", background=bg, foreground=fg, font=("Arial", 80))
+    label.pack()
+
+    # Username
+    user_label = ttk.Label(master=register, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
+    user_label.pack()
+    user_text = Text(master=register, height=30)
+    user_text.pack()
+
+    # Password
+    password_label = ttk.Label(master=register, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
+    password_label.pack()
+    password_text = Text(master=register, height=20)
+    password_text.pack()
+
 
 # Background Image
 #bg = PhotoImage(file="Sad_Background.gif")
