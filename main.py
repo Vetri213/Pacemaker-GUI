@@ -11,17 +11,16 @@ from tkinter import *
 #bg_order = 0
 
 if __name__=='__main__':
-    #get users list
+    #Get Users List
     file = open("text.txt","r")
     users = []
-    file.readline()
-    count = len(file.readlines())
-    for i in range (count):
-        print(file.readline())
-        #user,password = file.readline().split(",")
-        #users.append(user,password)
 
-    print(count)
+    for line in file.readlines():
+        user = line.strip("\n").split(",")
+        users.append(user)
+    #Number of Users
+    count = len(users)
+
     # creating and naming window
     root = Tk()
     root.title("Pacemaker GUI")
