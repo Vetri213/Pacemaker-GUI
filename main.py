@@ -12,13 +12,15 @@ from tkinter import *
 
 if __name__=='__main__':
     #get users list
-    try:
-        file = open(text.txt,r)
-        #users=pickle.load(open('users.dat','rb')) # read the file of users, if the file does not exist create empty list and the number of users=0
-        #count=len(users)
-    except:
-        users= []
-        count=0
+    file = open("text.txt","r")
+    users = []
+    file.readline()
+    count = len(file.readlines())
+    for i in range (count):
+        print(file.readline())
+        #user,password = file.readline().split(",")
+        #users.append(user,password)
+
     print(count)
     # creating and naming window
     root = Tk()
