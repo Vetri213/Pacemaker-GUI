@@ -9,7 +9,7 @@ def pacing_modes():
     pacing_modes.master = root
     pacing_modes.title("Pacemaker GUI")
     # Changing background colour
-    pacing_modes.configure(background="black")
+    pacing_modes.configure(background="white")
 
     # Changing window size
     width, height = pacing_modes.winfo_screenwidth(), pacing_modes.winfo_screenheight()
@@ -18,6 +18,26 @@ def pacing_modes():
     # Heading
     label = ttk.Label(master=pacing_modes, text="Pacing Modes", background=bg, foreground=fg, font=("Arial", 80))
     label.pack()
+
+    # Create a frame to contain the buttons
+    button_frame = ttk.Frame(pacing_modes, padding=300)
+    button_frame.pack(fill="both", expand=True)
+
+    # Button customization
+    style = ttk.Style()
+    style.configure('Pacing.TButton', background='black', width=30, height=5)
+
+    # Create buttons and add them to the frame
+    button1 = ttk.Button(button_frame, text="AOO", width=20, style='Pacing.TButton')
+    button2 = ttk.Button(button_frame, text="VOO", width=20, style='Pacing.TButton')
+    button3 = ttk.Button(button_frame, text="AAI", width=20, style='Pacing.TButton')
+    button4 = ttk.Button(button_frame, text="VVI", width=20, style='Pacing.TButton')
+
+    # Use the grid layout manager to arrange the buttons in columns
+    button1.grid(row=0, column=0, padx=30, pady=30)
+    button2.grid(row=0, column=1, padx=30, pady=30)
+    button3.grid(row=1, column=0, padx=30, pady=30)
+    button4.grid(row=1, column=1, padx=30, pady=30)
 
 
 #Login Function
