@@ -9,60 +9,212 @@ def show_aoo_mode_page():
     aoo_window.title("AOO Mode")
     aoo_window.configure(background="white")
 
-    # Add label
+    # Add a title
     aoo_label = ttk.Label(aoo_window, text="AOO Mode Information", background="white", foreground="black", font=("Arial", 20))
     aoo_label.pack()
 
     # Add the parameter here
+    lower_rate_label = ttk.Label(aoo_window, text="Lower Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    lower_rate_entry = Entry(aoo_window, font=("Arial", 16))
+    lower_rate_label.pack()
+    lower_rate_entry.pack()
 
+    upper_rate_label = ttk.Label(aoo_window, text="Upper Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    upper_rate_entry = Entry(aoo_window, font=("Arial", 16))
+    upper_rate_label.pack()
+    upper_rate_entry.pack()
+
+    atrial_amplitude_label = ttk.Label(aoo_window, text="Atrial Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    atrial_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
+    atrial_amplitude_label.pack()
+    atrial_amplitude_entry.pack()
+
+    atrial_pulse_width_label = ttk.Label(aoo_window, text="Atrial Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    atrial_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
+    atrial_pulse_width_label.pack()
+    atrial_pulse_width_entry.pack()
+
+    ventricular_amplitude_label = ttk.Label(aoo_window, text="Ventricular Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
+    ventricular_amplitude_label.pack()
+    ventricular_amplitude_entry.pack()
+
+    ventricular_pulse_width_label = ttk.Label(aoo_window, text="Ventricular Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
+    ventricular_pulse_width_label.pack()
+    ventricular_pulse_width_entry.pack()
+
+    vrp_label = ttk.Label(aoo_window, text="VRP:", background="white", foreground="black", font=("Arial", 16))
+    vrp_entry = Entry(aoo_window, font=("Arial", 16))
+    vrp_label.pack()
+    vrp_entry.pack()
+
+    arp_label = ttk.Label(aoo_window, text="ARP:", background="white", foreground="black", font=("Arial", 16))
+    arp_entry = Entry(aoo_window, font=("Arial", 16))
+    arp_label.pack()
+    arp_entry.pack()
 
     # Creat a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
     back_button.pack()
 def show_voo_mode_page():
-    aoo_window = Tk()
-    aoo_window.title("VOO Mode")
-    aoo_window.configure(background="white")
+    voo_window = Tk()
+    voo_window.title("VOO Mode")
+    voo_window.configure(background="white")
 
-    # Add label
-    aoo_label = ttk.Label(aoo_window, text="VOO Mode Information", background="white", foreground="black", font=("Arial", 20))
-    aoo_label.pack()
+    # Add a title
+    voo_label = ttk.Label(voo_window, text="VOO Mode Information", background="white", foreground="black", font=("Arial", 20))
+    voo_label.pack()
 
     # Add the parameter here
+    lower_rate_label = ttk.Label(voo_window, text="Lower Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    lower_rate_entry = Entry(voo_window, font=("Arial", 16))
+    lower_rate_label.pack()
+    lower_rate_entry.pack()
 
+    upper_rate_label = ttk.Label(voo_window, text="Upper Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    upper_rate_entry = Entry(voo_window, font=("Arial", 16))
+    upper_rate_label.pack()
+    upper_rate_entry.pack()
+
+    atrial_amplitude_label = ttk.Label(voo_window, text="Atrial Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    atrial_amplitude_entry = Entry(voo_window, font=("Arial", 16))
+    atrial_amplitude_label.pack()
+    atrial_amplitude_entry.pack()
+
+    atrial_pulse_width_label = ttk.Label(voo_window, text="Atrial Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    atrial_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
+    atrial_pulse_width_label.pack()
+    atrial_pulse_width_entry.pack()
+
+    ventricular_amplitude_label = ttk.Label(voo_window, text="Ventricular Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_amplitude_entry = Entry(voo_window, font=("Arial", 16))
+    ventricular_amplitude_label.pack()
+    ventricular_amplitude_entry.pack()
+
+    ventricular_pulse_width_label = ttk.Label(voo_window, text="Ventricular Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
+    ventricular_pulse_width_label.pack()
+    ventricular_pulse_width_entry.pack()
+
+    vrp_label = ttk.Label(voo_window, text="VRP:", background="white", foreground="black", font=("Arial", 16))
+    vrp_entry = Entry(voo_window, font=("Arial", 16))
+    vrp_label.pack()
+    vrp_entry.pack()
+
+    arp_label = ttk.Label(voo_window, text="ARP:", background="white", foreground="black", font=("Arial", 16))
+    arp_entry = Entry(voo_window, font=("Arial", 16))
+    arp_label.pack()
+    arp_entry.pack()
 
     # Creat a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button = ttk.Button(voo_window, text="Back to Pacing Modes", command=voo_window.destroy)
     back_button.pack()
 def show_aai_mode_page():
-    aoo_window = Tk()
-    aoo_window.title("AAI Mode")
-    aoo_window.configure(background="white")
+    aai_window = Tk()
+    aai_window.title("AAI Mode")
+    aai_window.configure(background="white")
 
     # Add label
-    aoo_label = ttk.Label(aoo_window, text="AAI Mode Information", background="white", foreground="black", font=("Arial", 20))
-    aoo_label.pack()
+    aai_label = ttk.Label(aai_window, text="AAI Mode Information", background="white", foreground="black", font=("Arial", 20))
+    aai_label.pack()
 
     # Add the parameter here
+    lower_rate_label = ttk.Label(aai_window, text="Lower Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    lower_rate_entry = Entry(aai_window, font=("Arial", 16))
+    lower_rate_label.pack()
+    lower_rate_entry.pack()
 
+    upper_rate_label = ttk.Label(aai_window, text="Upper Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    upper_rate_entry = Entry(aai_window, font=("Arial", 16))
+    upper_rate_label.pack()
+    upper_rate_entry.pack()
+
+    atrial_amplitude_label = ttk.Label(aai_window, text="Atrial Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    atrial_amplitude_entry = Entry(aai_window, font=("Arial", 16))
+    atrial_amplitude_label.pack()
+    atrial_amplitude_entry.pack()
+
+    atrial_pulse_width_label = ttk.Label(aai_window, text="Atrial Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    atrial_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
+    atrial_pulse_width_label.pack()
+    atrial_pulse_width_entry.pack()
+
+    ventricular_amplitude_label = ttk.Label(aai_window, text="Ventricular Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_amplitude_entry = Entry(aai_window, font=("Arial", 16))
+    ventricular_amplitude_label.pack()
+    ventricular_amplitude_entry.pack()
+
+    ventricular_pulse_width_label = ttk.Label(aai_window, text="Ventricular Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
+    ventricular_pulse_width_label.pack()
+    ventricular_pulse_width_entry.pack()
+
+    vrp_label = ttk.Label(aai_window, text="VRP:", background="white", foreground="black", font=("Arial", 16))
+    vrp_entry = Entry(aai_window, font=("Arial", 16))
+    vrp_label.pack()
+    vrp_entry.pack()
+
+    arp_label = ttk.Label(aai_window, text="ARP:", background="white", foreground="black", font=("Arial", 16))
+    arp_entry = Entry(aai_window, font=("Arial", 16))
+    arp_label.pack()
+    arp_entry.pack()
 
     # Creat a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
     back_button.pack()
 def show_vvi_mode_page():
-    aoo_window = Tk()
-    aoo_window.title("VVI Mode")
-    aoo_window.configure(background="white")
+    vvi_window = Tk()
+    vvi_window.title("VVI Mode")
+    vvi_window.configure(background="white")
 
-    # Add label
-    aoo_label = ttk.Label(aoo_window, text="VVI Mode Information", background="white", foreground="black", font=("Arial", 20))
-    aoo_label.pack()
+    # Add title
+    vvi_label = ttk.Label(vvi_window, text="VVI Mode Information", background="white", foreground="black", font=("Arial", 20))
+    vvi_label.pack()
 
     # Add the parameter here
+    lower_rate_label = ttk.Label(vvi_window, text="Lower Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    lower_rate_entry = Entry(vvi_window, font=("Arial", 16))
+    lower_rate_label.pack()
+    lower_rate_entry.pack()
 
+    upper_rate_label = ttk.Label(vvi_window, text="Upper Rate Limit:", background="white", foreground="black", font=("Arial", 16))
+    upper_rate_entry = Entry(vvi_window, font=("Arial", 16))
+    upper_rate_label.pack()
+    upper_rate_entry.pack()
+
+    atrial_amplitude_label = ttk.Label(vvi_window, text="Atrial Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    atrial_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
+    atrial_amplitude_label.pack()
+    atrial_amplitude_entry.pack()
+
+    atrial_pulse_width_label = ttk.Label(vvi_window, text="Atrial Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    atrial_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
+    atrial_pulse_width_label.pack()
+    atrial_pulse_width_entry.pack()
+
+    ventricular_amplitude_label = ttk.Label(vvi_window, text="Ventricular Amplitude:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
+    ventricular_amplitude_label.pack()
+    ventricular_amplitude_entry.pack()
+
+    ventricular_pulse_width_label = ttk.Label(vvi_window, text="Ventricular Pulse Width:", background="white", foreground="black", font=("Arial", 16))
+    ventricular_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
+    ventricular_pulse_width_label.pack()
+    ventricular_pulse_width_entry.pack()
+
+    vrp_label = ttk.Label(vvi_window, text="VRP:", background="white", foreground="black", font=("Arial", 16))
+    vrp_entry = Entry(vvi_window, font=("Arial", 16))
+    vrp_label.pack()
+    vrp_entry.pack()
+
+    arp_label = ttk.Label(vvi_window, text="ARP:", background="white", foreground="black", font=("Arial", 16))
+    arp_entry = Entry(vvi_window, font=("Arial", 16))
+    arp_label.pack()
+    arp_entry.pack()
 
     # Creat a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
     back_button.pack()
 
 def pacing_modes():
