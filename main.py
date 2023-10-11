@@ -4,6 +4,8 @@ import pygame
 from tkinter import *
 from tkinter import ttk
 
+
+
 def show_aoo_mode_page():
     aoo_window = Tk()
     aoo_window.title("AOO Mode")
@@ -53,6 +55,10 @@ def show_aoo_mode_page():
     arp_entry = Entry(aoo_window, font=("Arial", 16))
     arp_label.pack()
     arp_entry.pack()
+    # Create a "Save" button
+    save_button = ttk.Button(aoo_window, text="Save")
+    save_button.pack()
+
 
     # Creat a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
@@ -106,6 +112,9 @@ def show_voo_mode_page():
     arp_entry = Entry(voo_window, font=("Arial", 16))
     arp_label.pack()
     arp_entry.pack()
+     # Create a "Save" button
+    save_button = ttk.Button(voo_window, text="Save")
+    save_button.pack()
 
     # Creat a "back" button to return to "Pacing mode"
     back_button = ttk.Button(voo_window, text="Back to Pacing Modes", command=voo_window.destroy)
@@ -159,6 +168,9 @@ def show_aai_mode_page():
     arp_entry = Entry(aai_window, font=("Arial", 16))
     arp_label.pack()
     arp_entry.pack()
+     # Create a "Save" button
+    save_button = ttk.Button(aai_window, text="Save")
+    save_button.pack()
 
     # Creat a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
@@ -212,6 +224,9 @@ def show_vvi_mode_page():
     arp_entry = Entry(vvi_window, font=("Arial", 16))
     arp_label.pack()
     arp_entry.pack()
+    # Create a "Save" button
+    save_button = ttk.Button(vvi_window, text="Save")
+    save_button.pack()
 
     # Creat a "back" button to return to "Pacing mode"
     back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
