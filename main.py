@@ -105,6 +105,7 @@ def login_func():
 def register_func():
     def register_submit():
         print(len(users))
+
         if (len(users) <10):
             #Getting Username and Password from the Textboxes
             username = user_text.get(1.0, "end-1c")
@@ -121,9 +122,9 @@ def register_func():
             #Closing file
                 file.close()
             # Go to the ACTUAL DO STUFF PAGE
-            changing_label.configure(text="Information Recognized!")
-            register.destroy()
-            pacing_modes()
+                changing_label.configure(text="Information Recognized!")
+                register.destroy()
+                pacing_modes()
         else:
             changing_label.configure(text="Max Users Registered. Sorry!")
 
