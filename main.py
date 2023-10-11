@@ -89,6 +89,8 @@ def register_func():
             #Getting Username and Password from the Textboxes
             username = user_text.get(1.0, "end-1c")
             password = password_text.get(1.0, "end-1c")
+            if not username or not password:
+                 changing_label.configure(text="Username or password cannot be empty")
             #Creating a New Entry to be added to the file of Users (in the same format)
             new_entry = "\n"+username+","+password
             #Opening File in Append Mode (So as not to delete other users)
