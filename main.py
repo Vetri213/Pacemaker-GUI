@@ -100,8 +100,10 @@ def register_func():
                 file.write(new_entry)
             #Closing file
                 file.close()
-            #Allow Access to the PaceMaker App
-            #DO THIS LATER!!!
+            # Go to the ACTUAL DO STUFF PAGE
+            changing_label.configure(text="Information Recognized!")
+            register.destroy()
+            pacing_modes()
         else:
             changing_label.configure(text="Max Users Registered. Sorry!")
 
