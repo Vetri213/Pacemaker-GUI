@@ -91,14 +91,15 @@ def register_func():
             password = password_text.get(1.0, "end-1c")
             if not username or not password:
                  changing_label.configure(text="Username or password cannot be empty")
+            else:
             #Creating a New Entry to be added to the file of Users (in the same format)
-            new_entry = "\n"+username+","+password
+                new_entry = "\n"+username+","+password
             #Opening File in Append Mode (So as not to delete other users)
-            file = open("text.txt", "a")
+                file = open("text.txt", "a")
             #Adding Entry
-            file.write(new_entry)
+                file.write(new_entry)
             #Closing file
-            file.close()
+                file.close()
             #Allow Access to the PaceMaker App
             #DO THIS LATER!!!
         else:
