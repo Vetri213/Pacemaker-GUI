@@ -4,6 +4,67 @@ import pygame
 from tkinter import *
 from tkinter import ttk
 
+def show_aoo_mode_page():
+    aoo_window = Tk()
+    aoo_window.title("AOO Mode")
+    aoo_window.configure(background="white")
+
+    # Add label
+    aoo_label = ttk.Label(aoo_window, text="AOO Mode Information", background="white", foreground="black", font=("Arial", 20))
+    aoo_label.pack()
+
+    # Add the parameter here
+
+
+    # Creat a "back" button to return to "Pacing mode"
+    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button.pack()
+def show_voo_mode_page():
+    aoo_window = Tk()
+    aoo_window.title("VOO Mode")
+    aoo_window.configure(background="white")
+
+    # Add label
+    aoo_label = ttk.Label(aoo_window, text="VOO Mode Information", background="white", foreground="black", font=("Arial", 20))
+    aoo_label.pack()
+
+    # Add the parameter here
+
+
+    # Creat a "back" button to return to "Pacing mode"
+    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button.pack()
+def show_aai_mode_page():
+    aoo_window = Tk()
+    aoo_window.title("AAI Mode")
+    aoo_window.configure(background="white")
+
+    # Add label
+    aoo_label = ttk.Label(aoo_window, text="AAI Mode Information", background="white", foreground="black", font=("Arial", 20))
+    aoo_label.pack()
+
+    # Add the parameter here
+
+
+    # Creat a "back" button to return to "Pacing mode"
+    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button.pack()
+def show_vvi_mode_page():
+    aoo_window = Tk()
+    aoo_window.title("VVI Mode")
+    aoo_window.configure(background="white")
+
+    # Add label
+    aoo_label = ttk.Label(aoo_window, text="VVI Mode Information", background="white", foreground="black", font=("Arial", 20))
+    aoo_label.pack()
+
+    # Add the parameter here
+
+
+    # Creat a "back" button to return to "Pacing mode"
+    back_button = ttk.Button(aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
+    back_button.pack()
+
 def pacing_modes():
     pacing_modes = Tk()
     pacing_modes.master = root
@@ -28,10 +89,10 @@ def pacing_modes():
     style.configure('Pacing.TButton', background='black', width=30, height=5)
 
     # Create buttons and add them to the frame
-    button1 = ttk.Button(button_frame, text="AOO", width=20, style='Pacing.TButton')
-    button2 = ttk.Button(button_frame, text="VOO", width=20, style='Pacing.TButton')
-    button3 = ttk.Button(button_frame, text="AAI", width=20, style='Pacing.TButton')
-    button4 = ttk.Button(button_frame, text="VVI", width=20, style='Pacing.TButton')
+    button1 = ttk.Button(button_frame, text="AOO", width=20, style='Pacing.TButton',command=show_aoo_mode_page)
+    button2 = ttk.Button(button_frame, text="VOO", width=20, style='Pacing.TButton',command=show_voo_mode_page)
+    button3 = ttk.Button(button_frame, text="AAI", width=20, style='Pacing.TButton',command=show_aai_mode_page)
+    button4 = ttk.Button(button_frame, text="VVI", width=20, style='Pacing.TButton',command=show_vvi_mode_page)
 
     # Use the grid layout manager to arrange the buttons in columns
     button1.grid(row=0, column=0, padx=30, pady=30)
