@@ -19,43 +19,43 @@ def show_aoo_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(aoo_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(aoo_window, font=("Arial", 16))
-    lower_rate_label.pack()
-    lower_rate_entry.pack()
+    lower_rate_label.pack(pady=10)
+    lower_rate_entry.pack(pady=10)
 
     upper_rate_label = ttk.Label(aoo_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(aoo_window, font=("Arial", 16))
-    upper_rate_label.pack()
-    upper_rate_entry.pack()
+    upper_rate_label.pack(pady=10)
+    upper_rate_entry.pack(pady=10)
 
     atrial_amplitude_label = ttk.Label(aoo_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
     atrial_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
-    atrial_amplitude_label.pack()
-    atrial_amplitude_entry.pack()
+    atrial_amplitude_label.pack(pady=10)
+    atrial_amplitude_entry.pack(pady=10)
 
     atrial_pulse_width_label = ttk.Label(aoo_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     atrial_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
-    atrial_pulse_width_label.pack()
-    atrial_pulse_width_entry.pack()
+    atrial_pulse_width_label.pack(pady=10)
+    atrial_pulse_width_entry.pack(pady=10)
 
     ventricular_amplitude_label = ttk.Label(aoo_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
     ventricular_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
-    ventricular_amplitude_label.pack()
-    ventricular_amplitude_entry.pack()
+    ventricular_amplitude_label.pack(pady=10)
+    ventricular_amplitude_entry.pack(pady=10)
 
     ventricular_pulse_width_label = ttk.Label(aoo_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     ventricular_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
-    ventricular_pulse_width_label.pack()
-    ventricular_pulse_width_entry.pack()
+    ventricular_pulse_width_label.pack(pady=10)
+    ventricular_pulse_width_entry.pack(pady=10)
 
     vrp_label = ttk.Label(aoo_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
     vrp_entry = Entry(aoo_window, font=("Arial", 16))
-    vrp_label.pack()
-    vrp_entry.pack()
+    vrp_label.pack(pady=10)
+    vrp_entry.pack(pady=10)
 
     arp_label = ttk.Label(aoo_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
     arp_entry = Entry(aoo_window, font=("Arial", 16))
-    arp_label.pack()
-    arp_entry.pack()
+    arp_label.pack(pady=10)
+    arp_entry.pack(pady=10)
 
     # Style of Buttons
     style = ttk.Style()
@@ -68,11 +68,11 @@ def show_aoo_mode_page():
 
     # Create a "Save" button
     save_button = ttk.Button(master=aoo_window, text="Save")
-    save_button.pack()
+    save_button.pack(pady=10)
 
     # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(master=aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
-    back_button.pack()
+    back_button.pack(pady=5)
 def show_voo_mode_page():
     voo_window = Tk()
     voo_window.geometry('%dx%d+0+0' % (width, height))
@@ -86,43 +86,43 @@ def show_voo_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(voo_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(voo_window, font=("Arial", 16))
-    lower_rate_label.pack()
-    lower_rate_entry.pack()
+    lower_rate_label.pack(pady=10)
+    lower_rate_entry.pack(pady=10)
 
     upper_rate_label = ttk.Label(voo_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(voo_window, font=("Arial", 16))
-    upper_rate_label.pack()
-    upper_rate_entry.pack()
+    upper_rate_label.pack(pady=10)
+    upper_rate_entry.pack(pady=10)
 
     atrial_amplitude_label = ttk.Label(voo_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
     atrial_amplitude_entry = Entry(voo_window, font=("Arial", 16))
-    atrial_amplitude_label.pack()
-    atrial_amplitude_entry.pack()
+    atrial_amplitude_label.pack(pady=10)
+    atrial_amplitude_entry.pack(pady=10)
 
     atrial_pulse_width_label = ttk.Label(voo_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     atrial_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
-    atrial_pulse_width_label.pack()
-    atrial_pulse_width_entry.pack()
+    atrial_pulse_width_label.pack(pady=10)
+    atrial_pulse_width_entry.pack(pady=10)
 
     ventricular_amplitude_label = ttk.Label(voo_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
     ventricular_amplitude_entry = Entry(voo_window, font=("Arial", 16))
-    ventricular_amplitude_label.pack()
-    ventricular_amplitude_entry.pack()
+    ventricular_amplitude_label.pack(pady=10)
+    ventricular_amplitude_entry.pack(pady=10)
 
     ventricular_pulse_width_label = ttk.Label(voo_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     ventricular_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
-    ventricular_pulse_width_label.pack()
-    ventricular_pulse_width_entry.pack()
+    ventricular_pulse_width_label.pack(pady=10)
+    ventricular_pulse_width_entry.pack(pady=10)
 
     vrp_label = ttk.Label(voo_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
     vrp_entry = Entry(voo_window, font=("Arial", 16))
-    vrp_label.pack()
-    vrp_entry.pack()
+    vrp_label.pack(pady=10)
+    vrp_entry.pack(pady=10)
 
     arp_label = ttk.Label(voo_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
     arp_entry = Entry(voo_window, font=("Arial", 16))
-    arp_label.pack()
-    arp_entry.pack()
+    arp_label.pack(pady=10)
+    arp_entry.pack(pady=10)
 
     # Style of Buttons
     style = ttk.Style()
@@ -135,11 +135,11 @@ def show_voo_mode_page():
 
      # Create a "Save" button
     save_button = ttk.Button(voo_window, text="Save")
-    save_button.pack()
+    save_button.pack(pady=10)
 
     # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(voo_window, text="Back to Pacing Modes", command=voo_window.destroy)
-    back_button.pack()
+    back_button.pack(pady=5)
 def show_aai_mode_page():
     aai_window = Tk()
     aai_window.geometry('%dx%d+0+0' % (width, height))
@@ -153,43 +153,43 @@ def show_aai_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(aai_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(aai_window, font=("Arial", 16))
-    lower_rate_label.pack()
-    lower_rate_entry.pack()
+    lower_rate_label.pack(pady=10)
+    lower_rate_entry.pack(pady=10)
 
     upper_rate_label = ttk.Label(aai_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(aai_window, font=("Arial", 16))
-    upper_rate_label.pack()
-    upper_rate_entry.pack()
+    upper_rate_label.pack(pady=10)
+    upper_rate_entry.pack(pady=10)
 
     atrial_amplitude_label = ttk.Label(aai_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
     atrial_amplitude_entry = Entry(aai_window, font=("Arial", 16))
-    atrial_amplitude_label.pack()
-    atrial_amplitude_entry.pack()
+    atrial_amplitude_label.pack(pady=10)
+    atrial_amplitude_entry.pack(pady=10)
 
     atrial_pulse_width_label = ttk.Label(aai_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     atrial_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
-    atrial_pulse_width_label.pack()
-    atrial_pulse_width_entry.pack()
+    atrial_pulse_width_label.pack(pady=10)
+    atrial_pulse_width_entry.pack(pady=10)
 
     ventricular_amplitude_label = ttk.Label(aai_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
     ventricular_amplitude_entry = Entry(aai_window, font=("Arial", 16))
-    ventricular_amplitude_label.pack()
-    ventricular_amplitude_entry.pack()
+    ventricular_amplitude_label.pack(pady=10)
+    ventricular_amplitude_entry.pack(pady=10)
 
     ventricular_pulse_width_label = ttk.Label(aai_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     ventricular_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
-    ventricular_pulse_width_label.pack()
-    ventricular_pulse_width_entry.pack()
+    ventricular_pulse_width_label.pack(pady=10)
+    ventricular_pulse_width_entry.pack(pady=10)
 
     vrp_label = ttk.Label(aai_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
     vrp_entry = Entry(aai_window, font=("Arial", 16))
-    vrp_label.pack()
-    vrp_entry.pack()
+    vrp_label.pack(pady=10)
+    vrp_entry.pack(pady=10)
 
     arp_label = ttk.Label(aai_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
     arp_entry = Entry(aai_window, font=("Arial", 16))
-    arp_label.pack()
-    arp_entry.pack()
+    arp_label.pack(pady=10)
+    arp_entry.pack(pady=10)
 
     # Style of Buttons
     style = ttk.Style()
@@ -202,11 +202,11 @@ def show_aai_mode_page():
 
      # Create a "Save" button
     save_button = ttk.Button(aai_window, text="Save")
-    save_button.pack()
+    save_button.pack(pady=10)
 
     # Creat3 a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
-    back_button.pack()
+    back_button.pack(pady=5)
 def show_vvi_mode_page():
     vvi_window = Tk()
     vvi_window.geometry('%dx%d+0+0' % (width, height))
@@ -220,43 +220,43 @@ def show_vvi_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(vvi_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(vvi_window, font=("Arial", 16))
-    lower_rate_label.pack()
-    lower_rate_entry.pack()
+    lower_rate_label.pack(pady=10)
+    lower_rate_entry.pack(pady=10)
 
     upper_rate_label = ttk.Label(vvi_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(vvi_window, font=("Arial", 16))
-    upper_rate_label.pack()
-    upper_rate_entry.pack()
+    upper_rate_label.pack(pady=10)
+    upper_rate_entry.pack(pady=10)
 
     atrial_amplitude_label = ttk.Label(vvi_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
     atrial_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
-    atrial_amplitude_label.pack()
-    atrial_amplitude_entry.pack()
+    atrial_amplitude_label.pack(pady=10)
+    atrial_amplitude_entry.pack(pady=10)
 
     atrial_pulse_width_label = ttk.Label(vvi_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     atrial_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
-    atrial_pulse_width_label.pack()
-    atrial_pulse_width_entry.pack()
+    atrial_pulse_width_label.pack(pady=10)
+    atrial_pulse_width_entry.pack(pady=10)
 
     ventricular_amplitude_label = ttk.Label(vvi_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
     ventricular_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
-    ventricular_amplitude_label.pack()
-    ventricular_amplitude_entry.pack()
+    ventricular_amplitude_label.pack(pady=10)
+    ventricular_amplitude_entry.pack(pady=10)
 
     ventricular_pulse_width_label = ttk.Label(vvi_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     ventricular_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
-    ventricular_pulse_width_label.pack()
-    ventricular_pulse_width_entry.pack()
+    ventricular_pulse_width_label.pack(pady=10)
+    ventricular_pulse_width_entry.pack(pady=10)
 
     vrp_label = ttk.Label(vvi_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
     vrp_entry = Entry(vvi_window, font=("Arial", 16))
-    vrp_label.pack()
-    vrp_entry.pack()
+    vrp_label.pack(pady=10)
+    vrp_entry.pack(pady=10)
 
     arp_label = ttk.Label(vvi_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
     arp_entry = Entry(vvi_window, font=("Arial", 16))
-    arp_label.pack()
-    arp_entry.pack()
+    arp_label.pack(pady=10)
+    arp_entry.pack(pady=10)
 
     # Style of Buttons
     style = ttk.Style()
@@ -269,11 +269,11 @@ def show_vvi_mode_page():
 
     # Create a "Save" button
     save_button = ttk.Button(vvi_window, text="Save")
-    save_button.pack()
+    save_button.pack(pady=10)
 
     # Creat a "back" button to return to "Pacing mode"
     back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
-    back_button.pack()
+    back_button.pack(pady=5)
 
 def pacing_modes():
     pacing_modes = Tk()
@@ -288,7 +288,7 @@ def pacing_modes():
 
     # Heading
     label = ttk.Label(master=pacing_modes, text="Pacing Modes", background=bg, foreground=fg, font=("Arial", 80))
-    label.pack()
+    label.pack(pady=30)
 
     # Create a frame to contain the buttons
     #button_frame = ttk.Frame(pacing_modes, padding=300)
@@ -304,22 +304,20 @@ def pacing_modes():
     style.map('TButton', background=[('active', 'red')])
 
     # Create buttons and add them to the frame
-    space1 = ttk.Label(master=pacing_modes, text="")
-    space1.pack()
+
     button1 = ttk.Button(master = pacing_modes, text="AOO", style='Pacing.TButton',command=show_aoo_mode_page)
-    button1.pack()
-    space2 = ttk.Label(master=pacing_modes,text="")
-    space2.pack()
+    button1.pack(pady=20)
+
     button2 = ttk.Button(master = pacing_modes, text="VOO", style='Pacing.TButton',command=show_voo_mode_page)
-    button2.pack()
+    button2.pack(pady=20)
     button3 = ttk.Button(master = pacing_modes, text="AAI", style='Pacing.TButton',command=show_aai_mode_page)
-    button3.pack()
+    button3.pack(pady=20)
     button4 = ttk.Button(master = pacing_modes, text="VVI", style='Pacing.TButton',command=show_vvi_mode_page)
-    button4.pack()
+    button4.pack(pady=20)
 
     # Exit Button
     exit_button = ttk.Button(master=pacing_modes, text="Exit", command=quit)
-    exit_button.pack()
+    exit_button.pack(pady=100)
 
     # Use the grid layout manager to arrange the buttons in columns
     #button1.grid(row=0, column=0, padx=30, pady=30)
@@ -354,22 +352,22 @@ def login_func():
     login.geometry('%dx%d+0+0' % (width, height))
 
     # Heading
-    label = ttk.Label(master=login, text="login", background=bg, foreground=fg, font=("Arial", 80))
+    label = ttk.Label(master=login, text="LOGIN", background=bg, foreground=fg, font=("Arial", 80))
     label.pack()
 
     # Changing Label
     changing_label = ttk.Label(master=login, text="Please Enter Your Information Below:", background=bg, foreground=fg, font=("Arial", 20))
-    changing_label.pack()
+    changing_label.pack(pady=10)
 
     # Username
     user_label = ttk.Label(master=login, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
-    user_label.pack()
+    user_label.pack(pady=20)
     user_text = Text(master=login, height=5, width=50, font=("Arial", 20))
     user_text.pack()
 
     # Password
     password_label = ttk.Label(master=login, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
-    password_label.pack()
+    password_label.pack(pady=20)
     password_text = Text(master=login, height=5, width=50, font=("Arial", 20))
     password_text.pack()
 
@@ -383,7 +381,7 @@ def login_func():
 
     # Submit Button
     submit_button = ttk.Button(master=login, text="Submit", command=login_submit)
-    submit_button.pack()
+    submit_button.pack(pady=20)
 
     # Exit Button
     exit_button = ttk.Button(master=login, text="Exit", command=quit)
@@ -434,17 +432,17 @@ def register_func():
     # Changing Label
     changing_label = ttk.Label(master=register, text="Please Enter Your Information Below:", background=bg, foreground=fg,
                                font=("Arial", 20))
-    changing_label.pack()
+    changing_label.pack(pady=10)
 
     # Username
     user_label = ttk.Label(master=register, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
-    user_label.pack()
+    user_label.pack(pady=20)
     user_text = Text(master=register, height=5, width=50, font=("Arial", 20))
     user_text.pack()
 
     # Password
     password_label = ttk.Label(master=register, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
-    password_label.pack()
+    password_label.pack(pady=20)
     password_text = Text(master=register, height=5, width=50, font=("Arial", 20))
     password_text.pack()
 
@@ -458,7 +456,7 @@ def register_func():
 
     # Submit Button
     submit_button = ttk.Button(master=register, text="Submit", command=register_submit)
-    submit_button.pack()
+    submit_button.pack(pady=20)
 
     #Home Button
     exit_button = ttk.Button(master=register, text="Exit", command=quit)
@@ -509,25 +507,25 @@ if __name__=='__main__':
 
     # Heading
     label = ttk.Label(master=root, text="WELCOME", background=bg, foreground=fg, font=("Arial", 80))
-    label.pack()
+    label.pack(pady=50)
 
     # Style of Buttons
     style = ttk.Style()
     style.theme_use('alt')
-    style.configure('TButton', background=bg, foreground=fg, width=20, borderwidth=1, focusthickness=3,
+    style.configure('TButton', background=bg, foreground=fg, width=50, height =30, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
     style.map('TButton', background=[('active', 'red')])
 
     # Login
     login_button = ttk.Button(root, text="Login", command=login_func)
-    login_button.pack()
+    login_button.pack(pady=20)
     # Register
     register_button = ttk.Button(master=root, text="Register", command=register_func)
-    register_button.pack()
+    register_button.pack(pady=20)
     # Quit
-    button = ttk.Button(root, text='Quit', command=quit)
-    button.pack()
+    quit_button = ttk.Button(root, text='Quit', command=quit)
+    quit_button.pack(pady=20)
 
     root.resizable(False, False)
     root.mainloop()
