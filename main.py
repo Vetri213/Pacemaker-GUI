@@ -362,13 +362,13 @@ def login_func():
     # Username
     user_label = ttk.Label(master=login, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
     user_label.pack(pady=20)
-    user_text = Text(master=login, height=5, width=50, font=("Arial", 20))
+    user_text = Text(master=login, height=1, width=50, font=("Arial", 20))
     user_text.pack()
 
     # Password
     password_label = ttk.Label(master=login, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
     password_label.pack(pady=20)
-    password_text = Text(master=login, height=5, width=50, font=("Arial", 20))
+    password_text = Text(master=login, height=1, width=50, font=("Arial", 20))
     password_text.pack()
 
     # Style of Buttons
@@ -437,13 +437,13 @@ def register_func():
     # Username
     user_label = ttk.Label(master=register, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
     user_label.pack(pady=20)
-    user_text = Text(master=register, height=5, width=50, font=("Arial", 20))
+    user_text = Text(master=register, height=1, width=50, font=("Arial", 20))
     user_text.pack()
 
     # Password
     password_label = ttk.Label(master=register, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
     password_label.pack(pady=20)
-    password_text = Text(master=register, height=5, width=50, font=("Arial", 20))
+    password_text = Text(master=register, height=1, width=50, font=("Arial", 20))
     password_text.pack()
 
     # Style of Buttons
