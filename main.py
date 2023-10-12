@@ -351,7 +351,7 @@ def pacing_modes():
     button4 = ttk.Button(master = pacing_modes, text="VVI", style='Pacing.TButton',command=show_vvi_mode_page)
     button4.pack(pady=20)
 
-    # Exit Button
+    # Exit Button33
     exit_button = ttk.Button(master=pacing_modes, text="Exit", command=quit)
     exit_button.pack(pady=100)
 
@@ -425,6 +425,19 @@ def login_func():
 
 #Register Function
 def register_func():
+    def is_username_taken(username):
+        try:
+            # open the file anc check if the username has already been taken
+            with open("text.txt", "r") as file:
+                for line in file:
+                    parts = line.strip().split(',')
+                    if len(parts) == 2:  # make sure every line has two parts( username and password)
+                        existing_username, _ = parts
+                        if existing_username == username:
+                            return True
+        except Exception as e:
+            print(f"Error checking username: {str(e)}")
+        return False
     def register_submit():
         print(len(users))
 
@@ -433,7 +446,9 @@ def register_func():
             username = user_text.get(1.0, "end-1c")
             password = password_text.get(1.0, "end-1c")
             if not username or not password:
-                 changing_label.configure(text="Username or password cannot be empty")
+                changing_label.configure(text="Username or password cannot be empty")
+            elif is_username_taken(username):
+                changing_label.configure(text="Username is already taken")
             else:
             #Creating a New Entry to be added to the file of Users (in the same format)
                 new_entry = "\n"+username+","+password
