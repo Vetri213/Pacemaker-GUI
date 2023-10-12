@@ -3,7 +3,7 @@ import tkinter
 import pygame
 from tkinter import *
 from tkinter import ttk
-
+from PIL import Image, ImageTk
 
 
 def show_aoo_mode_page():
@@ -527,6 +527,13 @@ def register_func():
 #label1.lower()
 #bg_order = 0
 
+def set_background_image(window, image_path):
+    image = Image.open(image_path)
+    photo = ImageTk.PhotoImage(image)
+
+    label = Label(window, image=photo)
+    label.image = photo
+    label.place(x=0, y=0, relwidth=1, relheight=1)
 
 
 if __name__=='__main__':
@@ -547,6 +554,9 @@ if __name__=='__main__':
     root.title("Pacemaker GUI")
     # Changing background colour
     root.configure(background="black")
+
+    background_image_path = "heart.png"
+    set_background_image(root, background_image_path)
 
     # Changing window size
     width, height = root.winfo_screenwidth(), root.winfo_screenheight()
