@@ -298,7 +298,7 @@ def pacing_modes():
     # Style of Buttons
     style = ttk.Style()
     style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=50, height =30, borderwidth=1, focusthickness=3,
+    style.configure('TButton', background="black", foreground="white", width=10, height =30, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
     style.map('TButton', background=[('active', 'red')])
