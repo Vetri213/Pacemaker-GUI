@@ -222,11 +222,11 @@ def show_aai_mode_page():
 
      # Create a "Save" button
     save_button = ttk.Button(aai_window, text="Save")
-    save_button.pack(pady=10)
+    save_button.grid(row=12, column=0, pady=10)
 
     # Creat3 a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
-    back_button.pack(pady=5)
+    back_button.grid(row=12, column=1, pady=10)
 def show_vvi_mode_page():
     vvi_window = Tk()
     vvi_window.geometry('%dx%d+0+0' % (width, height))
@@ -234,7 +234,7 @@ def show_vvi_mode_page():
     vvi_window.configure(background="black")
 
     # Add label
-    vvi_label = ttk.Label(vvi_window, text="AAI Mode Information", background="black", foreground="white", font=("Arial", 20))
+    vvi_label = ttk.Label(vvi_window, text="VVI Mode Information", background="black", foreground="white", font=("Arial", 20))
     vvi_label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
 
     # Add the parameter here
