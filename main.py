@@ -80,7 +80,7 @@ def show_aoo_mode_page():
                     focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
 
     # Create a "Save" button
@@ -157,7 +157,7 @@ def show_voo_mode_page():
                     focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
      # Create a "Save" button
     save_button = ttk.Button(voo_window, text="Save", command=update_voo)
@@ -258,7 +258,7 @@ def show_aai_mode_page():
                     focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
      # Create a "Save" button
     save_button = ttk.Button(aai_window, text="Save", command=update_aai)
@@ -355,7 +355,7 @@ def show_vvi_mode_page():
                     focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
     # Create a "Save" button
     save_button = ttk.Button(vvi_window, text="Save", command=update_vvi)
@@ -387,7 +387,7 @@ def pacing_modes():
     new_old = ttk.Label(master=pacing_modes, text="New Pacemaker Detected", background=bg, foreground=fg, font=("Arial", 20))
     new_old.pack(pady=10)
 
-    connectivity = ttk.Label(master=pacing_modes, text="Connected", background=bg, foreground=fg, font=("Arial", 20))
+    connectivity = ttk.Label(master=pacing_modes, text="Device Disconnected", background=bg, foreground=fg, font=("Arial", 20))
     connectivity.pack(pady=10)
 
     # Style of Buttons
@@ -396,7 +396,7 @@ def pacing_modes():
     style.configure('TButton', background="black", foreground="white", width=10, height =30, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
     # Create buttons and add them to the frame
 
@@ -474,7 +474,7 @@ def login_func():
     style.configure('TButton', background="black", foreground="white", width=20, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
     # Submit Button
     submit_button = ttk.Button(master=login, text="Submit", command=login_submit)
@@ -564,7 +564,7 @@ def register_func():
     style.configure('TButton', background="black", foreground="white", width=20, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
     # Submit Button
     submit_button = ttk.Button(master=register, text="Submit", command=register_submit)
@@ -618,7 +618,7 @@ if __name__=='__main__':
     # Changing background colour
     root.configure(background="black")
 
-    background_image_path = "heartv2.jpg"
+    background_image_path = "ECGv1.png"
     set_background_image(root, background_image_path)
 
     # Changing window size
@@ -640,7 +640,7 @@ if __name__=='__main__':
     style.configure('TButton', background=bg, foreground=fg, width=20, height =30, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
-    style.map('TButton', background=[('active', 'red')])
+    style.map('TButton', background=[('active', 'teal')])
 
     # Login
     login_button = ttk.Button(root, text="Login", command=login_func)
