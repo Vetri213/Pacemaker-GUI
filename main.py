@@ -151,7 +151,7 @@ def show_voo_mode_page():
     style.map('TButton', background=[('active', 'red')])
 
      # Create a "Save" button
-    save_button = ttk.Button(voo_window, text="Save", command=update_voo())
+    save_button = ttk.Button(voo_window, text="Save", command=update_voo)
     save_button.pack(pady=10)
 
     # Create a "back" button to return to "Pacing mode"
@@ -252,7 +252,7 @@ def show_aai_mode_page():
     style.map('TButton', background=[('active', 'red')])
 
      # Create a "Save" button
-    save_button = ttk.Button(aai_window, text="Save", command=update_aai())
+    save_button = ttk.Button(aai_window, text="Save", command=update_aai)
     save_button.grid(row=12, column=0, pady=10)
 
     # Creat3 a "back" button to return to "Pacing mode"
@@ -349,7 +349,7 @@ def show_vvi_mode_page():
     style.map('TButton', background=[('active', 'red')])
 
     # Create a "Save" button
-    save_button = ttk.Button(vvi_window, text="Save", command=update_vvi())
+    save_button = ttk.Button(vvi_window, text="Save", command=update_vvi)
     save_button.grid(row=12, column=0, pady=10, padx =10)
 
     # Creat a "back" button to return to "Pacing mode"
