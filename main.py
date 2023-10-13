@@ -5,7 +5,16 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
+def show_egram_page():
+    egram_window = Tk()
+    egram_window.geometry('%dx%d+0+0' % (width, height))
+    egram_window.title("AOO Mode")
+    egram_window.configure(background="black")
 
+    # Add a title
+    aoo_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
+                          font=("Arial", 80))
+    aoo_label.pack()
 def show_aoo_mode_page():
     def update_aoo():
         global aoo_vals
@@ -395,6 +404,8 @@ def pacing_modes():
     button3.pack(pady=20)
     button4 = ttk.Button(master = pacing_modes, text="VVI", style='Pacing.TButton',command=show_vvi_mode_page)
     button4.pack(pady=20)
+    button5 = ttk.Button(master=pacing_modes, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
+    button5.pack(pady=20)
 
     # Exit Button33
     exit_button = ttk.Button(master=pacing_modes, text="Exit", command=quit)
