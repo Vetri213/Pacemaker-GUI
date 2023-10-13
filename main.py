@@ -644,13 +644,13 @@ if __name__=='__main__':
 
     # Login
     login_button = ttk.Button(root, text="Login", command=login_func)
-    login_button.pack(pady=20)
+    login_button.pack(pady=15)
     # Register
     register_button = ttk.Button(master=root, text="Register", command=register_func)
-    register_button.pack(pady=20)
+    register_button.pack(pady=15)
     # Quit
     quit_button = ttk.Button(root, text='Quit', command=quit)
-    quit_button.pack(pady=20)
+    quit_button.pack(pady=15)
 
     root.resizable(True, True)
 
