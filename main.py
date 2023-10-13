@@ -585,7 +585,9 @@ def register_func():
 
 def set_background_image(window, image_path):
     image = Image.open(image_path)
+    image = image.resize((root.winfo_screenwidth(), root.winfo_screenheight()))
     photo = ImageTk.PhotoImage(image)
+
 
     label = Label(window, image=photo)
     label.image = photo
