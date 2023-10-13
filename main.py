@@ -7,6 +7,9 @@ from PIL import Image, ImageTk
 
 
 def show_aoo_mode_page():
+    def update_aoo():
+        global aoo_vals
+        aoo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),atrial_amplitude_entry.get(),atrial_pulse_width_entry.get()]
     aoo_window = Tk()
     aoo_window.geometry('%dx%d+0+0' % (width, height))
     aoo_window.title("AOO Mode")
@@ -19,21 +22,25 @@ def show_aoo_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(aoo_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(aoo_window, font=("Arial", 16))
+    lower_rate_entry.insert(0,aoo_vals[0])
     lower_rate_label.pack(pady=10)
     lower_rate_entry.pack(pady=10)
 
     upper_rate_label = ttk.Label(aoo_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(aoo_window, font=("Arial", 16))
+    upper_rate_entry.insert(0, aoo_vals[1])
     upper_rate_label.pack(pady=10)
     upper_rate_entry.pack(pady=10)
 
     atrial_amplitude_label = ttk.Label(aoo_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
     atrial_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
+    atrial_amplitude_entry.insert(0, aoo_vals[2])
     atrial_amplitude_label.pack(pady=10)
     atrial_amplitude_entry.pack(pady=10)
 
     atrial_pulse_width_label = ttk.Label(aoo_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     atrial_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
+    atrial_pulse_width_entry.insert(0,aoo_vals[3])
     atrial_pulse_width_label.pack(pady=10)
     atrial_pulse_width_entry.pack(pady=10)
 
@@ -66,8 +73,9 @@ def show_aoo_mode_page():
     # When Hovering
     style.map('TButton', background=[('active', 'red')])
 
+
     # Create a "Save" button
-    save_button = ttk.Button(master=aoo_window, text="Save")
+    save_button = ttk.Button(master=aoo_window, text="Save", style='TButton', command=update_aoo)
     save_button.pack(pady=10)
 
     # Create a "back" button to return to "Pacing mode"
@@ -366,8 +374,8 @@ def pacing_modes():
 def login_func():
     def login_submit():
         # Getting Username and Password from the Textboxes
-        username = user_text.get(1.0, "end-1c")
-        password = password_text.get(1.0, "end-1c")
+        username = user_text.get()
+        password = password_text.get()
         login_info = [username,password]
         if(login_info in users):
             #Go to the ACTUAL DO STUFF PAGE
@@ -398,13 +406,13 @@ def login_func():
     # Username
     user_label = ttk.Label(master=login, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
     user_label.pack(pady=20)
-    user_text = Text(master=login, height=1, width=50, font=("Arial", 20))
+    user_text = Entry(master=login, width=50, font=("Arial", 20))
     user_text.pack()
 
     # Password
     password_label = ttk.Label(master=login, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
     password_label.pack(pady=20)
-    password_text = Text(master=login, height=1, width=50, font=("Arial", 20))
+    password_text = Entry(master=login,width=50, font=("Arial", 20),show="*")
     password_text.pack()
 
     # Style of Buttons
@@ -443,8 +451,8 @@ def register_func():
 
         if (len(users) <10):
             #Getting Username and Password from the Textboxes
-            username = user_text.get(1.0, "end-1c")
-            password = password_text.get(1.0, "end-1c")
+            username = user_text.get()
+            password = password_text.get()
             if not username or not password:
                 changing_label.configure(text="Username or password cannot be empty")
             elif is_username_taken(username):
@@ -488,13 +496,13 @@ def register_func():
     # Username
     user_label = ttk.Label(master=register, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
     user_label.pack(pady=20)
-    user_text = Text(master=register, height=1, width=50, font=("Arial", 20))
+    user_text = Entry(master=register, width=50, font=("Arial", 20))
     user_text.pack()
 
     # Password
     password_label = ttk.Label(master=register, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
     password_label.pack(pady=20)
-    password_text = Text(master=register, height=1, width=50, font=("Arial", 20))
+    password_text = Entry(master=register, width=50, font=("Arial", 20), show="*")
     password_text.pack()
 
     # Style of Buttons
@@ -563,7 +571,6 @@ if __name__=='__main__':
     root.geometry('%dx%d+0+0' % (width, height))
 
 
-
     # Widget Options
     bg = "black"
     fg = "white"
@@ -591,5 +598,16 @@ if __name__=='__main__':
     quit_button.pack(pady=20)
 
     root.resizable(True, True)
+
+    #Initializing lists for each pacing mode type
+    #AOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width
+    aoo_vals = [0,0,0,0]
+    #VOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, ARP
+    voo_vals = [0,0,0,0,0]
+    #AAI - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, Atrial Sensitivty, ARP, PVARP, Hysterisis, Rate Smoothing
+    aai_vals = [0,0,0,0,0,0,0,0,0]
+    #VVI - Lower Rate Limit, Upper Rate Limit, Ventricular Amplitude, Ventricular Pulse Width, Ventricular Sensitivity, VRP, Hysterisis, Rate Smoothing
+    vvi_vals = [0,0,0,0,0,0,0,0]
+
     root.mainloop()
 
