@@ -555,12 +555,14 @@ if __name__=='__main__':
     # Changing background colour
     root.configure(background="black")
 
-    background_image_path = "heart.png"
+    background_image_path = "heartv2.jpg"
     set_background_image(root, background_image_path)
 
     # Changing window size
     width, height = root.winfo_screenwidth(), root.winfo_screenheight()
     root.geometry('%dx%d+0+0' % (width, height))
+
+
 
     # Widget Options
     bg = "black"
@@ -573,7 +575,7 @@ if __name__=='__main__':
     # Style of Buttons
     style = ttk.Style()
     style.theme_use('alt')
-    style.configure('TButton', background=bg, foreground=fg, width=50, height =30, borderwidth=1, focusthickness=3,
+    style.configure('TButton', background=bg, foreground=fg, width=20, height =30, borderwidth=1, focusthickness=3,
                     focuscolor='none', font=('American typewriter', 20))
     # When Hovering
     style.map('TButton', background=[('active', 'red')])
@@ -588,6 +590,6 @@ if __name__=='__main__':
     quit_button = ttk.Button(root, text='Quit', command=quit)
     quit_button.pack(pady=20)
 
-    root.resizable(False, False)
+    root.resizable(True, True)
     root.mainloop()
 
