@@ -82,6 +82,10 @@ def show_aoo_mode_page():
     back_button = ttk.Button(master=aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
     back_button.pack(pady=5)
 def show_voo_mode_page():
+    def update_voo():
+        global voo_vals
+        voo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),ventricular_amplitude_entry.get(),
+                   ventricular_pulse_width_entry.get(), arp_entry.get()]
     voo_window = Tk()
     voo_window.geometry('%dx%d+0+0' % (width, height))
     voo_window.title("VOO Mode")
@@ -94,11 +98,13 @@ def show_voo_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(voo_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(voo_window, font=("Arial", 16))
+    lower_rate_entry.insert(0,voo_vals[0])
     lower_rate_label.pack(pady=10)
     lower_rate_entry.pack(pady=10)
 
     upper_rate_label = ttk.Label(voo_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(voo_window, font=("Arial", 16))
+    upper_rate_entry.insert(0,voo_vals[1])
     upper_rate_label.pack(pady=10)
     upper_rate_entry.pack(pady=10)
 
@@ -114,11 +120,13 @@ def show_voo_mode_page():
 
     ventricular_amplitude_label = ttk.Label(voo_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
     ventricular_amplitude_entry = Entry(voo_window, font=("Arial", 16))
+    ventricular_amplitude_entry.insert(0,voo_vals[2])
     ventricular_amplitude_label.pack(pady=10)
     ventricular_amplitude_entry.pack(pady=10)
 
     ventricular_pulse_width_label = ttk.Label(voo_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     ventricular_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
+    ventricular_pulse_width_entry.insert(0,voo_vals[3])
     ventricular_pulse_width_label.pack(pady=10)
     ventricular_pulse_width_entry.pack(pady=10)
 
@@ -129,6 +137,7 @@ def show_voo_mode_page():
 
     arp_label = ttk.Label(voo_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
     arp_entry = Entry(voo_window, font=("Arial", 16))
+    arp_entry.insert(0,voo_vals[4])
     arp_label.pack(pady=10)
     arp_entry.pack(pady=10)
 
@@ -142,13 +151,18 @@ def show_voo_mode_page():
     style.map('TButton', background=[('active', 'red')])
 
      # Create a "Save" button
-    save_button = ttk.Button(voo_window, text="Save")
+    save_button = ttk.Button(voo_window, text="Save", command=update_voo())
     save_button.pack(pady=10)
 
     # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(voo_window, text="Back to Pacing Modes", command=voo_window.destroy)
     back_button.pack(pady=5)
 def show_aai_mode_page():
+    def update_aai():
+        global aai_vals
+        aai_vals= [lower_rate_entry.get(),upper_rate_entry.get(),atrial_amplitude_entry.get(),
+                   atrial_pulse_width_entry.get(), atrial_sensitivity_entry.get(), arp_entry.get(),
+                   pvarp_entry.get(), hysteresis_entry.get(), rate_smoothing_entry.get()]
     aai_window = Tk()
     aai_window.geometry('%dx%d+0+0' % (width, height))
     aai_window.title("AAI Mode")
@@ -162,25 +176,30 @@ def show_aai_mode_page():
     lower_rate_label = ttk.Label(aai_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_label.grid(row=1, column=0, pady=10, padx =10)
     lower_rate_entry = Entry(aai_window, font=("Arial", 16))
+    lower_rate_entry.insert(0,aai_vals[0])
     lower_rate_entry.grid(row=2, column=0, pady=10, padx =10)
 
     upper_rate_label = ttk.Label(aai_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(aai_window, font=("Arial", 16))
+    upper_rate_entry.insert(0,aai_vals[1])
     upper_rate_label.grid(row=1, column=1, pady=10, padx =10)
     upper_rate_entry.grid(row=2, column=1, pady=10, padx =10)
 
     atrial_amplitude_label = ttk.Label(aai_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
     atrial_amplitude_entry = Entry(aai_window, font=("Arial", 16))
+    atrial_amplitude_entry.insert(0,aai_vals[2])
     atrial_amplitude_label.grid(row=3, column=0, pady=10, padx =10)
     atrial_amplitude_entry.grid(row=4, column=0, pady=10, padx =10)
 
     atrial_pulse_width_label = ttk.Label(aai_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     atrial_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
+    atrial_pulse_width_entry.insert(0,aai_vals[3])
     atrial_pulse_width_label.grid(row=3, column=1, pady=10, padx =10)
     atrial_pulse_width_entry.grid(row=4, column=1, pady=10, padx =10)
 
     atrial_sensitivity_label = ttk.Label(aai_window, text="Atrial Sensitivity:", background="black", foreground="white", font=("Arial", 16))
     atrial_sensitivity_entry = Entry(aai_window, font=("Arial", 16))
+    atrial_sensitivity_entry.insert(0,aai_vals[4])
     atrial_sensitivity_label.grid(row=5, column=0, pady=10, padx =10)
     atrial_sensitivity_entry.grid(row=6, column=0, pady=10, padx =10)
 
@@ -201,21 +220,25 @@ def show_aai_mode_page():
 
     arp_label = ttk.Label(aai_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
     arp_entry = Entry(aai_window, font=("Arial", 16))
+    arp_entry.insert(0,aai_vals[5])
     arp_label.grid(row=5, column=1, pady=10, padx =10)
     arp_entry.grid(row=6, column=1, pady=10, padx =10)
 
     pvarp_label = ttk.Label(aai_window, text="PVARP:", background="black", foreground="white", font=("Arial", 16))
     pvarp_entry = Entry(aai_window, font=("Arial", 16))
+    pvarp_entry.insert(0,aai_vals[6])
     pvarp_label.grid(row=7, column=0, pady=10, padx =10)
     pvarp_entry.grid(row=8, column=0, pady=10, padx =10)
 
     hysteresis_label = ttk.Label(aai_window, text="Hysteresis:", background="black", foreground="white", font=("Arial", 16))
     hysteresis_entry = Entry(aai_window, font=("Arial", 16))
+    hysteresis_entry.insert(0,aai_vals[7])
     hysteresis_label.grid(row=7, column=1, pady=10, padx =10)
     hysteresis_entry.grid(row=8, column=1, pady=10, padx=10 )
 
     rate_smoothing_label = ttk.Label(aai_window, text="Rate Smoothing:", background="black", foreground="white", font=("Arial", 16))
     rate_smoothing_entry = Entry(aai_window, font=("Arial", 16))
+    rate_smoothing_entry.insert(0,aai_vals[8])
     rate_smoothing_label.grid(row=9, column=0, pady=10)
     rate_smoothing_entry.grid(row=10, column=0, pady=10)
 
@@ -229,13 +252,19 @@ def show_aai_mode_page():
     style.map('TButton', background=[('active', 'red')])
 
      # Create a "Save" button
-    save_button = ttk.Button(aai_window, text="Save")
+    save_button = ttk.Button(aai_window, text="Save", command=update_aai())
     save_button.grid(row=12, column=0, pady=10)
 
     # Creat3 a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
     back_button.grid(row=12, column=1, pady=10)
 def show_vvi_mode_page():
+    def update_vvi():
+        global vvi_vals
+        vvi_vals = [lower_rate_entry.get(), upper_rate_entry.get(), ventricular_amplitude_entry.get(),
+                   ventricular_pulse_width_entry.get(), ventricular_sensitivity_entry.get(), vrp_entry.get(), hysteresis_entry.get(),
+                    rate_smoothing_entry.get()]
+
     vvi_window = Tk()
     vvi_window.geometry('%dx%d+0+0' % (width, height))
     vvi_window.title("VVI Mode")
@@ -248,11 +277,13 @@ def show_vvi_mode_page():
     # Add the parameter here
     lower_rate_label = ttk.Label(vvi_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     lower_rate_entry = Entry(vvi_window, font=("Arial", 16))
+    lower_rate_entry.insert(0,vvi_vals[0])
     lower_rate_label.grid(row=1, column=0, pady=10, padx =10)
     lower_rate_entry.grid(row=2, column=0, pady=10, padx =10)
 
     upper_rate_label = ttk.Label(vvi_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
     upper_rate_entry = Entry(vvi_window, font=("Arial", 16))
+    upper_rate_entry.insert(0,vvi_vals[1])
     upper_rate_label.grid(row=1, column=1, pady=10, padx =10)
     upper_rate_entry.grid(row=2, column=1, pady=10, padx =10)
 
@@ -268,32 +299,38 @@ def show_vvi_mode_page():
 
     ventricular_amplitude_label = ttk.Label(vvi_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
     ventricular_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
+    ventricular_amplitude_entry.insert(0,vvi_vals[2])
     ventricular_amplitude_label.grid(row=3, column=0, pady=10, padx =10)
     ventricular_amplitude_entry.grid(row=4, column=0, pady=10, padx =10)
 
     ventricular_pulse_width_label = ttk.Label(vvi_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
     ventricular_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
+    ventricular_pulse_width_entry.insert(0,vvi_vals[3])
     ventricular_pulse_width_label.grid(row=3, column=1, pady=10, padx =10)
     ventricular_pulse_width_entry.grid(row=4, column=1, pady=10, padx =10)
 
 
     ventricular_sensitivity_label = ttk.Label(vvi_window, text="Ventricular Sensitivity:", background="black", foreground="white", font=("Arial", 16))
     ventricular_sensitivity_entry = Entry(vvi_window, font=("Arial", 16))
+    ventricular_sensitivity_entry.insert(0,vvi_vals[4])
     ventricular_sensitivity_label.grid(row=5, column=0, pady=10, padx =10)
     ventricular_sensitivity_entry.grid(row=6, column=0, pady=10, padx =10)
 
     vrp_label = ttk.Label(vvi_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
     vrp_entry = Entry(vvi_window, font=("Arial", 16))
+    vrp_entry.insert(0,vvi_vals[5])
     vrp_label.grid(row=5, column=1, pady=10, padx =10)
     vrp_entry.grid(row=6, column=1, pady=10, padx =10)
 
     hysteresis_label = ttk.Label(vvi_window, text="Hysteresis:", background="black", foreground="white", font=("Arial", 16))
     hysteresis_entry = Entry(vvi_window, font=("Arial", 16))
+    hysteresis_entry.insert(0,vvi_vals[6])
     hysteresis_label.grid(row=7, column=0, pady=10, padx =10)
     hysteresis_entry.grid(row=8, column=0, pady=10, padx =10)
 
     rate_smoothing_label = ttk.Label(vvi_window, text="Rate Smoothing:", background="black", foreground="white", font=("Arial", 16))
     rate_smoothing_entry = Entry(vvi_window, font=("Arial", 16))
+    rate_smoothing_entry.insert(0,vvi_vals[7])
     rate_smoothing_label.grid(row=7, column=1, pady=10, padx =10)
     rate_smoothing_entry.grid(row=8, column=1, pady=10, padx =10)
 
@@ -312,7 +349,7 @@ def show_vvi_mode_page():
     style.map('TButton', background=[('active', 'red')])
 
     # Create a "Save" button
-    save_button = ttk.Button(vvi_window, text="Save")
+    save_button = ttk.Button(vvi_window, text="Save", command=update_vvi())
     save_button.grid(row=12, column=0, pady=10, padx =10)
 
     # Creat a "back" button to return to "Pacing mode"
