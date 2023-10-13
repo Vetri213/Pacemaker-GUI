@@ -384,6 +384,8 @@ def pacing_modes():
     #button_frame = ttk.Frame(pacing_modes, padding=300)
     #button_frame.pack(fill="both", expand=True)
 
+    label = ttk.Label(master=pacing_modes, text="New Pacemaker Detected", background=bg, foreground=fg, font=("Arial", 30))
+    label.pack(pady=30)
 
     # Style of Buttons
     style = ttk.Style()
