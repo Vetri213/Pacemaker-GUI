@@ -12,18 +12,32 @@ def show_egram_page():
     egram_window.configure(background="black")
 
     # Add a title
-    aoo_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
+    egram_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
                           font=("Arial", 80))
-    aoo_label.pack()
+    egram_label.pack()
+    # Style of Buttons
+    style = ttk.Style()
+    style.theme_use('alt')
+    style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
+                    focusthickness=3,
+                    focuscolor='none', font=('American typewriter', 20))
+    # When Hovering
+    style.map('TButton', background=[('active', 'teal')])
+
+    # Create a "back" button to return to "Pacing mode"
+    back_button = ttk.Button(egram_window, text="Back to Pacing Modes", command=egram_window.destroy)
+    back_button.pack()
 def show_aoo_mode_page():
     def update_aoo():
         global aoo_vals
         if 30 <= int(lower_rate_entry.get()) <= 175 and 50 <= int(upper_rate_entry.get()) <= 175 and 0.0 <= float(atrial_amplitude_entry.get()) <= 7 \
                 and 0.05 <= float(atrial_pulse_width_entry.get()) <= 1.9:
-            aoo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),atrial_amplitude_entry.get(),atrial_pulse_width_entry.get()]
+            result = messagebox.askokcancel("Confirmation", "Are you sure?")
+            if (result):
+                aoo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),atrial_amplitude_entry.get(),atrial_pulse_width_entry.get()]
+                aoo_window.destroy()
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-            aoo_window.destroy()
 
     aoo_window = Tk()
     aoo_window.geometry('%dx%d+0+0' % (width, height))
@@ -92,7 +106,7 @@ def show_aoo_mode_page():
     # Create a "Save" button
     save_button = ttk.Button(master=aoo_window, text="Save", style='TButton', command=update_aoo)
     save_button.pack(pady=10)
-
+    0
     # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(master=aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
     back_button.pack(pady=5)
@@ -101,11 +115,13 @@ def show_voo_mode_page():
         global voo_vals
         if 30 <= int(lower_rate_entry.get()) <= 175 and 50 <= int(upper_rate_entry.get()) <= 175 and 0.0 <= float(ventricular_amplitude_entry.get()) <= 7 \
                 and 0.05 <= float(ventricular_pulse_width_entry.get()) <= 1.9 and 150<=int(arp_entry.get())<=500:
-            voo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),ventricular_amplitude_entry.get(),
-                   ventricular_pulse_width_entry.get(), arp_entry.get()]
+            result = messagebox.askokcancel("Confirmation", "Are you sure?")
+            if (result):
+                voo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),ventricular_amplitude_entry.get(),
+                       ventricular_pulse_width_entry.get(), arp_entry.get()]
+                voo_window.destroy()
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-            voo_window.destroy()
 
     voo_window = Tk()
     voo_window.geometry('%dx%d+0+0' % (width, height))
@@ -185,9 +201,11 @@ def show_aai_mode_page():
                 and 0.05 <=float(atrial_pulse_width_entry.get())<=1.9 and 0.25<=float(atrial_sensitivity_entry.get())<=10\
                 and 150<=int(arp_entry.get())<=500 and 150<=int(pvarp_entry.get())<=500 and (30<=int(hysteresis_entry.get())<=175 or int(hysteresis_entry.get())==0)\
                 and 0<=int(rate_smoothing_entry.get())<=21:
-            aai_vals=[lower_rate_entry.get(), upper_rate_entry.get(), atrial_amplitude_entry.get(),
-                      atrial_pulse_width_entry.get(), atrial_sensitivity_entry.get(), arp_entry.get(),
-                      pvarp_entry.get(), hysteresis_entry.get(), rate_smoothing_entry.get()]
+            result = messagebox.askokcancel("Confirmation","Are you sure?")
+            if (result):
+                aai_vals=[lower_rate_entry.get(), upper_rate_entry.get(), atrial_amplitude_entry.get(),
+                          atrial_pulse_width_entry.get(), atrial_sensitivity_entry.get(), arp_entry.get(),
+                          pvarp_entry.get(), hysteresis_entry.get(), rate_smoothing_entry.get()]
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
             aai_window.destroy()
@@ -284,7 +302,7 @@ def show_aai_mode_page():
     save_button = ttk.Button(aai_window, text="Save", command=update_aai)
     save_button.grid(row=12, column=5, pady=10)
 
-    # Creat3 a "back" button to return to "Pacing mode"
+    # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
     back_button.grid(row=12, column=6, pady=10)
 def show_vvi_mode_page():
@@ -294,9 +312,11 @@ def show_vvi_mode_page():
                 and 0.05 <= float(ventricular_pulse_width_entry.get()) <= 1.9 and 0.25 <= float(ventricular_sensitivity_entry.get()) <= 10 \
                 and 150 <= int(vrp_entry.get()) <= 500 and (30 <= int(hysteresis_entry.get()) <= 175 or int(hysteresis_entry.get()) == 0) \
                 and 0 <= int(rate_smoothing_entry.get()) <= 21:
-            vvi_vals = [lower_rate_entry.get(), upper_rate_entry.get(), ventricular_amplitude_entry.get(),
-                        ventricular_pulse_width_entry.get(), ventricular_sensitivity_entry.get(), vrp_entry.get(), hysteresis_entry.get(),
-                        rate_smoothing_entry.get()]
+            result = messagebox.askokcancel("Confirmation", "Are you sure?")
+            if (result):
+                vvi_vals = [lower_rate_entry.get(), upper_rate_entry.get(), ventricular_amplitude_entry.get(),
+                            ventricular_pulse_width_entry.get(), ventricular_sensitivity_entry.get(), vrp_entry.get(), hysteresis_entry.get(),
+                            rate_smoothing_entry.get()]
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
             vvi_window.destroy()
@@ -527,7 +547,7 @@ def register_func():
             print(f"Error checking username: {str(e)}")
         return False
     def register_submit():
-        print(len(users))
+        #print(len(users))
 
         if (len(users) <10):
             #Getting Username and Password from the Textboxes
