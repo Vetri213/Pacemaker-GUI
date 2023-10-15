@@ -35,9 +35,10 @@ def show_aoo_mode_page():
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 aoo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),atrial_amplitude_entry.get(),atrial_pulse_width_entry.get()]
-                aoo_window.destroy()
+
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
+            aoo_window.destroy()
 
     aoo_window = Tk()
     aoo_window.geometry('%dx%d+0+0' % (width, height))
