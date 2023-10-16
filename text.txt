@@ -1,9 +1,3 @@
 Zephyr,GodOfWinds
 Liyht,123
-lijiobouno,nlijoiio
 123,123
-12,12
-2,2
-1,1
-3,3
-Zephyr123,Windy

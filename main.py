@@ -462,7 +462,7 @@ def pacing_modes():
 
     # Exit Button33
     exit_button = ttk.Button(master=pacing_modes, text="Exit", command=quit)
-    exit_button.pack(pady=100)
+    exit_button.pack(pady=20)
 
     # Use the grid layout manager to arrange the buttons in columns
     #button1.grid(row=0, column=0, padx=30, pady=30)
