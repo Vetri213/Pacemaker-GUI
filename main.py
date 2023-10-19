@@ -704,13 +704,13 @@ if __name__=='__main__':
 
     #Initializing lists for each pacing mode type
     #AOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width
-    aoo_vals = [0,0,0,0]
+    aoo_vals = [30,50,0,0.05]
     #VOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, ARP
-    voo_vals = [0,0,0,0,0]
+    voo_vals = [30,50,0,0.05,150]
     #AAI - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, Atrial Sensitivty, ARP, PVARP, Hysterisis, Rate Smoothing
-    aai_vals = [0,0,0,0,0,0,0,0,0]
+    aai_vals = [30,50,0,0.05,0.25,150,150,0,0]
     #VVI - Lower Rate Limit, Upper Rate Limit, Ventricular Amplitude, Ventricular Pulse Width, Ventricular Sensitivity, VRP, Hysterisis, Rate Smoothing
-    vvi_vals = [0,0,0,0,0,0,0,0]
+    vvi_vals = [30,50,0,0.05,0.35,150,0,0]
 
     root.mainloop()
 
