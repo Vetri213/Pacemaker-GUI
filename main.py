@@ -414,6 +414,55 @@ def show_vvi_mode_page():
     back_button.grid(row=12, column=6, pady=10, padx =10)
 
 def pacing_modes():
+    def save_and_quit():
+        file = open("text.txt", "w")
+        for i in range (len(users)):
+            if (users[i][0] == user):
+                current_vals_str = "{"
+                for val in aoo_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}{"
+                for val in voo_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}{"
+                for val in aai_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}{"
+                for val in vvi_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}"
+                print(current_vals_str)
+                all_vals[i] = current_vals_str
+
+            #     print (str(voo_vals))
+            #     aoo_new_vals = ("{"+str(aoo_vals).strip("[]{}").replace("\' ", "")+"}")
+            #     voo_new_vals = ("{"+str(voo_vals).strip("[{}]").replace("\' ", "")+"}")
+            #     aai_new_vals = ("{"+str(aai_vals).strip("[]{}").replace("\' ", "")+"}")
+            #     vvi_new_vals = ("{"+str(vvi_vals).strip("[]{}").replace("\' ", "")+"}")
+            #     #print (aoo_new_vals)
+                #print (voo_new_vals)
+                #print (aai_new_vals)
+                #print (vvi_new_vals)
+
+
+                #entry = (str(users[i][0])+"|"+users[i][1]+"|"+aoo_new_vals+voo_new_vals+aai_new_vals+vvi_new_vals)
+                #Reorder Structure with New Values
+             #   pass
+            #else:
+
+            entry = (str(users[i][0])+"|"+users[i][1]+"|"+all_vals[i]+"\n")
+
+            file.write(entry)
+
+        quit()
     pacing_modes = Tk()
     pacing_modes.master = root
     pacing_modes.title("Pacemaker GUI")
@@ -461,7 +510,7 @@ def pacing_modes():
     button5.pack(pady=20)
 
     # Exit Button33
-    exit_button = ttk.Button(master=pacing_modes, text="Exit", command=quit)
+    exit_button = ttk.Button(master=pacing_modes, text="Exit", command=save_and_quit)
     exit_button.pack(pady=20)
 
     # Use the grid layout manager to arrange the buttons in columns
@@ -482,6 +531,26 @@ def login_func():
             #Go to the ACTUAL DO STUFF PAGE
             changing_label.configure(text="Information Recognized!")
             login.destroy()
+            line_num = users.index(login_info)
+            file = open("text.txt", "r")
+            content = file.readlines()
+            user,password,vals = content[line_num].strip("\n").split("|")
+            #print(user,password,vals)
+            global aoo_vals,voo_vals,aai_vals,vvi_vals
+            aoo_vals_str = ""
+            voo_vals_str = ""
+            aai_vals_str = ""
+            vvi_vals_str = ""
+            for val in aoo_vals:
+                aoo_vals_str += str(val)
+            for val in voo_vals:
+                voo_vals_str += str(val)
+            for val in aai_vals:
+                aai_vals_str += str(val)
+            for val in vvi_vals:
+                vvi_vals_str += str(val)
+            print(aoo_vals_str)
+            print(voo_vals_str)
             pacing_modes()
         else:
             changing_label.configure(text="No User Matches Your Input. Please Try Again.")
@@ -560,7 +629,7 @@ def register_func():
                 changing_label.configure(text="Username is already taken")
             else:
             #Creating a New Entry to be added to the file of Users (in the same format)
-                new_entry = "\n"+username+","+password
+                new_entry = username+"|"+password+"|{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}\n"
             #Opening File in Append Mode (So as not to delete other users)
                 file = open("text.txt", "a")
             #Adding Entry
@@ -651,10 +720,12 @@ if __name__=='__main__':
     # Get Users List
     file = open("text.txt", "r")
     users = []
-
+    all_vals = []
     for line in file.readlines():
-        user = line.strip("\n").split(",")
-        users.append(user)
+        user,password,vals = line.strip("\n").split("|")
+        users.append([user,password])
+        all_vals.append(vals)
+    #print(users)
     # Number of Users
     count = len(users)
     # Close File
