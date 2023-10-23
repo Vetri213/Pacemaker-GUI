@@ -413,10 +413,11 @@ def show_vvi_mode_page():
     back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
     back_button.grid(row=12, column=6, pady=10, padx =10)
 
-def pacing_modes():
+def pacing_modes(user):
     def save_and_quit():
         file = open("text.txt", "w")
         for i in range (len(users)):
+            print(user)
             if (users[i][0] == user):
                 current_vals_str = "{"
                 for val in aoo_vals:
@@ -439,7 +440,6 @@ def pacing_modes():
                     current_vals_str += ","
                 current_vals_str = current_vals_str[:len(current_vals_str) - 1]
                 current_vals_str += "}"
-                print(current_vals_str)
                 all_vals[i] = current_vals_str
 
             #     print (str(voo_vals))
@@ -458,10 +458,11 @@ def pacing_modes():
              #   pass
             #else:
 
+            print(all_vals[i])
             entry = (str(users[i][0])+"|"+users[i][1]+"|"+all_vals[i]+"\n")
 
             file.write(entry)
-
+        file.close()
         quit()
     pacing_modes = Tk()
     pacing_modes.master = root
@@ -551,7 +552,7 @@ def login_func():
                 vvi_vals_str += str(val)
             print(aoo_vals_str)
             print(voo_vals_str)
-            pacing_modes()
+            pacing_modes(username)
         else:
             changing_label.configure(text="No User Matches Your Input. Please Try Again.")
     root.destroy()
@@ -636,10 +637,14 @@ def register_func():
                 file.write(new_entry)
             #Closing file
                 file.close()
+
+                users.append([username,password])
+                all_vals.append("{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}")
+
             # Go to the ACTUAL DO STUFF PAGE
                 changing_label.configure(text="Information Recognized!")
                 register.destroy()
-                pacing_modes()
+                pacing_modes(username)
         else:
             changing_label.configure(text="Max Users Registered. Sorry!")
 
