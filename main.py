@@ -419,6 +419,10 @@ def pacing_modes(user,vals):
     voo_vals_str = voo_vals_str.strip("{")
     aai_vals_str = aai_vals_str.strip("{")
     vvi_vals_str = vvi_vals_str.strip("{")
+    global aoo_vals
+    global voo_vals
+    global aai_vals
+    global vvi_vals
     aoo_vals = aoo_vals_str.split(",")
     voo_vals = voo_vals_str.split(",")
     aai_vals = aai_vals_str.split(",")
