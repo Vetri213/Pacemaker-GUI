@@ -4,10 +4,16 @@ import pygame
 from tkinter import *
 from tkinter import ttk,messagebox
 from PIL import Image, ImageTk
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import numpy as np
+
 
 def show_egram_page():
+    width, height = 800, 600
+
     egram_window = Tk()
-    egram_window.geometry('%dx%d+0+0' % (width, height))
+    egram_window.attributes('-fullscreen', True)
     egram_window.title("AOO Mode")
     egram_window.configure(background="black")
 
@@ -15,6 +21,7 @@ def show_egram_page():
     egram_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
                           font=("Arial", 80))
     egram_label.pack()
+
     # Style of Buttons
     style = ttk.Style()
     style.theme_use('alt')
@@ -24,9 +31,31 @@ def show_egram_page():
     # When Hovering
     style.map('TButton', background=[('active', 'teal')])
 
+    # Sample data for time and voltage
+    time = np.linspace(0, 1, 1000)  # 1 second, 1000 points
+    voltage = 0.5 * np.sin(2 * np.pi * 5 * time)  # Example sine wave
+
+    # Create a figure and plot the E-gram graph
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(time, voltage, label='E-gram Signal', color='blue')
+    ax.set_title('Electrogram (E-gram) Signal')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Voltage (mV)')
+    ax.legend()
+    ax.grid(True)
+
+    # Embed the matplotlib figure in the Tkinter window
+    canvas = FigureCanvasTkAgg(fig, master=egram_window)
+    canvas_widget = canvas.get_tk_widget()
+    canvas_widget.pack()
+
     # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(egram_window, text="Back to Pacing Modes", command=egram_window.destroy)
-    back_button.pack()
+    back_button.pack(pady=20)
+
+    # Display the Tkinter window
+    egram_window.mainloop()
+
 def show_aoo_mode_page():
     def update_aoo():
         global aoo_vals
@@ -107,7 +136,7 @@ def show_aoo_mode_page():
     # Create a "Save" button
     save_button = ttk.Button(master=aoo_window, text="Save", style='TButton', command=update_aoo)
     save_button.pack(pady=10)
-    0
+
     # Create a "back" button to return to "Pacing mode"
     back_button = ttk.Button(master=aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
     back_button.pack(pady=5)
