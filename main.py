@@ -456,14 +456,14 @@ def pacing_modes(user,vals):
     voo_vals = voo_vals_str.split(",")
     aai_vals = aai_vals_str.split(",")
     vvi_vals = vvi_vals_str.split(",")
-    print(aoo_vals)
-    print(voo_vals)
-    print(aai_vals)
-    print(vvi_vals)
+    # print(aoo_vals)
+    # print(voo_vals)
+    # print(aai_vals)
+    # print(vvi_vals)
     def save_and_quit():
         file = open("text.txt", "w")
         for i in range (len(users)):
-            print(user)
+            # print(user)
             if (users[i][0] == user):
                 current_vals_str = "{"
                 for val in aoo_vals:
@@ -504,7 +504,7 @@ def pacing_modes(user,vals):
              #   pass
             #else:
 
-            print(all_vals[i])
+            # print(all_vals[i])
             entry = (str(users[i][0])+"|"+users[i][1]+"|"+all_vals[i]+"\n")
 
             file.write(entry)
@@ -582,7 +582,7 @@ def login_func():
             file = open("text.txt", "r")
             content = file.readlines()
             user,password,vals = content[line_num].strip("\n").split("|")
-            print(user,password,vals)
+            # print(user,password,vals)
             file.close()
             #global aoo_vals,voo_vals,aai_vals,vvi_vals
             # aoo_vals_str = ""
