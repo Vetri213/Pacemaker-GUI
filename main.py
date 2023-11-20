@@ -413,7 +413,20 @@ def show_vvi_mode_page():
     back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
     back_button.grid(row=12, column=6, pady=10, padx =10)
 
-def pacing_modes(user):
+def pacing_modes(user,vals):
+    aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,temp = vals.split("}")
+    aoo_vals_str = aoo_vals_str.strip("{")
+    voo_vals_str = voo_vals_str.strip("{")
+    aai_vals_str = aai_vals_str.strip("{")
+    vvi_vals_str = vvi_vals_str.strip("{")
+    aoo_vals = aoo_vals_str.split(",")
+    voo_vals = voo_vals_str.split(",")
+    aai_vals = aai_vals_str.split(",")
+    vvi_vals = vvi_vals_str.split(",")
+    print(aoo_vals)
+    print(voo_vals)
+    print(aai_vals)
+    print(vvi_vals)
     def save_and_quit():
         file = open("text.txt", "w")
         for i in range (len(users)):
@@ -536,23 +549,24 @@ def login_func():
             file = open("text.txt", "r")
             content = file.readlines()
             user,password,vals = content[line_num].strip("\n").split("|")
-            #print(user,password,vals)
-            global aoo_vals,voo_vals,aai_vals,vvi_vals
-            aoo_vals_str = ""
-            voo_vals_str = ""
-            aai_vals_str = ""
-            vvi_vals_str = ""
-            for val in aoo_vals:
-                aoo_vals_str += str(val)
-            for val in voo_vals:
-                voo_vals_str += str(val)
-            for val in aai_vals:
-                aai_vals_str += str(val)
-            for val in vvi_vals:
-                vvi_vals_str += str(val)
-            print(aoo_vals_str)
-            print(voo_vals_str)
-            pacing_modes(username)
+            print(user,password,vals)
+            file.close()
+            #global aoo_vals,voo_vals,aai_vals,vvi_vals
+            # aoo_vals_str = ""
+            # voo_vals_str = ""
+            # aai_vals_str = ""
+            # vvi_vals_str = ""
+            # for val in aoo_vals:
+            #     aoo_vals_str += str(val)
+            # for val in voo_vals:
+            #     voo_vals_str += str(val)
+            # for val in aai_vals:
+            #     aai_vals_str += str(val)
+            # for val in vvi_vals:
+            #     vvi_vals_str += str(val)
+            # print(aoo_vals_str)
+            # print(voo_vals_str)
+            pacing_modes(username,vals)
         else:
             changing_label.configure(text="No User Matches Your Input. Please Try Again.")
     root.destroy()
@@ -778,15 +792,15 @@ if __name__=='__main__':
 
     root.resizable(True, True)
 
-    #Initializing lists for each pacing mode type
-    #AOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width
-    aoo_vals = [30,50,0,0.05]
-    #VOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, ARP
-    voo_vals = [30,50,0,0.05,150]
-    #AAI - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, Atrial Sensitivty, ARP, PVARP, Hysterisis, Rate Smoothing
-    aai_vals = [30,50,0,0.05,0.25,150,150,0,0]
-    #VVI - Lower Rate Limit, Upper Rate Limit, Ventricular Amplitude, Ventricular Pulse Width, Ventricular Sensitivity, VRP, Hysterisis, Rate Smoothing
-    vvi_vals = [30,50,0,0.05,0.35,150,0,0]
+    # # Initializing lists for each pacing mode type
+    # # AOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width
+    # aoo_vals = [30, 50, 0, 0.05]
+    # # VOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, ARP
+    # voo_vals = [30, 50, 0, 0.05, 150]
+    # # AAI - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, Atrial Sensitivty, ARP, PVARP, Hysterisis, Rate Smoothing
+    # aai_vals = [30, 50, 0, 0.05, 0.25, 150, 150, 0, 0]
+    # # VVI - Lower Rate Limit, Upper Rate Limit, Ventricular Amplitude, Ventricular Pulse Width, Ventricular Sensitivity, VRP, Hysterisis, Rate Smoothing
+    # vvi_vals = [30, 50, 0, 0.05, 0.35, 150, 0, 0]
 
     root.mainloop()
 
