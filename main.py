@@ -189,13 +189,13 @@ class Register(tkinter.Frame):
                 file.close()
 
                 users.append([username, password])
-                all_vals.append(
-                    "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}")
+                default_vals = "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}"
+                all_vals.append(default_vals)
 
                 # Go to the ACTUAL DO STUFF PAGE
                 self.changing_label.configure(text="Information Recognized!")
                 self.destroy()
-                pacing_modes(username)
+                pacing_modes(username,default_vals)
         else:
             self.changing_label.configure(text="Max Users Registered. Sorry!")
 
@@ -760,7 +760,7 @@ def pacing_modes(user,vals):
         file.close()
     def save_and_logout():
         save()
-        home()
+        #home
 
     def save_and_quit():
         save()
