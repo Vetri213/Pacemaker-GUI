@@ -8,6 +8,144 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
+class App(tkinter.Frame):
+    def __init__(self,master=None):
+        super().__init__(master)
+        self.master=master
+        self.place(relheight=1,relwidth=1)
+        self.home()
+
+    def set_background_image(window, image_path):
+        image = Image.open(image_path)
+        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
+        photo = ImageTk.PhotoImage(image)
+
+        label = Label(window, image=photo)
+        label.image = photo
+        label.place(x=0, y=0, relwidth=1, relheight=1)
+
+    def home(self):
+        #Change Background
+        self.set_background_image("ECGv1.png")
+        # Heading
+        self.label = ttk.Label(self, text="WELCOME", background=bg, foreground=fg, font=("Arial", 80))
+        self.label.pack(pady=50)
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background=bg, foreground=fg, width=20, height=30, borderwidth=1, focusthickness=3,
+                        focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        self.style.map('TButton', background=[('active', 'teal')])
+
+        # Login
+        self.login_button = ttk.Button(self, text="Login", command=self.login_func)
+        self.login_button.pack(pady=15)
+        # Register
+        self.register_button = ttk.Button(master=self, text="Register", command=register_func)
+        self.register_button.pack(pady=15)
+        # Quit
+        self.quit_button = ttk.Button(self, text='Quit', command=quit)
+        self.quit_button.pack(pady=15)
+
+    def login_func(self):
+        Login(master=self.master)
+        self.destroy
+
+    def register_func(self):
+        Register(master=self.master)
+        self.destroy
+
+
+#Login Function
+class Login(tkinter.Frame):
+    def __init__(self,master=None):
+        super().__init__(master)
+        self.master = master
+        self.place(relheight=1, relwidth=1)
+        self.login()
+
+    def set_background_image(window, image_path):
+        image = Image.open(image_path)
+        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
+        photo = ImageTk.PhotoImage(image)
+
+        label = Label(window, image=photo)
+        label.image = photo
+        label.place(x=0, y=0, relwidth=1, relheight=1)
+
+    def login(self):
+        #Change Background
+        self.set_background_image("ECGv1.png")
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background=bg, foreground=fg, width=20, height=30, borderwidth=1,
+                             focusthickness=3,
+                             focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        self.style.map('TButton', background=[('active', 'teal')])
+        # Heading
+        self.label = ttk.Label(master=self, text="LOGIN", background=bg, foreground=fg, font=("Arial", 80))
+        self.label.pack()
+
+        # Changing Label
+        self.changing_label = ttk.Label(master=self, text="Please Enter Your Information Below:", background=bg,
+                                   foreground=fg, font=("Arial", 20))
+        self.changing_label.pack(pady=10)
+
+        # Username
+        self.user_label = ttk.Label(master=self, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
+        self.user_label.pack(pady=20)
+        self.user_text = Entry(master=self, width=50, font=("Arial", 20))
+        self.user_text.pack()
+
+        # Password
+        self.password_label = ttk.Label(master=self, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
+        self.password_label.pack(pady=20)
+        self.password_text = Entry(master=self, width=50, font=("Arial", 20), show="*")
+        self.password_text.pack()
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background="black", foreground="white", width=20, borderwidth=1, focusthickness=3,
+                        focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        self.style.map('TButton', background=[('active', 'teal')])
+
+        # Submit Button
+        self.submit_button = ttk.Button(master=self, text="Submit", command=self.login_submit)
+        self.submit_button.pack(pady=20)
+
+        # Exit Button
+        self.exit_button = ttk.Button(master=self, text="Exit", command=quit)
+        self.exit_button.pack()
+
+    def login_submit(self):
+        # Getting Username and Password from the Textboxes
+        username = self.user_text.get()
+        password = self.password_text.get()
+        login_info = [username,password]
+        if(login_info in users):
+            #Go to the ACTUAL DO STUFF PAGE
+            self.changing_label.configure(text="Information Recognized!")
+            line_num = users.index(login_info)
+            file = open("text.txt", "r")
+            content = file.readlines()
+            user, password, vals = content[line_num].strip("\n").split("|")
+            # print(user,password,vals)
+            file.close()
+
+            self.destroy()
+            pacing_modes(username, vals)
+
+        else:
+            changing_label.configure(text="No User Matches Your Input. Please Try Again.")
+
+
 
 def show_egram_page():
     width, height = 800, 600
@@ -460,9 +598,9 @@ def pacing_modes(user,vals):
     # print(voo_vals)
     # print(aai_vals)
     # print(vvi_vals)
-    def save_and_quit():
+    def save():
         file = open("text.txt", "w")
-        for i in range (len(users)):
+        for i in range(len(users)):
             # print(user)
             if (users[i][0] == user):
                 current_vals_str = "{"
@@ -494,21 +632,26 @@ def pacing_modes(user,vals):
             #     aai_new_vals = ("{"+str(aai_vals).strip("[]{}").replace("\' ", "")+"}")
             #     vvi_new_vals = ("{"+str(vvi_vals).strip("[]{}").replace("\' ", "")+"}")
             #     #print (aoo_new_vals)
-                #print (voo_new_vals)
-                #print (aai_new_vals)
-                #print (vvi_new_vals)
+            # print (voo_new_vals)
+            # print (aai_new_vals)
+            # print (vvi_new_vals)
 
-
-                #entry = (str(users[i][0])+"|"+users[i][1]+"|"+aoo_new_vals+voo_new_vals+aai_new_vals+vvi_new_vals)
-                #Reorder Structure with New Values
-             #   pass
-            #else:
+            # entry = (str(users[i][0])+"|"+users[i][1]+"|"+aoo_new_vals+voo_new_vals+aai_new_vals+vvi_new_vals)
+            # Reorder Structure with New Values
+            #   pass
+            # else:
 
             # print(all_vals[i])
-            entry = (str(users[i][0])+"|"+users[i][1]+"|"+all_vals[i]+"\n")
+            entry = (str(users[i][0]) + "|" + users[i][1] + "|" + all_vals[i] + "\n")
 
             file.write(entry)
         file.close()
+    def save_and_logout():
+        save()
+        home()
+
+    def save_and_quit():
+        save()
         quit()
     pacing_modes = Tk()
     pacing_modes.master = root
@@ -556,6 +699,9 @@ def pacing_modes(user,vals):
     button5 = ttk.Button(master=pacing_modes, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
     button5.pack(pady=20)
 
+    logout = ttk.Button(master=pacing_modes, text="Logout", style='Pacing.TButton', command=save_and_logout)
+    logout.pack(pady=20)
+
     # Exit Button33
     exit_button = ttk.Button(master=pacing_modes, text="Exit", command=save_and_quit)
     exit_button.pack(pady=20)
@@ -567,87 +713,6 @@ def pacing_modes(user,vals):
     #button4.grid(row=1, column=1, padx=30, pady=30)
 
 
-#Login Function
-def login_func():
-    def login_submit():
-        # Getting Username and Password from the Textboxes
-        username = user_text.get()
-        password = password_text.get()
-        login_info = [username,password]
-        if(login_info in users):
-            #Go to the ACTUAL DO STUFF PAGE
-            changing_label.configure(text="Information Recognized!")
-            login.destroy()
-            line_num = users.index(login_info)
-            file = open("text.txt", "r")
-            content = file.readlines()
-            user,password,vals = content[line_num].strip("\n").split("|")
-            # print(user,password,vals)
-            file.close()
-            #global aoo_vals,voo_vals,aai_vals,vvi_vals
-            # aoo_vals_str = ""
-            # voo_vals_str = ""
-            # aai_vals_str = ""
-            # vvi_vals_str = ""
-            # for val in aoo_vals:
-            #     aoo_vals_str += str(val)
-            # for val in voo_vals:
-            #     voo_vals_str += str(val)
-            # for val in aai_vals:
-            #     aai_vals_str += str(val)
-            # for val in vvi_vals:
-            #     vvi_vals_str += str(val)
-            # print(aoo_vals_str)
-            # print(voo_vals_str)
-            pacing_modes(username,vals)
-        else:
-            changing_label.configure(text="No User Matches Your Input. Please Try Again.")
-    root.destroy()
-    login = Tk()
-    login.master = root
-    login.title("Pacemaker GUI")
-    # Changing background colour
-    login.configure(background="black")
-
-    # Changing window size
-    width, height = login.winfo_screenwidth(), login.winfo_screenheight()
-    login.geometry('%dx%d+0+0' % (width, height))
-
-    # Heading
-    label = ttk.Label(master=login, text="LOGIN", background=bg, foreground=fg, font=("Arial", 80))
-    label.pack()
-
-    # Changing Label
-    changing_label = ttk.Label(master=login, text="Please Enter Your Information Below:", background=bg, foreground=fg, font=("Arial", 20))
-    changing_label.pack(pady=10)
-
-    # Username
-    user_label = ttk.Label(master=login, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
-    user_label.pack(pady=20)
-    user_text = Entry(master=login, width=50, font=("Arial", 20))
-    user_text.pack()
-
-    # Password
-    password_label = ttk.Label(master=login, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
-    password_label.pack(pady=20)
-    password_text = Entry(master=login,width=50, font=("Arial", 20),show="*")
-    password_text.pack()
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=20, borderwidth=1, focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-    # Submit Button
-    submit_button = ttk.Button(master=login, text="Submit", command=login_submit)
-    submit_button.pack(pady=20)
-
-    # Exit Button
-    exit_button = ttk.Button(master=login, text="Exit", command=quit)
-    exit_button.pack()
 
 #Register Function
 def register_func():
@@ -759,7 +824,7 @@ def register_func():
 
 def set_background_image(window, image_path):
     image = Image.open(image_path)
-    image = image.resize((root.winfo_screenwidth(), root.winfo_screenheight()))
+    image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
     photo = ImageTk.PhotoImage(image)
 
 
@@ -782,48 +847,28 @@ if __name__=='__main__':
     count = len(users)
     # Close File
     file.close()
-
+# ------------------------------------------------------------------------------------------------------------
     # creating and naming window
     root = Tk()
     root.title("Pacemaker GUI")
     # Changing background colour
     root.configure(background="black")
 
-    background_image_path = "ECGv1.png"
-    set_background_image(root, background_image_path)
 
     # Changing window size
     width, height = root.winfo_screenwidth(), root.winfo_screenheight()
     root.geometry('%dx%d+0+0' % (width, height))
 
-
     # Widget Options
     bg = "black"
     fg = "white"
-
-    # Heading
-    label = ttk.Label(master=root, text="WELCOME", background=bg, foreground=fg, font=("Arial", 80))
-    label.pack(pady=50)
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background=bg, foreground=fg, width=20, height =30, borderwidth=1, focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-    # Login
-    login_button = ttk.Button(root, text="Login", command=login_func)
-    login_button.pack(pady=15)
-    # Register
-    register_button = ttk.Button(master=root, text="Register", command=register_func)
-    register_button.pack(pady=15)
-    # Quit
-    quit_button = ttk.Button(root, text='Quit', command=quit)
-    quit_button.pack(pady=15)
-
     root.resizable(True, True)
+
+    App(master=root)
+
+    root.mainloop()
+
+
 
     # # Initializing lists for each pacing mode type
     # # AOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width
@@ -834,6 +879,3 @@ if __name__=='__main__':
     # aai_vals = [30, 50, 0, 0.05, 0.25, 150, 150, 0, 0]
     # # VVI - Lower Rate Limit, Upper Rate Limit, Ventricular Amplitude, Ventricular Pulse Width, Ventricular Sensitivity, VRP, Hysterisis, Rate Smoothing
     # vvi_vals = [30, 50, 0, 0.05, 0.35, 150, 0, 0]
-
-    root.mainloop()
-
