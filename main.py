@@ -346,10 +346,12 @@ class pacing_modes(tkinter.Frame):
         file.close()
     def save_and_logout(self):
         self.save()
-        #home
+        self.destroy()
+        App(master=self.master)
 
     def save_and_quit(self):
         self.save()
+        self.destroy()
         quit()
 
     def pacingmodes(self):
