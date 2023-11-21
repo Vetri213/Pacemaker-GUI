@@ -140,7 +140,7 @@ class Login(tkinter.Frame):
             file.close()
 
             self.destroy()
-            pacing_modes(username, vals)
+            pacing_modes(self.master, username, vals)
 
         else:
             self.changing_label.configure(text="No User Matches Your Input. Please Try Again.")
@@ -195,7 +195,7 @@ class Register(tkinter.Frame):
                 # Go to the ACTUAL DO STUFF PAGE
                 self.changing_label.configure(text="Information Recognized!")
                 self.destroy()
-                pacing_modes(username,default_vals)
+                pacing_modes(self.master, username, default_vals)
         else:
             self.changing_label.configure(text="Max Users Registered. Sorry!")
 
@@ -258,6 +258,151 @@ class Register(tkinter.Frame):
         self.exit_button = ttk.Button(master=self, text="Exit", command=quit)
         self.exit_button.pack()
 
+class pacing_modes(tkinter.Frame):
+    def __init__(self,master=None,user=None,vals=None):
+        super().__init__(master)
+        self.master = master
+        self.user = user
+        self.vals = vals
+        self.place(relheight=1, relwidth=1)
+        self.globalize_vals()
+        self.pacingmodes()
+
+    def set_background_image(window, image_path):
+        image = Image.open(image_path)
+        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
+        photo = ImageTk.PhotoImage(image)
+
+        label = Label(window, image=photo)
+        label.image = photo
+        label.place(x=0, y=0, relwidth=1, relheight=1)
+
+    def globalize_vals(self):
+        aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,temp = self.vals.split("}")
+        aoo_vals_str = aoo_vals_str.strip("{")
+        voo_vals_str = voo_vals_str.strip("{")
+        aai_vals_str = aai_vals_str.strip("{")
+        vvi_vals_str = vvi_vals_str.strip("{")
+        global aoo_vals
+        global voo_vals
+        global aai_vals
+        global vvi_vals
+        aoo_vals = aoo_vals_str.split(",")
+        voo_vals = voo_vals_str.split(",")
+        aai_vals = aai_vals_str.split(",")
+        vvi_vals = vvi_vals_str.split(",")
+        # print(aoo_vals)
+        # print(voo_vals)
+        # print(aai_vals)
+        # print(vvi_vals)
+
+    def save(self):
+        file = open("text.txt", "w")
+        for i in range(len(users)):
+            # print(user)
+            if (users[i][0] == user):
+                current_vals_str = "{"
+                for val in aoo_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}{"
+                for val in voo_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}{"
+                for val in aai_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}{"
+                for val in vvi_vals:
+                    current_vals_str += str(val)
+                    current_vals_str += ","
+                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
+                current_vals_str += "}"
+                all_vals[i] = current_vals_str
+
+            #     print (str(voo_vals))
+            #     aoo_new_vals = ("{"+str(aoo_vals).strip("[]{}").replace("\' ", "")+"}")
+            #     voo_new_vals = ("{"+str(voo_vals).strip("[{}]").replace("\' ", "")+"}")
+            #     aai_new_vals = ("{"+str(aai_vals).strip("[]{}").replace("\' ", "")+"}")
+            #     vvi_new_vals = ("{"+str(vvi_vals).strip("[]{}").replace("\' ", "")+"}")
+            #     #print (aoo_new_vals)
+            # print (voo_new_vals)
+            # print (aai_new_vals)
+            # print (vvi_new_vals)
+
+            # entry = (str(users[i][0])+"|"+users[i][1]+"|"+aoo_new_vals+voo_new_vals+aai_new_vals+vvi_new_vals)
+            # Reorder Structure with New Values
+            #   pass
+            # else:
+
+            # print(all_vals[i])
+            entry = (str(users[i][0]) + "|" + users[i][1] + "|" + all_vals[i] + "\n")
+
+            file.write(entry)
+        file.close()
+    def save_and_logout(self):
+        self.save()
+        #home
+
+    def save_and_quit(self):
+        self.save()
+        quit()
+
+    def pacingmodes(self):
+        # Change Background
+        self.set_background_image("ECGv1.png")
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background=bg, foreground=fg, width=20, height=30, borderwidth=1, focusthickness=3,
+                             focuscolor='none', font=('American typewriter', 20))
+        # Heading
+        self.label = ttk.Label(master=self, text="Pacing Modes", background=bg, foreground=fg, font=("Arial", 80))
+        self.label.pack(pady=30)
+
+        # Create a frame to contain the buttons
+        #button_frame = ttk.Frame(self, padding=300)
+        #button_frame.pack(fill="both", expand=True)
+
+        self.new_old = ttk.Label(master=self, text="New Pacemaker Detected", background=bg, foreground=fg, font=("Arial", 20))
+        self.new_old.pack(pady=10)
+
+        self.connectivity = ttk.Label(master=self, text="Device Disconnected", background=bg, foreground=fg, font=("Arial", 20))
+        self.connectivity.pack(pady=10)
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background="black", foreground="white", width=10, height =30, borderwidth=1, focusthickness=3,
+                        focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        self.style.map('TButton', background=[('active', 'teal')])
+
+        # Create buttons and add them to the frame
+
+        self.button1 = ttk.Button(master = self, text="AOO", style='Pacing.TButton',command=show_aoo_mode_page)
+        self.button1.pack(pady=20)
+
+        self.button2 = ttk.Button(master = self, text="VOO", style='Pacing.TButton',command=show_voo_mode_page)
+        self.button2.pack(pady=20)
+        self.button3 = ttk.Button(master = self, text="AAI", style='Pacing.TButton',command=show_aai_mode_page)
+        self.button3.pack(pady=20)
+        self.button4 = ttk.Button(master = self, text="VVI", style='Pacing.TButton',command=show_vvi_mode_page)
+        self.button4.pack(pady=20)
+        self.button5 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
+        self.button5.pack(pady=20)
+
+        self.logout = ttk.Button(master=self, text="Logout", style='Pacing.TButton', command=self.save_and_logout)
+        self.logout.pack(pady=20)
+
+        # Exit Button33
+        self.exit_button = ttk.Button(master=self, text="Exit", command=self.save_and_quit)
+        self.exit_button.pack(pady=20)
 
 def show_egram_page():
     width, height = 800, 600
@@ -692,131 +837,7 @@ def show_vvi_mode_page():
     back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
     back_button.grid(row=12, column=6, pady=10, padx =10)
 
-def pacing_modes(user,vals):
-    aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,temp = vals.split("}")
-    aoo_vals_str = aoo_vals_str.strip("{")
-    voo_vals_str = voo_vals_str.strip("{")
-    aai_vals_str = aai_vals_str.strip("{")
-    vvi_vals_str = vvi_vals_str.strip("{")
-    global aoo_vals
-    global voo_vals
-    global aai_vals
-    global vvi_vals
-    aoo_vals = aoo_vals_str.split(",")
-    voo_vals = voo_vals_str.split(",")
-    aai_vals = aai_vals_str.split(",")
-    vvi_vals = vvi_vals_str.split(",")
-    # print(aoo_vals)
-    # print(voo_vals)
-    # print(aai_vals)
-    # print(vvi_vals)
-    def save():
-        file = open("text.txt", "w")
-        for i in range(len(users)):
-            # print(user)
-            if (users[i][0] == user):
-                current_vals_str = "{"
-                for val in aoo_vals:
-                    current_vals_str += str(val)
-                    current_vals_str += ","
-                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}{"
-                for val in voo_vals:
-                    current_vals_str += str(val)
-                    current_vals_str += ","
-                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}{"
-                for val in aai_vals:
-                    current_vals_str += str(val)
-                    current_vals_str += ","
-                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}{"
-                for val in vvi_vals:
-                    current_vals_str += str(val)
-                    current_vals_str += ","
-                current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}"
-                all_vals[i] = current_vals_str
 
-            #     print (str(voo_vals))
-            #     aoo_new_vals = ("{"+str(aoo_vals).strip("[]{}").replace("\' ", "")+"}")
-            #     voo_new_vals = ("{"+str(voo_vals).strip("[{}]").replace("\' ", "")+"}")
-            #     aai_new_vals = ("{"+str(aai_vals).strip("[]{}").replace("\' ", "")+"}")
-            #     vvi_new_vals = ("{"+str(vvi_vals).strip("[]{}").replace("\' ", "")+"}")
-            #     #print (aoo_new_vals)
-            # print (voo_new_vals)
-            # print (aai_new_vals)
-            # print (vvi_new_vals)
-
-            # entry = (str(users[i][0])+"|"+users[i][1]+"|"+aoo_new_vals+voo_new_vals+aai_new_vals+vvi_new_vals)
-            # Reorder Structure with New Values
-            #   pass
-            # else:
-
-            # print(all_vals[i])
-            entry = (str(users[i][0]) + "|" + users[i][1] + "|" + all_vals[i] + "\n")
-
-            file.write(entry)
-        file.close()
-    def save_and_logout():
-        save()
-        #home
-
-    def save_and_quit():
-        save()
-        quit()
-    pacing_modes = Tk()
-    pacing_modes.master = root
-    pacing_modes.title("Pacemaker GUI")
-    # Changing background colour
-    pacing_modes.configure(background="black")
-
-    # Changing window size
-    width, height = pacing_modes.winfo_screenwidth(), pacing_modes.winfo_screenheight()
-    pacing_modes.geometry('%dx%d+0+0' % (width, height))
-
-    # Heading
-    label = ttk.Label(master=pacing_modes, text="Pacing Modes", background=bg, foreground=fg, font=("Arial", 80))
-    label.pack(pady=30)
-
-    # Create a frame to contain the buttons
-    #button_frame = ttk.Frame(pacing_modes, padding=300)
-    #button_frame.pack(fill="both", expand=True)
-
-    new_old = ttk.Label(master=pacing_modes, text="New Pacemaker Detected", background=bg, foreground=fg, font=("Arial", 20))
-    new_old.pack(pady=10)
-
-    connectivity = ttk.Label(master=pacing_modes, text="Device Disconnected", background=bg, foreground=fg, font=("Arial", 20))
-    connectivity.pack(pady=10)
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=10, height =30, borderwidth=1, focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-    # Create buttons and add them to the frame
-
-    button1 = ttk.Button(master = pacing_modes, text="AOO", style='Pacing.TButton',command=show_aoo_mode_page)
-    button1.pack(pady=20)
-
-    button2 = ttk.Button(master = pacing_modes, text="VOO", style='Pacing.TButton',command=show_voo_mode_page)
-    button2.pack(pady=20)
-    button3 = ttk.Button(master = pacing_modes, text="AAI", style='Pacing.TButton',command=show_aai_mode_page)
-    button3.pack(pady=20)
-    button4 = ttk.Button(master = pacing_modes, text="VVI", style='Pacing.TButton',command=show_vvi_mode_page)
-    button4.pack(pady=20)
-    button5 = ttk.Button(master=pacing_modes, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
-    button5.pack(pady=20)
-
-    logout = ttk.Button(master=pacing_modes, text="Logout", style='Pacing.TButton', command=save_and_logout)
-    logout.pack(pady=20)
-
-    # Exit Button33
-    exit_button = ttk.Button(master=pacing_modes, text="Exit", command=save_and_quit)
-    exit_button.pack(pady=20)
 
     # Use the grid layout manager to arrange the buttons in columns
     #button1.grid(row=0, column=0, padx=30, pady=30)
