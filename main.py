@@ -387,7 +387,7 @@ class pacing_modes(tkinter.Frame):
 
         # Create buttons and add them to the frame
 
-        self.button1 = ttk.Button(master = self, text="AOO", style='Pacing.TButton',command=show_aoo_mode_page)
+        self.button1 = ttk.Button(master = self, text="AOO", style='Pacing.TButton',command=self.AOOPressed)
         self.button1.pack(pady=20)
 
         self.button2 = ttk.Button(master = self, text="VOO", style='Pacing.TButton',command=show_voo_mode_page)
@@ -405,6 +405,116 @@ class pacing_modes(tkinter.Frame):
         # Exit Button33
         self.exit_button = ttk.Button(master=self, text="Exit", command=self.save_and_quit)
         self.exit_button.pack(pady=20)
+
+    def AOOPressed(self):
+        AOO_Mode(master=self.master)
+
+    # def AAIPressed(self, e):
+    #     AAI_Mode(master=self.master)
+    #     self.destroy()
+    #
+    # def VOOPressed(self, e):
+    #     VOO_Mode(master=self.master)
+    #     self.destroy()
+    #
+    # def VVIPressed(self, e):
+    #     VVI_Mode(master=self.master)
+    #     self.destroy()
+
+class AOO_Mode(tkinter.Frame):
+    def __init__(self,master=None):
+        self.displayAOO()
+
+    def update_aoo(self):
+        global aoo_vals
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+            result = messagebox.askokcancel("Confirmation", "Are you sure?")
+            if (result):
+                aoo_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
+
+        else:
+            messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
+            self.aoo_window.destroy()
+
+    def displayAOO(self):
+        self.aoo_window = Tk()
+        self.aoo_window.geometry('%dx%d+0+0' % (width, height))
+        self.aoo_window.title("AOO Mode")
+        self.aoo_window.configure(background="black")
+
+        # Add a title
+        self.aoo_label = ttk.Label(self.aoo_window, text="AOO Mode Information", background="black", foreground="white",
+                              font=("Arial", 20))
+        self.aoo_label.pack()
+
+        # Add the parameter here
+        self.lower_rate_label = ttk.Label(self.aoo_window, text="Lower Rate Limit:", background="black", foreground="white",
+                                     font=("Arial", 16))
+        self.lower_rate_entry = Entry(self.aoo_window, font=("Arial", 16))
+        self.lower_rate_entry.insert(0, aoo_vals[0])
+        self.lower_rate_label.pack(pady=10)
+        self.lower_rate_entry.pack(pady=10)
+
+        self.upper_rate_label = ttk.Label(self.aoo_window, text="Upper Rate Limit:", background="black", foreground="white",
+                                     font=("Arial", 16))
+        self.upper_rate_entry = Entry(self.aoo_window, font=("Arial", 16))
+        self.upper_rate_entry.insert(0, aoo_vals[1])
+        self.upper_rate_label.pack(pady=10)
+        self.upper_rate_entry.pack(pady=10)
+
+        self.atrial_amplitude_label = ttk.Label(self.aoo_window, text="Atrial Amplitude:", background="black", foreground="white",
+                                           font=("Arial", 16))
+        self.atrial_amplitude_entry = Entry(self.aoo_window, font=("Arial", 16))
+        self.atrial_amplitude_entry.insert(0, aoo_vals[2])
+        self.atrial_amplitude_label.pack(pady=10)
+        self.atrial_amplitude_entry.pack(pady=10)
+
+        self.atrial_pulse_width_label = ttk.Label(self.aoo_window, text="Atrial Pulse Width:", background="black",
+                                             foreground="white", font=("Arial", 16))
+        self.atrial_pulse_width_entry = Entry(self.aoo_window, font=("Arial", 16))
+        self.atrial_pulse_width_entry.insert(0, aoo_vals[3])
+        self.atrial_pulse_width_label.pack(pady=10)
+        self.atrial_pulse_width_entry.pack(pady=10)
+
+        #    ventricular_amplitude_label = ttk.Label(self, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
+        #    ventricular_amplitude_entry = Entry(self, font=("Arial", 16))
+        #    ventricular_amplitude_label.pack(pady=10)
+        #    ventricular_amplitude_entry.pack(pady=10)
+
+        #    ventricular_pulse_width_label = ttk.Label(self, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
+        #    ventricular_pulse_width_entry = Entry(self, font=("Arial", 16))
+        #    ventricular_pulse_width_label.pack(pady=10)
+        #    ventricular_pulse_width_entry.pack(pady=10)
+
+        # vrp_label = ttk.Label(self, text="VRP:", background="black", foreground="white", font=("Arial", 16))
+        # vrp_entry = Entry(self, font=("Arial", 16))
+        # vrp_label.pack(pady=10)
+        # vrp_entry.pack(pady=10)
+
+        # arp_label = ttk.Label(self, text="ARP:", background="black", foreground="white", font=("Arial", 16))
+        # arp_entry = Entry(self, font=("Arial", 16))
+        # arp_label.pack(pady=10)
+        # arp_entry.pack(pady=10)
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
+                        focusthickness=3,
+                        focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        self.style.map('TButton', background=[('active', 'teal')])
+
+        # Create a "Save" button
+        self.save_button = ttk.Button(master=self.aoo_window, text="Save", style='TButton', command=self.update_aoo)
+        self.save_button.pack(pady=10)
+
+        # Create a "back" button to return to "Pacing mode"
+        self.back_button = ttk.Button(master=self.aoo_window, text="Back to Pacing Modes", command=self.aoo_window.destroy)
+        self.back_button.pack(pady=5)
+
+
 
 def show_egram_page():
     width, height = 800, 600
@@ -453,90 +563,7 @@ def show_egram_page():
     # Display the Tkinter window
     egram_window.mainloop()
 
-def show_aoo_mode_page():
-    def update_aoo():
-        global aoo_vals
-        if 30 <= int(lower_rate_entry.get()) <= 175 and 50 <= int(upper_rate_entry.get()) <= 175 and 0.0 <= float(atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(atrial_pulse_width_entry.get()) <= 1.9:
-            result = messagebox.askokcancel("Confirmation", "Are you sure?")
-            if (result):
-                aoo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),atrial_amplitude_entry.get(),atrial_pulse_width_entry.get()]
 
-        else:
-            messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-            aoo_window.destroy()
-
-    aoo_window = Tk()
-    aoo_window.geometry('%dx%d+0+0' % (width, height))
-    aoo_window.title("AOO Mode")
-    aoo_window.configure(background="black")
-
-    # Add a title
-    aoo_label = ttk.Label(aoo_window, text="AOO Mode Information", background="black", foreground="white", font=("Arial", 20))
-    aoo_label.pack()
-
-    # Add the parameter here
-    lower_rate_label = ttk.Label(aoo_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    lower_rate_entry = Entry(aoo_window, font=("Arial", 16))
-    lower_rate_entry.insert(0,aoo_vals[0])
-    lower_rate_label.pack(pady=10)
-    lower_rate_entry.pack(pady=10)
-
-    upper_rate_label = ttk.Label(aoo_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    upper_rate_entry = Entry(aoo_window, font=("Arial", 16))
-    upper_rate_entry.insert(0, aoo_vals[1])
-    upper_rate_label.pack(pady=10)
-    upper_rate_entry.pack(pady=10)
-
-    atrial_amplitude_label = ttk.Label(aoo_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    atrial_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
-    atrial_amplitude_entry.insert(0, aoo_vals[2])
-    atrial_amplitude_label.pack(pady=10)
-    atrial_amplitude_entry.pack(pady=10)
-
-    atrial_pulse_width_label = ttk.Label(aoo_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    atrial_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
-    atrial_pulse_width_entry.insert(0,aoo_vals[3])
-    atrial_pulse_width_label.pack(pady=10)
-    atrial_pulse_width_entry.pack(pady=10)
-
-#    ventricular_amplitude_label = ttk.Label(aoo_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
-#    ventricular_amplitude_entry = Entry(aoo_window, font=("Arial", 16))
-#    ventricular_amplitude_label.pack(pady=10)
-#    ventricular_amplitude_entry.pack(pady=10)
-
-#    ventricular_pulse_width_label = ttk.Label(aoo_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-#    ventricular_pulse_width_entry = Entry(aoo_window, font=("Arial", 16))
-#    ventricular_pulse_width_label.pack(pady=10)
-#    ventricular_pulse_width_entry.pack(pady=10)
-
-    #vrp_label = ttk.Label(aoo_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
-    #vrp_entry = Entry(aoo_window, font=("Arial", 16))
-    #vrp_label.pack(pady=10)
-    #vrp_entry.pack(pady=10)
-
-    #arp_label = ttk.Label(aoo_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
-    #arp_entry = Entry(aoo_window, font=("Arial", 16))
-    #arp_label.pack(pady=10)
-    #arp_entry.pack(pady=10)
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
-                    focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-
-    # Create a "Save" button
-    save_button = ttk.Button(master=aoo_window, text="Save", style='TButton', command=update_aoo)
-    save_button.pack(pady=10)
-
-    # Create a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(master=aoo_window, text="Back to Pacing Modes", command=aoo_window.destroy)
-    back_button.pack(pady=5)
 def show_voo_mode_page():
     def update_voo():
         global voo_vals
