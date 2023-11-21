@@ -300,7 +300,7 @@ class pacing_modes(tkinter.Frame):
         file = open("text.txt", "w")
         for i in range(len(users)):
             # print(user)
-            if (users[i][0] == user):
+            if (users[i][0] == self.user):
                 current_vals_str = "{"
                 for val in aoo_vals:
                     current_vals_str += str(val)
@@ -431,7 +431,9 @@ class AOO_Mode(tkinter.Frame):
                 and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
+                global aoo_vals
                 aoo_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
+
 
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
