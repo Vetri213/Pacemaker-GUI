@@ -43,7 +43,7 @@ class App(tkinter.Frame):
         self.login_button = ttk.Button(self, text="Login", command=self.login_func)
         self.login_button.pack(pady=15)
         # Register
-        self.register_button = ttk.Button(master=self, text="Register", command=register_func)
+        self.register_button = ttk.Button(master=self, text="Register", command=self.register_func)
         self.register_button.pack(pady=15)
         # Quit
         self.quit_button = ttk.Button(self, text='Quit', command=quit)
@@ -143,8 +143,120 @@ class Login(tkinter.Frame):
             pacing_modes(username, vals)
 
         else:
-            changing_label.configure(text="No User Matches Your Input. Please Try Again.")
+            self.changing_label.configure(text="No User Matches Your Input. Please Try Again.")
 
+
+class Register(tkinter.Frame):
+    def __init__(self,master=None):
+        super().__init__(master)
+        self.master=master
+        self.place(relheight=1,relwidth=1)
+        self.register()
+
+    def is_username_taken(self,username):
+        try:
+            # open the file anc check if the username has already been taken
+            with open("text.txt", "r") as file:
+                for line in file:
+                    parts = line.strip().split(',')
+                    if len(parts) == 2:  # make sure every line has two parts( username and password)
+                        existing_username, _ = parts
+                        if existing_username == username:
+                            return True
+        except Exception as e:
+            print(f"Error checking username: {str(e)}")
+        return False
+
+    def register_submit(self):
+        # print(len(users))
+
+        if (len(users) < 10):
+            # Getting Username and Password from the Textboxes
+            username = self.user_text.get()
+            password = self.password_text.get()
+            if not username or not password:
+                self.changing_label.configure(text="Username or password cannot be empty")
+            elif self.is_username_taken(username):
+                self.changing_label.configure(text="Username is already taken")
+            else:
+                # Creating a New Entry to be added to the file of Users (in the same format)
+                new_entry = username + "|" + password + "|{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}\n"
+                # Opening File in Append Mode (So as not to delete other users)
+                file = open("text.txt", "a")
+                # Adding Entry
+                file.write(new_entry)
+                # Closing file
+                file.close()
+
+                users.append([username, password])
+                all_vals.append(
+                    "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}")
+
+                # Go to the ACTUAL DO STUFF PAGE
+                self.changing_label.configure(text="Information Recognized!")
+                self.destroy()
+                pacing_modes(username)
+        else:
+            self.changing_label.configure(text="Max Users Registered. Sorry!")
+
+    def set_background_image(window, image_path):
+        image = Image.open(image_path)
+        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
+        photo = ImageTk.PhotoImage(image)
+
+        label = Label(window, image=photo)
+        label.image = photo
+        label.place(x=0, y=0, relwidth=1, relheight=1)
+
+    # Register Function
+    def register(self):
+        # Change Background
+        self.set_background_image("ECGv1.png")
+
+        # Style of Buttons
+        self.style = ttk.Style()
+        self.style.theme_use('alt')
+        self.style.configure('TButton', background=bg, foreground=fg, width=20, height=30, borderwidth=1,
+                             focusthickness=3,
+                             focuscolor='none', font=('American typewriter', 20))
+
+        # Heading
+        self.label = ttk.Label(master=self, text="REGISTER", background=bg, foreground=fg, font=("Arial", 80))
+        self.label.pack()
+
+        # Changing Label
+        self.changing_label = ttk.Label(master=self, text="Please Enter Your Information Below:", background=bg,
+                                   foreground=fg,
+                                   font=("Arial", 20))
+        self.changing_label.pack(pady=10)
+
+        # Username
+        self.user_label = ttk.Label(master=self, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
+        self.user_label.pack(pady=20)
+        self.user_text = Entry(master=self, width=50, font=("Arial", 20))
+        self.user_text.pack()
+
+        # Password
+        self.password_label = ttk.Label(master=self, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
+        self.password_label.pack(pady=20)
+        self.password_text = Entry(master=self, width=50, font=("Arial", 20), show="*")
+        self.password_text.pack()
+
+        # Style of Buttons
+        style = ttk.Style()
+        style.theme_use('alt')
+        style.configure('TButton', background="black", foreground="white", width=20, borderwidth=1, focusthickness=3,
+                        focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        style.map('TButton', background=[('active', 'teal')])
+
+        # Submit Button
+        self.submit_button = ttk.Button(master=self, text="Submit", command=self.register_submit)
+        self.submit_button.pack(pady=20)
+
+        # Home Button
+        self.exit_button = ttk.Button(master=self, text="Exit", command=quit)
+        self.exit_button.pack()
 
 
 def show_egram_page():
@@ -714,99 +826,6 @@ def pacing_modes(user,vals):
 
 
 
-#Register Function
-def register_func():
-    def is_username_taken(username):
-        try:
-            # open the file anc check if the username has already been taken
-            with open("text.txt", "r") as file:
-                for line in file:
-                    parts = line.strip().split(',')
-                    if len(parts) == 2:  # make sure every line has two parts( username and password)
-                        existing_username, _ = parts
-                        if existing_username == username:
-                            return True
-        except Exception as e:
-            print(f"Error checking username: {str(e)}")
-        return False
-    def register_submit():
-        #print(len(users))
-
-        if (len(users) <10):
-            #Getting Username and Password from the Textboxes
-            username = user_text.get()
-            password = password_text.get()
-            if not username or not password:
-                changing_label.configure(text="Username or password cannot be empty")
-            elif is_username_taken(username):
-                changing_label.configure(text="Username is already taken")
-            else:
-            #Creating a New Entry to be added to the file of Users (in the same format)
-                new_entry = username+"|"+password+"|{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}\n"
-            #Opening File in Append Mode (So as not to delete other users)
-                file = open("text.txt", "a")
-            #Adding Entry
-                file.write(new_entry)
-            #Closing file
-                file.close()
-
-                users.append([username,password])
-                all_vals.append("{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}")
-
-            # Go to the ACTUAL DO STUFF PAGE
-                changing_label.configure(text="Information Recognized!")
-                register.destroy()
-                pacing_modes(username)
-        else:
-            changing_label.configure(text="Max Users Registered. Sorry!")
-
-    root.destroy()
-    register = Tk()
-    register.master = root
-    register.title("Pacemaker GUI")
-    # Changing background colour
-    register.configure(background="black")
-
-    # Changing window size
-    width, height = register.winfo_screenwidth(), register.winfo_screenheight()
-    register.geometry('%dx%d+0+0' % (width, height))
-
-    # Heading
-    label = ttk.Label(master=register, text="REGISTER", background=bg, foreground=fg, font=("Arial", 80))
-    label.pack()
-
-    # Changing Label
-    changing_label = ttk.Label(master=register, text="Please Enter Your Information Below:", background=bg, foreground=fg,
-                               font=("Arial", 20))
-    changing_label.pack(pady=10)
-
-    # Username
-    user_label = ttk.Label(master=register, text="Username:", background=bg, foreground=fg, font=("Arial", 20))
-    user_label.pack(pady=20)
-    user_text = Entry(master=register, width=50, font=("Arial", 20))
-    user_text.pack()
-
-    # Password
-    password_label = ttk.Label(master=register, text="Password:", background=bg, foreground=fg, font=("Arial", 20))
-    password_label.pack(pady=20)
-    password_text = Entry(master=register, width=50, font=("Arial", 20), show="*")
-    password_text.pack()
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=20, borderwidth=1, focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-    # Submit Button
-    submit_button = ttk.Button(master=register, text="Submit", command=register_submit)
-    submit_button.pack(pady=20)
-
-    #Home Button
-    exit_button = ttk.Button(master=register, text="Exit", command=quit)
-    exit_button.pack()
 
 
 
