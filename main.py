@@ -589,14 +589,14 @@ class pacing_modes(tkinter.Frame):
         AOO_Mode(master=self.master)
 
 
-    def AAIPressed(self, e):
+    def AAIPressed(self):
          AAI_Mode(master=self.master)
 
-    def VOOPressed(self, e):
+    def VOOPressed(self):
         VOO_Mode(master=self.master)
 
 
-    def VVIPressed(self, e):
+    def VVIPressed(self):
         VVI_Mode(master=self.master)
 
     def AATPressed(self):
@@ -947,7 +947,7 @@ class VOO_Mode(tkinter.Frame):
 
 class VVI_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVVI()
 
     def update_vvi(self):
         global vvi_vals
@@ -979,57 +979,57 @@ class VVI_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.lower_rate_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.lower_rate_entry.insert(0, vvi_vals[0])
-        self.lower_rate_label.grid(row = 1, column = 1)
-        self.lower_rate_entry.pack(pady=10)
+        self.lower_rate_label.grid(row = 1, column = 0)
+        self.lower_rate_entry.grid(row = 2, column = 0)
 
         self.upper_rate_label = ttk.Label(self.vvi_window, text="Upper Rate Limit:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.upper_rate_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.upper_rate_entry.insert(0, vvi_vals[1])
-        self.upper_rate_label.pack(pady=10)
-        self.upper_rate_entry.pack(pady=10)
+        self.upper_rate_label.grid(row = 1, column = 1)
+        self.upper_rate_entry.grid(row = 2, column = 1)
 
         self.ventricular_amplitude_label = ttk.Label(self.vvi_window, text="Ventricular Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
         self.ventricular_amplitude_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.ventricular_amplitude_entry.insert(0, vvi_vals[2])
-        self.ventricular_amplitude_label.pack(pady=10)
-        self.ventricular_amplitude_entry.pack(pady=10)
+        self.ventricular_amplitude_label.grid(row = 3, column = 0)
+        self.ventricular_amplitude_entry.grid(row = 4, column = 0)
 
         self.ventricular_pulse_width_label = ttk.Label(self.vvi_window, text="Ventricular Pulse Width:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.ventricular_pulse_width_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.ventricular_pulse_width_entry.insert(0, vvi_vals[3])
-        self.ventricular_pulse_width_label.pack(pady=10)
-        self.ventricular_pulse_width_entry.pack(pady=10)
+        self.ventricular_pulse_width_label.grid(row = 3, column = 1)
+        self.ventricular_pulse_width_entry.grid(row = 4, column = 1)
 
         self.ventricular_sensitivity_label = ttk.Label(self.vvi_window, text="Ventricular Sensitivity:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.ventricular_sensitivity_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.ventricular_sensitivity_entry.insert(0, vvi_vals[4])
-        self.ventricular_sensitivity_label.pack(pady=10)
-        self.ventricular_sensitivity_entry.pack(pady=10)
+        self.ventricular_sensitivity_label.grid(row = 5, column = 0)
+        self.ventricular_sensitivity_entry.grid(row = 6, column = 0)
 
         self.vrp_label = ttk.Label(self.vvi_window, text="VRP:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.vrp_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.vrp_entry.insert(0, vvi_vals[5])
-        self.vrp_label.pack(pady=10)
-        self.vrp_entry.pack(pady=10)
+        self.vrp_label.grid(row = 5, column = 1)
+        self.vrp_entry.grid(row = 6, column = 1)
 
         self.hysteresis_label = ttk.Label(self.vvi_window, text="Hysteresis:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.hysteresis_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.hysteresis_entry.insert(0, vvi_vals[6])
-        self.hysteresis_label.pack(pady=10)
-        self.hysteresis_entry.pack(pady=10)
+        self.hysteresis_label.grid(row = 7, column = 0)
+        self.hysteresis_entry.grid(row = 8, column = 0)
 
         self.rate_smooth_label = ttk.Label(self.vvi_window, text="Rate Smooth:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.rate_smooth_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.rate_smooth_entry.insert(0, vvi_vals[7])
-        self.rate_smooth_label.pack(pady=10)
-        self.rate_smooth_entry.pack(pady=10)
+        self.rate_smooth_label.grid(row = 7, column = 1)
+        self.rate_smooth_entry.grid(row = 8, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -1041,11 +1041,11 @@ class VVI_Mode(tkinter.Frame):
 
         # Create a "Save" button
         self.save_button = ttk.Button(master=self.vvi_window, text="Save", style='TButton', command=self.update_vvi)
-        self.save_button.pack(pady=10)
+        self.save_button.grid(row =9 , column = 0)
 
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.vvi_window, text="Back to Pacing Modes", command=self.vvi_window.destroy)
-        self.back_button.pack(pady=5)
+        self.back_button.grid(row = 9, column = 1)
 
 class AAT_Mode(tkinter.Frame):
     def __init__(self,master=None):
