@@ -1,5 +1,5 @@
 import tkinter
-
+import serial
 import pygame
 from tkinter import *
 from tkinter import ttk,messagebox
@@ -4130,8 +4130,25 @@ def show_vvi_mode_page():
 
 
 
-
-
+#Check if there is a connection to the DCM and if so, which port
+def check_connection():
+    try:
+        serial.Serial(port="COM6", baudrate=115200)
+        return 6
+    except:
+        try:
+            serial.Serial(port="COM5", baudrate=115200)
+            return 5
+        except:
+            try:
+                serial.Serial(port="COM4", baudrate=115200)
+                return 4
+            except:
+                try:
+                    serial.Serial(port="COM3", baudrate=115200)
+                    return 3
+                except:
+                    return 0 # not connected
 
 
 
@@ -4188,6 +4205,8 @@ if __name__=='__main__':
     bg = "black"
     fg = "white"
     root.resizable(True, True)
+
+    print(check_connection())
 
     App(master=root)
 
