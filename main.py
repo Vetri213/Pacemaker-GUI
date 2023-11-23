@@ -972,14 +972,14 @@ class VVI_Mode(tkinter.Frame):
         # Add a title
         self.vvi_label = ttk.Label(self.vvi_window, text="VVI Mode Information", background="black", foreground="white",
                               font=("Arial", 20))
-        self.vvi_label.pack()
+        self.vvi_label.grid(row = 0, column = 0, columnspan = 9, pady = 10, padx = 10)
 
         # Add the parameter here
         self.lower_rate_label = ttk.Label(self.vvi_window, text="Lower Rate Limit:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.lower_rate_entry = Entry(self.vvi_window, font=("Arial", 16))
         self.lower_rate_entry.insert(0, vvi_vals[0])
-        self.lower_rate_label.pack(pady=10)
+        self.lower_rate_label.grid(row = 1, column = 1)
         self.lower_rate_entry.pack(pady=10)
 
         self.upper_rate_label = ttk.Label(self.vvi_window, text="Upper Rate Limit:", background="black", foreground="white",
@@ -1058,7 +1058,7 @@ class AAT_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aat_vals
-                aat_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
+                aat_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ARP_entry.get(),self.PVARP_entry.get()]
 
 
         else:
