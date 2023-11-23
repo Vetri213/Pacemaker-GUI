@@ -268,6 +268,45 @@ class pacing_modes(tkinter.Frame):
         self.globalize_vals()
         self.pacingmodes()
 
+    # Check if there is a connection to the DCM and if so, which port
+    def check_connection(self):
+        try:
+            serial.Serial(port="COM6", baudrate=115200)
+            self.port = 6
+        except:
+            try:
+                serial.Serial(port="COM5", baudrate=115200)
+                self.port = 5
+            except:
+                try:
+                    serial.Serial(port="COM4", baudrate=115200)
+                    self.port = 4
+                except:
+                    try:
+                        serial.Serial(port="COM3", baudrate=115200)
+                        self.port = 3
+                    except:
+                        self.port = 0  # not connected
+
+    def connect(self):
+        self.port = self.checkConnect()
+        self.stat = Label(self, font=("Times New Roman", 12))
+        if (self.port == 0):
+            self.stat['text'] = "Pacemaker Connection: not connected"
+        else:
+            self.stat['text'] = "Pacemaker Connection: COM" + str(self.port)
+        self.refresh = Button(self, text="Refresh", font=("Times New Roman", 12))
+        self.refresh.place(x=10, y=20)
+        self.refresh.bind("<Button-1>", self.refreshPressed)
+        self.stat.place(x=10, y=0)
+
+    def refreshPressed(self, e):
+        self.port = self.checkConnect()
+        if (self.port == 0):
+            self.stat['text'] = "Pacemaker Connection: not connected"
+        else:
+            self.stat['text'] = "Pacemaker Connection: COM" + str(self.port)
+
     def set_background_image(window, image_path):
         image = Image.open(image_path)
         image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
@@ -509,33 +548,33 @@ class pacing_modes(tkinter.Frame):
         self.button3.pack(pady=20)
         self.button4 = ttk.Button(master = self, text="VVI", style='Pacing.TButton',command=self.VVIPressed)
         self.button4.pack(pady=20)
-        self.button5 = ttk.Button(master = self, text="AAT", style='Pacing.TButton',command=self.aatPressed)
+        self.button5 = ttk.Button(master = self, text="AAT", style='Pacing.TButton',command=None)#self.aatPressed)
         self.button5.pack(pady=20)
-        self.button6 = ttk.Button(master = self, text="VVT", style='Pacing.TButton',command=self.VVTPressed)
+        self.button6 = ttk.Button(master = self, text="VVT", style='Pacing.TButton',command=None)#self.VVTPressed)
         self.button6.pack(pady=20)
-        self.button7 = ttk.Button(master = self, text="VDD", style='Pacing.TButton',command=self.VDDPressed)
+        self.button7 = ttk.Button(master = self, text="VDD", style='Pacing.TButton',command=None)#self.VDDPressed)
         self.button7.pack(pady=20)
-        self.button8 = ttk.Button(master = self, text="DOO", style='Pacing.TButton',command=self.DOOPressed)
+        self.button8 = ttk.Button(master = self, text="DOO", style='Pacing.TButton',command=None)#self.DOOPressed)
         self.button8.pack(pady=20)
-        self.button9 = ttk.Button(master = self, text="DDI", style='Pacing.TButton',command=self.DDIPressed)
+        self.button9 = ttk.Button(master = self, text="DDI", style='Pacing.TButton',command=None)#self.DDIPressed)
         self.button9.pack(pady=20)
-        self.button10 = ttk.Button(master = self, text="DDD", style='Pacing.TButton',command=self.DDDPressed)
+        self.button10 = ttk.Button(master = self, text="DDD", style='Pacing.TButton',command=None)#self.DDDPressed)
         self.button10.pack(pady=20)
-        self.button11 = ttk.Button(master = self, text="AOOR", style='Pacing.TButton',command=self.AOORPressed)
+        self.button11 = ttk.Button(master = self, text="AOOR", style='Pacing.TButton',command=None)#self.AOORPressed)
         self.button11.pack(pady=20)
-        self.button12 = ttk.Button(master = self, text="AAIR", style='Pacing.TButton',command=self.AAIRPressed)
+        self.button12 = ttk.Button(master = self, text="AAIR", style='Pacing.TButton',command=None)#self.AAIRPressed)
         self.button12.pack(pady=20)
-        self.button13 = ttk.Button(master = self, text="VOOR", style='Pacing.TButton',command=self.VOORPressed)
+        self.button13 = ttk.Button(master = self, text="VOOR", style='Pacing.TButton',command=None)#self.VOORPressed)
         self.button13.pack(pady=20)
-        self.button14 = ttk.Button(master = self, text="VVIR", style='Pacing.TButton',command=self.VVIRPressed)
+        self.button14 = ttk.Button(master = self, text="VVIR", style='Pacing.TButton',command=None)#self.VVIRPressed)
         self.button14.pack(pady=20)
-        self.button15 = ttk.Button(master = self, text="VDDR", style='Pacing.TButton',command=self.VDDRPressed)
+        self.button15 = ttk.Button(master = self, text="VDDR", style='Pacing.TButton',command=None)#self.VDDRPressed)
         self.button15.pack(pady=20)
-        self.button16 = ttk.Button(master = self, text="DOOR", style='Pacing.TButton',command=self.DOORPressed)
+        self.button16 = ttk.Button(master = self, text="DOOR", style='Pacing.TButton',command=None)#self.DOORPressed)
         self.button16.pack(pady=20)
-        self.button17 = ttk.Button(master = self, text="DDIR", style='Pacing.TButton',command=self.DDIRPressed)
+        self.button17 = ttk.Button(master = self, text="DDIR", style='Pacing.TButton',command=None)#self.DDIRPressed)
         self.button17.pack(pady=20)
-        self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=self.DDDRPressed)
+        self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=None)#self.DDDRPressed)
         self.button18.pack(pady=20)
         self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
         self.button19.pack(pady=20)
@@ -4130,25 +4169,7 @@ def show_vvi_mode_page():
 
 
 
-#Check if there is a connection to the DCM and if so, which port
-def check_connection():
-    try:
-        serial.Serial(port="COM6", baudrate=115200)
-        return 6
-    except:
-        try:
-            serial.Serial(port="COM5", baudrate=115200)
-            return 5
-        except:
-            try:
-                serial.Serial(port="COM4", baudrate=115200)
-                return 4
-            except:
-                try:
-                    serial.Serial(port="COM3", baudrate=115200)
-                    return 3
-                except:
-                    return 0 # not connected
+
 
 
 
@@ -4205,8 +4226,6 @@ if __name__=='__main__':
     bg = "black"
     fg = "white"
     root.resizable(True, True)
-
-    print(check_connection())
 
     App(master=root)
 
