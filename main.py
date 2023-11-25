@@ -7,6 +7,8 @@ from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
+import struct
+import time
 
 #---------------------------------HOME---------------------------------#
 
@@ -589,53 +591,53 @@ class pacing_modes(tkinter.Frame):
         self.exit_button.pack(pady=20)
 
     #Communicating with the Pace Maker
-    def Communicate(mode, lr, apw, vpw, va, arp, vrp, aa, recovt, rf, msr, avd, at, react, ats, vs):
-        try:
-            ser = serial.Serial(port="COM" + str(global_.Commu), baudrate=115200)
-        except:
-            return "Pacemaker not connected"
-        ser.open
+    def Communicate(self, mode, lr=0, apw=0, vpw=0, va=0, arp=0, vrp=0, aa=0, recovt=0, rf=0, msr=0, avd=0, at=0, react=0, ats=0, vs=0):
+        if (self.port == 0):
+            return "Pace Maker Not Connected"
+        else:
+            pace_maker = serial.Serial(port="COM" + str(self.port), baudrate=115200)
+
+        pace_maker.open
         Header = '<2B4Hf2Hf4HfH2f'
         if (aa == 'OFF'):
             aa = 0
         if (va == 'OFF'):
             va = 0
-        sp = struct.pack(Header, 0x16, 0x55, mode, lr, apw, vpw, va, arp, vrp, aa, recovt, rf, msr, avd, at, react, ats,
+        data = struct.pack(Header, 0x16, 0x55, mode, lr, apw, vpw, va, arp, vrp, aa, recovt, rf, msr, avd, at, react, ats,
                          vs)
-        print(len(sp))
-        ser.write(sp)
-        # ser.write(struct.pack('<2B10fH',0x16,0x22,0,0,0,0,0,0,0,0,0,0,0))
-        print(len(sp))
+        print(len(data))
+        pace_maker.write(data)
+        print(len(data))
         time.sleep(0.5)
-        serialdata = ser.read(58)
-        ser.close
-        print(len(sp))
-        modeV = struct.unpack('H', serialdata[16:18])
-        lrV = struct.unpack('H', serialdata[18:20])
-        apwV = struct.unpack('H', serialdata[20:22])
-        vpwV = struct.unpack('H', serialdata[22:24])
-        vaV = struct.unpack('f', serialdata[24:28])
-        arpV = struct.unpack('H', serialdata[28:30])
-        vrpV = struct.unpack('H', serialdata[30:32])
-        aaV = struct.unpack('f', serialdata[32:36])
-        recovtV = struct.unpack('H', serialdata[36:38])
-        rfV = struct.unpack('H', serialdata[38:40])
-        msrV = struct.unpack('H', serialdata[40:42])
-        avdV = struct.unpack('H', serialdata[42:44])
-        atV = struct.unpack('f', serialdata[44:48])
-        reactV = struct.unpack('H', serialdata[48:50])
-        atsV = struct.unpack('f', serialdata[50:54])
-        vsV = struct.unpack('f', serialdata[54:58])
-        print(modeV[0], lrV[0], apwV[0], vpwV[0], vaV[0], arpV[0], vrpV[0], aaV[0], recovtV[0], rfV[0], msrV[0],
-              avdV[0], atV[0], reactV[0], atsV[0], vsV[0])
-        if (modeV[0] == mode and lrV[0] == lr and apwV[0] == apw and vpwV[0] == vpw and (vaV[0] - va < 0.01) and arpV[
-            0] == arp and vrpV[0] == vrp
-                and (aaV[0] - aa < 0.01) and recovtV[0] == recovt and rfV[0] == rf and msrV[0] == msr and avdV[
-                    0] == avd and (atV[0] - at < 0.01) and reactV[0] == react and (atsV[0] - ats < 0.01) and (
-                        vsV[0] - vs < 0.01)):
-            return "Parameter set and store successfully"
+        serialdata = pace_maker.read(58)
+        pace_maker.close
+        print(len(data))
+        mode_pacemaker = struct.unpack('H', serialdata[16:18])
+        lr_pacemaker = struct.unpack('H', serialdata[18:20])
+        apw_pacemaker = struct.unpack('H', serialdata[20:22])
+        vpw_pacemaker = struct.unpack('H', serialdata[22:24])
+        va_pacemaker = struct.unpack('f', serialdata[24:28])
+        arp_pacemaker = struct.unpack('H', serialdata[28:30])
+        vrp_pacemaker = struct.unpack('H', serialdata[30:32])
+        aa_pacemaker = struct.unpack('f', serialdata[32:36])
+        recovt_pacemaker = struct.unpack('H', serialdata[36:38])
+        rf_pacemaker = struct.unpack('H', serialdata[38:40])
+        msr_pacemaker = struct.unpack('H', serialdata[40:42])
+        avd_pacemaker = struct.unpack('H', serialdata[42:44])
+        at_pacemaker = struct.unpack('f', serialdata[44:48])
+        react_pacemaker = struct.unpack('H', serialdata[48:50])
+        ats_pacemaker = struct.unpack('f', serialdata[50:54])
+        vs_pacemaker = struct.unpack('f', serialdata[54:58])
+        print(mode_pacemaker[0], lr_pacemaker[0], apw_pacemaker[0], vpw_pacemaker[0], va_pacemaker[0], arp_pacemaker[0], vrp_pacemaker[0], aa_pacemaker[0], recovt_pacemaker[0], rf_pacemaker[0], msr_pacemaker[0],
+              avd_pacemaker[0], at_pacemaker[0], react_pacemaker[0], ats_pacemaker[0], vs_pacemaker[0])
+        if (mode_pacemaker[0] == mode and lr_pacemaker[0] == lr and apw_pacemaker[0] == apw and vpw_pacemaker[0] == vpw and (va_pacemaker[0] - va < 0.01) and arp_pacemaker[
+            0] == arp and vrp_pacemaker[0] == vrp
+                and (aa_pacemaker[0] - aa < 0.01) and recovt_pacemaker[0] == recovt and rf_pacemaker[0] == rf and msr_pacemaker[0] == msr and avd_pacemaker[
+                    0] == avd and (at_pacemaker[0] - at < 0.01) and react_pacemaker[0] == react and (ats_pacemaker[0] - ats < 0.01) and (
+                        vs_pacemaker[0] - vs < 0.01)):
+            return "Parameters Stored Successfully"
         else:
-            return "Some or all parameters did not store properly, check pacemaker version compatibility"
+            return "Some Parameters Were Not Stored Correctly. Please Try Again."
 
 
     #---DIFFERENT MODES---#
