@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
+#---------------------------------HOME---------------------------------#
+
 class App(tkinter.Frame):
     def __init__(self,master=None):
         super().__init__(master)
@@ -15,18 +17,9 @@ class App(tkinter.Frame):
         self.place(relheight=1,relwidth=1)
         self.home()
 
-    def set_background_image(window, image_path):
-        image = Image.open(image_path)
-        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
-        photo = ImageTk.PhotoImage(image)
-
-        label = Label(window, image=photo)
-        label.image = photo
-        label.place(x=0, y=0, relwidth=1, relheight=1)
-
     def home(self):
         #Change Background
-        self.set_background_image("ECGv1.png")
+        set_background_image(self,"ECGv1.png")
         # Heading
         self.label = ttk.Label(self, text="WELCOME", background=bg, foreground=fg, font=("Arial", 80))
         self.label.pack(pady=50)
@@ -57,8 +50,8 @@ class App(tkinter.Frame):
         Register(master=self.master)
         self.destroy
 
+#---------------------------------LOGIN---------------------------------#
 
-#Login Function
 class Login(tkinter.Frame):
     def __init__(self,master=None):
         super().__init__(master)
@@ -66,18 +59,10 @@ class Login(tkinter.Frame):
         self.place(relheight=1, relwidth=1)
         self.login()
 
-    def set_background_image(window, image_path):
-        image = Image.open(image_path)
-        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
-        photo = ImageTk.PhotoImage(image)
-
-        label = Label(window, image=photo)
-        label.image = photo
-        label.place(x=0, y=0, relwidth=1, relheight=1)
 
     def login(self):
         #Change Background
-        self.set_background_image("ECGv1.png")
+        set_background_image(self,"ECGv1.png")
 
         # Style of Buttons
         self.style = ttk.Style()
@@ -120,9 +105,17 @@ class Login(tkinter.Frame):
         self.submit_button = ttk.Button(master=self, text="Submit", command=self.login_submit)
         self.submit_button.pack(pady=20)
 
+        # Back Button
+        self.back_button = ttk.Button(master=self, text="Back", command=self.back)
+        self.back_button.pack(pady=20)
+
         # Exit Button
         self.exit_button = ttk.Button(master=self, text="Exit", command=quit)
         self.exit_button.pack()
+
+    def back(self):
+        self.destroy()
+        App(master=self.master)
 
     def login_submit(self):
         # Getting Username and Password from the Textboxes
@@ -145,6 +138,7 @@ class Login(tkinter.Frame):
         else:
             self.changing_label.configure(text="No User Matches Your Input. Please Try Again.")
 
+#---------------------------------REGISTER---------------------------------#
 
 class Register(tkinter.Frame):
     def __init__(self,master=None):
@@ -167,6 +161,8 @@ class Register(tkinter.Frame):
             print(f"Error checking username: {str(e)}")
         return False
 
+
+
     def register_submit(self):
         # print(len(users))
 
@@ -179,8 +175,9 @@ class Register(tkinter.Frame):
             elif self.is_username_taken(username):
                 self.changing_label.configure(text="Username is already taken")
             else:
+                default_vals = "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}"
                 # Creating a New Entry to be added to the file of Users (in the same format)
-                new_entry = username + "|" + password + "|{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}\n"
+                new_entry = username + "|" + password + "|" + default_vals + "\n" #{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
                 # Opening File in Append Mode (So as not to delete other users)
                 file = open("text.txt", "a")
                 # Adding Entry
@@ -189,7 +186,7 @@ class Register(tkinter.Frame):
                 file.close()
 
                 users.append([username, password])
-                default_vals = "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}"
+
                 all_vals.append(default_vals)
 
                 # Go to the ACTUAL DO STUFF PAGE
@@ -199,19 +196,10 @@ class Register(tkinter.Frame):
         else:
             self.changing_label.configure(text="Max Users Registered. Sorry!")
 
-    def set_background_image(window, image_path):
-        image = Image.open(image_path)
-        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
-        photo = ImageTk.PhotoImage(image)
-
-        label = Label(window, image=photo)
-        label.image = photo
-        label.place(x=0, y=0, relwidth=1, relheight=1)
-
     # Register Function
     def register(self):
         # Change Background
-        self.set_background_image("ECGv1.png")
+        set_background_image(self,"ECGv1.png")
 
         # Style of Buttons
         self.style = ttk.Style()
@@ -254,9 +242,19 @@ class Register(tkinter.Frame):
         self.submit_button = ttk.Button(master=self, text="Submit", command=self.register_submit)
         self.submit_button.pack(pady=20)
 
-        # Home Button
+        # Back Button
+        self.back_button = ttk.Button(master=self, text="Back", command=self.back)
+        self.back_button.pack(pady=20)
+
+        # Exit Button
         self.exit_button = ttk.Button(master=self, text="Exit", command=quit)
         self.exit_button.pack()
+
+    def back(self):
+        self.destroy()
+        App(master=self.master)
+
+#---------------------------------PACING MODES---------------------------------#
 
 class pacing_modes(tkinter.Frame):
     def __init__(self,master=None,user=None,vals=None):
@@ -289,7 +287,7 @@ class pacing_modes(tkinter.Frame):
                         self.port = 0  # not connected
 
     def connect(self):
-        self.port = self.checkConnect()
+        self.port = self.check_connection()
         self.stat = Label(self, font=("Times New Roman", 12))
         if (self.port == 0):
             self.stat['text'] = "Pacemaker Connection: not connected"
@@ -300,24 +298,16 @@ class pacing_modes(tkinter.Frame):
         self.refresh.bind("<Button-1>", self.refreshPressed)
         self.stat.place(x=10, y=0)
 
-    def refreshPressed(self, e):
-        self.port = self.checkConnect()
+    def refreshPressed(self):
+        self.check_connection()
         if (self.port == 0):
-            self.stat['text'] = "Pacemaker Connection: not connected"
+            self.connectivity.configure(text="No Connection")
         else:
-            self.stat['text'] = "Pacemaker Connection: COM" + str(self.port)
+            self.connectivity.configure(text=("Connection: COM" + str(self.port)))
 
-    def set_background_image(window, image_path):
-        image = Image.open(image_path)
-        image = image.resize((window.winfo_screenwidth(), window.winfo_screenheight()))
-        photo = ImageTk.PhotoImage(image)
-
-        label = Label(window, image=photo)
-        label.image = photo
-        label.place(x=0, y=0, relwidth=1, relheight=1)
-
+    #Globalizing the variables to be used by all the modes
     def globalize_vals(self):
-        aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,aat_vals_str,vvt_vals_str,vdd_vals_str,doo_vals_str,ddi_vals_str,ddd_vals_str,ddd_vals_str,aoor_vals_str,aair_vals_str,voor_vals_str,vvir_vals_str,vddr_vals_str,door_vals_str,ddir_vals_str,dddr_vals_str,temp = self.vals.split("}")
+        aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,aat_vals_str,vvt_vals_str,vdd_vals_str,doo_vals_str,ddi_vals_str,ddd_vals_str,ddd_vals_str,aoor_vals_str,aair_vals_str,voor_vals_str,vvir_vals_str,vddr_vals_str,door_vals_str,ddir_vals_str,dddr_vals_str = self.vals.split("}")
         aoo_vals_str = aoo_vals_str.strip("{")
         voo_vals_str = voo_vals_str.strip("{")
         aai_vals_str = aai_vals_str.strip("{")
@@ -377,6 +367,7 @@ class pacing_modes(tkinter.Frame):
         # print(aai_vals)
         # print(vvi_vals)
 
+    # Takes the updated values and saves them into the text file
     def save(self):
         file = open("text.txt", "w")
         for i in range(len(users)):
@@ -402,7 +393,7 @@ class pacing_modes(tkinter.Frame):
                     current_vals_str += str(val)
                     current_vals_str += ","
                 current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}"
+                current_vals_str += "}{"
                 for val in aat_vals:
                     current_vals_str += str(val)
                     current_vals_str += ","
@@ -422,7 +413,7 @@ class pacing_modes(tkinter.Frame):
                     current_vals_str += str(val)
                     current_vals_str += ","
                 current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}"
+                current_vals_str += "}{"
                 for val in ddi_vals:
                     current_vals_str += str(val)
                     current_vals_str += ","
@@ -442,7 +433,7 @@ class pacing_modes(tkinter.Frame):
                     current_vals_str += str(val)
                     current_vals_str += ","
                 current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}"
+                current_vals_str += "}{"
                 for val in voor_vals:
                     current_vals_str += str(val)
                     current_vals_str += ","
@@ -462,7 +453,7 @@ class pacing_modes(tkinter.Frame):
                     current_vals_str += str(val)
                     current_vals_str += ","
                 current_vals_str = current_vals_str[:len(current_vals_str) - 1]
-                current_vals_str += "}"
+                current_vals_str += "}{"
                 all_vals[i] = current_vals_str
                 for val in ddir_vals:
                     current_vals_str += str(val)
@@ -474,6 +465,8 @@ class pacing_modes(tkinter.Frame):
                     current_vals_str += ","
                 current_vals_str = current_vals_str[:len(current_vals_str) - 1]
                 current_vals_str += "}"
+                # current_vals_str += "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}"
+
                 all_vals[i] = current_vals_str
 
 
@@ -497,6 +490,8 @@ class pacing_modes(tkinter.Frame):
 
             file.write(entry)
         file.close()
+
+
     def save_and_logout(self):
         self.save()
         self.destroy()
@@ -507,9 +502,10 @@ class pacing_modes(tkinter.Frame):
         self.destroy()
         quit()
 
+    #Display
     def pacingmodes(self):
         # Change Background
-        self.set_background_image("ECGv1.png")
+        set_background_image(self,"ECGv1.png")
 
         # Style of Buttons
         self.style = ttk.Style()
@@ -527,8 +523,13 @@ class pacing_modes(tkinter.Frame):
         self.new_old = ttk.Label(master=self, text="New Pacemaker Detected", background=bg, foreground=fg, font=("Arial", 20))
         self.new_old.pack(pady=10)
 
-        self.connectivity = ttk.Label(master=self, text="Device Disconnected", background=bg, foreground=fg, font=("Arial", 20))
+        self.connectivity = ttk.Label(master=self, text="No Connection", background=bg, foreground=fg,
+                                      font=("Arial", 20))
         self.connectivity.pack(pady=10)
+        self.refresh_button = ttk.Button(master=self, text="Refresh", style='Pacing.TButton', command=self.refreshPressed)
+        self.refresh_button.pack(pady=10)
+
+        self.refreshPressed()
 
         # Style of Buttons
         self.style = ttk.Style()
@@ -541,43 +542,45 @@ class pacing_modes(tkinter.Frame):
         # Create buttons and add them to the frame
 
         self.button1 = ttk.Button(master = self, text="AOO", style='Pacing.TButton',command=self.AOOPressed)
-        self.button1.grid(row=0,column=0,columnspan=2,padx=10,pady=10)
-        self.button2 = ttk.Button(master = self, text="VOO", style='Pacing.TButton',command=self.VOOPressed)
-        self.button2.grid(row=1,column=0,columnspan=2,padx=10,pady=10)
-        self.button3 = ttk.Button(master = self, text="AAI", style='Pacing.TButton',command=self.AAIPressed)
-        self.button3.grid(row=2,column=0,columnspan=2,padx=10,pady=10)
-        self.button4 = ttk.Button(master = self, text="VVI", style='Pacing.TButton',command=self.VVIPressed)
-        self.button4.grid(row=3,column=0,columnspan=2,padx=10,pady=10)
-        self.button5 = ttk.Button(master = self, text="AAT", style='Pacing.TButton',command=None)#self.aatPressed)
-        self.button5.grid(row=4,column=0,columnspan=2,padx=10,pady=10)
-        self.button6 = ttk.Button(master = self, text="VVT", style='Pacing.TButton',command=None)#self.VVTPressed)
-        self.button6.grid(row=5,column=0,columnspan=2,padx=10,pady=10)
-        self.button7 = ttk.Button(master = self, text="VDD", style='Pacing.TButton',command=None)#self.VDDPressed)
-        self.button7.grid(row=6,column=0,columnspan=2,padx=10,pady=10)
-        self.button8 = ttk.Button(master = self, text="DOO", style='Pacing.TButton',command=None)#self.DOOPressed)
-        self.button8.grid(row=7,column=0,columnspan=2,padx=10,pady=10)
-        self.button9 = ttk.Button(master = self, text="DDI", style='Pacing.TButton',command=None)#self.DDIPressed)
-        self.button9.grid(row=8,column=0,columnspan=2,padx=10,pady=10)
-        self.button10 = ttk.Button(master = self, text="DDD", style='Pacing.TButton',command=None)#self.DDDPressed)
-        self.button10.grid(row=9,column=0,columnspan=2,padx=10,pady=10)
-        self.button11 = ttk.Button(master = self, text="AOOR", style='Pacing.TButton',command=None)#self.AOORPressed)
-        self.button11.grid(row=10,column=0,columnspan=2,padx=10,pady=10)
-        self.button12 = ttk.Button(master = self, text="AAIR", style='Pacing.TButton',command=None)#self.AAIRPressed)
-        self.button12.grid(row=0,column=1,columnspan=2,padx=10,pady=10)
-        self.button13 = ttk.Button(master = self, text="VOOR", style='Pacing.TButton',command=None)#self.VOORPressed)
-        self.button13.grid(row=1,column=1,columnspan=2,padx=10,pady=10)
-        self.button14 = ttk.Button(master = self, text="VVIR", style='Pacing.TButton',command=None)#self.VVIRPressed)
-        self.button14.grid(row=2,column=1,columnspan=2,padx=10,pady=10)
-        self.button15 = ttk.Button(master = self, text="VDDR", style='Pacing.TButton',command=None)#self.VDDRPressed)
-        self.button15.grid(row=3,column=1,columnspan=2,padx=10,pady=10)
-        self.button16 = ttk.Button(master = self, text="DOOR", style='Pacing.TButton',command=None)#self.DOORPressed)
-        self.button16.grid(row=4,column=1,columnspan=2,padx=10,pady=10)
-        self.button17 = ttk.Button(master = self, text="DDIR", style='Pacing.TButton',command=None)#self.DDIRPressed)
-        self.button17.grid(row=5,column=1,columnspan=2,padx=10,pady=10)
-        self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=None)#self.DDDRPressed)
-        self.button18.grid(row=6,column=1,columnspan=2,padx=10,pady=10)
-        self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
-        self.button19.pack(pady=20)
+        self.button1.pack(pady=10)
+
+        # self.button1.grid(row=0,column=0,columnspan=2,padx=10,pady=10)
+        # self.button2 = ttk.Button(master = self, text="VOO", style='Pacing.TButton',command=self.VOOPressed)
+        # self.button2.grid(row=1,column=0,columnspan=2,padx=10,pady=10)
+        # self.button3 = ttk.Button(master = self, text="AAI", style='Pacing.TButton',command=self.AAIPressed)
+        # self.button3.grid(row=2,column=0,columnspan=2,padx=10,pady=10)
+        # self.button4 = ttk.Button(master = self, text="VVI", style='Pacing.TButton',command=self.VVIPressed)
+        # self.button4.grid(row=3,column=0,columnspan=2,padx=10,pady=10)
+        # self.button5 = ttk.Button(master = self, text="AAT", style='Pacing.TButton',command=None)#self.aatPressed)
+        # self.button5.grid(row=4,column=0,columnspan=2,padx=10,pady=10)
+        # self.button6 = ttk.Button(master = self, text="VVT", style='Pacing.TButton',command=None)#self.VVTPressed)
+        # self.button6.grid(row=5,column=0,columnspan=2,padx=10,pady=10)
+        # self.button7 = ttk.Button(master = self, text="VDD", style='Pacing.TButton',command=None)#self.VDDPressed)
+        # self.button7.grid(row=6,column=0,columnspan=2,padx=10,pady=10)
+        # self.button8 = ttk.Button(master = self, text="DOO", style='Pacing.TButton',command=None)#self.DOOPressed)
+        # self.button8.grid(row=7,column=0,columnspan=2,padx=10,pady=10)
+        # self.button9 = ttk.Button(master = self, text="DDI", style='Pacing.TButton',command=None)#self.DDIPressed)
+        # self.button9.grid(row=8,column=0,columnspan=2,padx=10,pady=10)
+        # self.button10 = ttk.Button(master = self, text="DDD", style='Pacing.TButton',command=None)#self.DDDPressed)
+        # self.button10.grid(row=9,column=0,columnspan=2,padx=10,pady=10)
+        # self.button11 = ttk.Button(master = self, text="AOOR", style='Pacing.TButton',command=None)#self.AOORPressed)
+        # self.button11.grid(row=10,column=0,columnspan=2,padx=10,pady=10)
+        # self.button12 = ttk.Button(master = self, text="AAIR", style='Pacing.TButton',command=None)#self.AAIRPressed)
+        # self.button12.grid(row=0,column=1,columnspan=2,padx=10,pady=10)
+        # self.button13 = ttk.Button(master = self, text="VOOR", style='Pacing.TButton',command=None)#self.VOORPressed)
+        # self.button13.grid(row=1,column=1,columnspan=2,padx=10,pady=10)
+        # self.button14 = ttk.Button(master = self, text="VVIR", style='Pacing.TButton',command=None)#self.VVIRPressed)
+        # self.button14.grid(row=2,column=1,columnspan=2,padx=10,pady=10)
+        # self.button15 = ttk.Button(master = self, text="VDDR", style='Pacing.TButton',command=None)#self.VDDRPressed)
+        # self.button15.grid(row=3,column=1,columnspan=2,padx=10,pady=10)
+        # self.button16 = ttk.Button(master = self, text="DOOR", style='Pacing.TButton',command=None)#self.DOORPressed)
+        # self.button16.grid(row=4,column=1,columnspan=2,padx=10,pady=10)
+        # self.button17 = ttk.Button(master = self, text="DDIR", style='Pacing.TButton',command=None)#self.DDIRPressed)
+        # self.button17.grid(row=5,column=1,columnspan=2,padx=10,pady=10)
+        # self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=None)#self.DDDRPressed)
+        # self.button18.grid(row=6,column=1,columnspan=2,padx=10,pady=10)
+        # self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
+        # self.button19.pack(pady=20)
         self.logout = ttk.Button(master=self, text="Logout", style='Pacing.TButton', command=self.save_and_logout)
         self.logout.pack(pady=20)
 
@@ -585,6 +588,57 @@ class pacing_modes(tkinter.Frame):
         self.exit_button = ttk.Button(master=self, text="Exit", command=self.save_and_quit)
         self.exit_button.pack(pady=20)
 
+    #Communicating with the Pace Maker
+    def Communicate(mode, lr, apw, vpw, va, arp, vrp, aa, recovt, rf, msr, avd, at, react, ats, vs):
+        try:
+            ser = serial.Serial(port="COM" + str(global_.Commu), baudrate=115200)
+        except:
+            return "Pacemaker not connected"
+        ser.open
+        Header = '<2B4Hf2Hf4HfH2f'
+        if (aa == 'OFF'):
+            aa = 0
+        if (va == 'OFF'):
+            va = 0
+        sp = struct.pack(Header, 0x16, 0x55, mode, lr, apw, vpw, va, arp, vrp, aa, recovt, rf, msr, avd, at, react, ats,
+                         vs)
+        print(len(sp))
+        ser.write(sp)
+        # ser.write(struct.pack('<2B10fH',0x16,0x22,0,0,0,0,0,0,0,0,0,0,0))
+        print(len(sp))
+        time.sleep(0.5)
+        serialdata = ser.read(58)
+        ser.close
+        print(len(sp))
+        modeV = struct.unpack('H', serialdata[16:18])
+        lrV = struct.unpack('H', serialdata[18:20])
+        apwV = struct.unpack('H', serialdata[20:22])
+        vpwV = struct.unpack('H', serialdata[22:24])
+        vaV = struct.unpack('f', serialdata[24:28])
+        arpV = struct.unpack('H', serialdata[28:30])
+        vrpV = struct.unpack('H', serialdata[30:32])
+        aaV = struct.unpack('f', serialdata[32:36])
+        recovtV = struct.unpack('H', serialdata[36:38])
+        rfV = struct.unpack('H', serialdata[38:40])
+        msrV = struct.unpack('H', serialdata[40:42])
+        avdV = struct.unpack('H', serialdata[42:44])
+        atV = struct.unpack('f', serialdata[44:48])
+        reactV = struct.unpack('H', serialdata[48:50])
+        atsV = struct.unpack('f', serialdata[50:54])
+        vsV = struct.unpack('f', serialdata[54:58])
+        print(modeV[0], lrV[0], apwV[0], vpwV[0], vaV[0], arpV[0], vrpV[0], aaV[0], recovtV[0], rfV[0], msrV[0],
+              avdV[0], atV[0], reactV[0], atsV[0], vsV[0])
+        if (modeV[0] == mode and lrV[0] == lr and apwV[0] == apw and vpwV[0] == vpw and (vaV[0] - va < 0.01) and arpV[
+            0] == arp and vrpV[0] == vrp
+                and (aaV[0] - aa < 0.01) and recovtV[0] == recovt and rfV[0] == rf and msrV[0] == msr and avdV[
+                    0] == avd and (atV[0] - at < 0.01) and reactV[0] == react and (atsV[0] - ats < 0.01) and (
+                        vsV[0] - vs < 0.01)):
+            return "Parameter set and store successfully"
+        else:
+            return "Some or all parameters did not store properly, check pacemaker version compatibility"
+
+
+    #---DIFFERENT MODES---#
     def AOOPressed(self):
         AOO_Mode(master=self.master)
 
@@ -645,7 +699,6 @@ class AOO_Mode(tkinter.Frame):
 
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-            self.aoo_window.destroy()
 
     def displayAOO(self):
         self.aoo_window = Tk()
@@ -1408,7 +1461,7 @@ class DDI_Mode(tkinter.Frame):
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
             self.ddi_window.destroy()
 
-    def displayDOO(self):
+    def DOO_Mode(self):
         self.doo_window = Tk()
         self.doo_window.geometry('%dx%d+0+0' % (width, height))
         self.doo_window.title("DOO Mode")
@@ -3384,7 +3437,7 @@ class DOOR_Mode(tkinter.Frame):
 
 
 
-    def displayDDIR(self):
+    def DDIR_Mode(self):
         self.ddir_window = Tk()
         self.ddir_window.geometry('%dx%d+0+0' % (width, height))
         self.ddir_window.title("DDIR Mode")
@@ -4166,7 +4219,6 @@ def show_vvi_mode_page():
     #button2.grid(row=0, column=1, padx=30, pady=30)
     #button3.grid(row=1, column=0, padx=30, pady=30)
     #button4.grid(row=1, column=1, padx=30, pady=30)
-
 
 
 
