@@ -590,54 +590,7 @@ class pacing_modes(tkinter.Frame):
         self.exit_button = ttk.Button(master=self, text="Exit", command=self.save_and_quit)
         self.exit_button.pack(pady=20)
 
-    #Communicating with the Pace Maker
-    def Communicate(self, mode, lr=0, apw=0, vpw=0, va=0, arp=0, vrp=0, aa=0, recovt=0, rf=0, msr=0, avd=0, at=0, react=0, ats=0, vs=0):
-        if (self.port == 0):
-            return "Pace Maker Not Connected"
-        else:
-            pace_maker = serial.Serial(port="COM" + str(self.port), baudrate=115200)
 
-        pace_maker.open
-        Header = '<2B4Hf2Hf4HfH2f'
-        if (aa == 'OFF'):
-            aa = 0
-        if (va == 'OFF'):
-            va = 0
-        data = struct.pack(Header, 0x16, 0x55, mode, lr, apw, vpw, va, arp, vrp, aa, recovt, rf, msr, avd, at, react, ats,
-                         vs)
-        print(len(data))
-        pace_maker.write(data)
-        print(len(data))
-        time.sleep(0.5)
-        serialdata = pace_maker.read(58)
-        pace_maker.close
-        print(len(data))
-        mode_pacemaker = struct.unpack('H', serialdata[16:18])
-        lr_pacemaker = struct.unpack('H', serialdata[18:20])
-        apw_pacemaker = struct.unpack('H', serialdata[20:22])
-        vpw_pacemaker = struct.unpack('H', serialdata[22:24])
-        va_pacemaker = struct.unpack('f', serialdata[24:28])
-        arp_pacemaker = struct.unpack('H', serialdata[28:30])
-        vrp_pacemaker = struct.unpack('H', serialdata[30:32])
-        aa_pacemaker = struct.unpack('f', serialdata[32:36])
-        recovt_pacemaker = struct.unpack('H', serialdata[36:38])
-        rf_pacemaker = struct.unpack('H', serialdata[38:40])
-        msr_pacemaker = struct.unpack('H', serialdata[40:42])
-        avd_pacemaker = struct.unpack('H', serialdata[42:44])
-        at_pacemaker = struct.unpack('f', serialdata[44:48])
-        react_pacemaker = struct.unpack('H', serialdata[48:50])
-        ats_pacemaker = struct.unpack('f', serialdata[50:54])
-        vs_pacemaker = struct.unpack('f', serialdata[54:58])
-        print(mode_pacemaker[0], lr_pacemaker[0], apw_pacemaker[0], vpw_pacemaker[0], va_pacemaker[0], arp_pacemaker[0], vrp_pacemaker[0], aa_pacemaker[0], recovt_pacemaker[0], rf_pacemaker[0], msr_pacemaker[0],
-              avd_pacemaker[0], at_pacemaker[0], react_pacemaker[0], ats_pacemaker[0], vs_pacemaker[0])
-        if (mode_pacemaker[0] == mode and lr_pacemaker[0] == lr and apw_pacemaker[0] == apw and vpw_pacemaker[0] == vpw and (va_pacemaker[0] - va < 0.01) and arp_pacemaker[
-            0] == arp and vrp_pacemaker[0] == vrp
-                and (aa_pacemaker[0] - aa < 0.01) and recovt_pacemaker[0] == recovt and rf_pacemaker[0] == rf and msr_pacemaker[0] == msr and avd_pacemaker[
-                    0] == avd and (at_pacemaker[0] - at < 0.01) and react_pacemaker[0] == react and (ats_pacemaker[0] - ats < 0.01) and (
-                        vs_pacemaker[0] - vs < 0.01)):
-            return "Parameters Stored Successfully"
-        else:
-            return "Some Parameters Were Not Stored Correctly. Please Try Again."
 
 
     #---DIFFERENT MODES---#
@@ -4225,7 +4178,54 @@ def show_vvi_mode_page():
 
 
 
+#Communicating with the Pace Maker
+    def Communicate(self, mode, LR=0, APW=0, VPW=0, VA=0, ARP=0, VRP=0, AA=0, RecovTime=0, RF=0, MSR=0, AVD=0, AT=0, ReactTime=0, ATSats=0, VS=0):
+        if (self.port == 0):
+            return "Pace Maker Not Connected"
+        else:
+            pace_maker = serial.Serial(port="COM" + str(self.port), baudrate=115200)
 
+        pace_maker.open
+        Header = '<2B4Hf2Hf4HfH2f'
+        if (AA == 'OFF'):
+            AA = 0
+        if (VA == 'OFF'):
+            VA = 0
+        data = struct.pack(Header, 0x16, 0x55, mode, LR, APW, VPW, VA, ARP, VRP, AA, RecovTime, RF, MSR, AVD, AT, ReactTime, ATS,
+                         VS)
+        print(len(data))
+        pace_maker.write(data)
+        print(len(data))
+        time.sleep(0.5)
+        serialdata = pace_maker.read(58)
+        pace_maker.close
+        print(len(data))
+        mode_pacemaker = struct.unpack('H', serialdata[16:18])
+        LR_pacemaker = struct.unpack('H', serialdata[18:20])
+        APW_pacemaker = struct.unpack('H', serialdata[20:22])
+        VPW_pacemaker = struct.unpack('H', serialdata[22:24])
+        VA_pacemaker = struct.unpack('f', serialdata[24:28])
+        ARP_pacemaker = struct.unpack('H', serialdata[28:30])
+        VRP_pacemaker = struct.unpack('H', serialdata[30:32])
+        AA_pacemaker = struct.unpack('f', serialdata[32:36])
+        RecovTime_pacemaker = struct.unpack('H', serialdata[36:38])
+        RF_pacemaker = struct.unpack('H', serialdata[38:40])
+        MSR_pacemaker = struct.unpack('H', serialdata[40:42])
+        AVD_pacemaker = struct.unpack('H', serialdata[42:44])
+        AT_pacemaker = struct.unpack('f', serialdata[44:48])
+        ReactTime_pacemaker = struct.unpack('H', serialdata[48:50])
+        ATS_pacemaker = struct.unpack('f', serialdata[50:54])
+        VS_pacemaker = struct.unpack('f', serialdata[54:58])
+        print(mode_pacemaker[0], LR_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AA_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], MSR_pacemaker[0],
+              AVD_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0], ATS_pacemaker[0], VS_pacemaker[0])
+        if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LR and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
+            0] == ARP and VRP_pacemaker[0] == VRP
+                and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and MSR_pacemaker[0] == MSR and AVD_pacemaker[
+                    0] == AVD and (AT_pacemaker[0] - AT < 0.01) and ReactTime_pacemaker[0] == ReactTime and (ATS_pacemaker[0] - ATS < 0.01) and (
+                        VS_pacemaker[0] - VS < 0.01)):
+            return "Parameters Stored Successfully"
+        else:
+            return "Some Parameters Were Not Stored Correctly. Please Try Again."
 
 
 
