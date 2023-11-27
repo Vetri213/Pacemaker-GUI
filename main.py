@@ -557,33 +557,33 @@ class pacing_modes(tkinter.Frame):
         self.button3.grid(row=5,column = 0)
         self.button4 = ttk.Button(master = self, text="VVI", style='Pacing.TButton',command=self.VVIPressed)
         self.button4.grid(row=5,column = 2)
-        self.button5 = ttk.Button(master = self, text="AAT", style='Pacing.TButton',command=None)#self.aatPressed)
+        self.button5 = ttk.Button(master = self, text="AAT", style='Pacing.TButton',command=self.AATPressed)
         self.button5.grid(row=6,column = 0)
-        self.button6 = ttk.Button(master = self, text="VVT", style='Pacing.TButton',command=None)#self.VVTPressed)
+        self.button6 = ttk.Button(master = self, text="VVT", style='Pacing.TButton',command=self.VVTPressed)
         self.button6.grid(row=6,column = 2)
-        self.button7 = ttk.Button(master = self, text="VDD", style='Pacing.TButton',command=None)#self.VDDPressed)
+        self.button7 = ttk.Button(master = self, text="VDD", style='Pacing.TButton',command=self.VDDPressed)
         self.button7.grid(row=7,column = 0)
-        self.button8 = ttk.Button(master = self, text="DOO", style='Pacing.TButton',command=None)#self.DOOPressed)
+        self.button8 = ttk.Button(master = self, text="DOO", style='Pacing.TButton',command=self.DOOPressed)
         self.button8.grid(row=7,column = 2)
-        self.button9 = ttk.Button(master = self, text="DDI", style='Pacing.TButton',command=None)#self.DDIPressed)
+        self.button9 = ttk.Button(master = self, text="DDI", style='Pacing.TButton',command=self.DDIPressed)
         self.button9.grid(row=8,column = 0)
-        self.button10 = ttk.Button(master = self, text="DDD", style='Pacing.TButton',command=None)#self.DDDPressed)
+        self.button10 = ttk.Button(master = self, text="DDD", style='Pacing.TButton',command=self.DDDPressed)
         self.button10.grid(row=8,column = 2)
-        self.button11 = ttk.Button(master = self, text="AOOR", style='Pacing.TButton',command=None)#self.AOORPressed)
+        self.button11 = ttk.Button(master = self, text="AOOR", style='Pacing.TButton',command=self.AOORPressed)
         self.button11.grid(row=9,column = 0)
-        self.button12 = ttk.Button(master = self, text="AAIR", style='Pacing.TButton',command=None)#self.AAIRPressed)
+        self.button12 = ttk.Button(master = self, text="AAIR", style='Pacing.TButton',command=self.AAIRPressed)
         self.button12.grid(row=9,column = 2)
-        self.button13 = ttk.Button(master = self, text="VOOR", style='Pacing.TButton',command=None)#self.VOORPressed)
+        self.button13 = ttk.Button(master = self, text="VOOR", style='Pacing.TButton',command=self.VOORPressed)
         self.button13.grid(row=10,column = 0)
-        self.button14 = ttk.Button(master = self, text="VVIR", style='Pacing.TButton',command=None)#self.VVIRPressed)
+        self.button14 = ttk.Button(master = self, text="VVIR", style='Pacing.TButton',command=self.VVIRPressed)
         self.button14.grid(row=10,column = 2)
-        self.button15 = ttk.Button(master = self, text="VDDR", style='Pacing.TButton',command=None)#self.VDDRPressed)
+        self.button15 = ttk.Button(master = self, text="VDDR", style='Pacing.TButton',command=self.VDDRPressed)
         self.button15.grid(row=11,column = 0)
-        self.button16 = ttk.Button(master = self, text="DOOR", style='Pacing.TButton',command=None)#self.DOORPressed)
+        self.button16 = ttk.Button(master = self, text="DOOR", style='Pacing.TButton',command=self.DOORPressed)
         self.button16.grid(row=11,column = 2)
-        self.button17 = ttk.Button(master = self, text="DDIR", style='Pacing.TButton',command=None)#self.DDIRPressed)
+        self.button17 = ttk.Button(master = self, text="DDIR", style='Pacing.TButton',command=self.DDIRPressed)
         self.button17.grid(row=12,column = 0)
-        self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=None)#self.DDDRPressed)
+        self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=self.DDDRPressed)
         self.button18.grid(row=12,column = 2)
         self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
         self.button19.grid(row=13,column = 1)
@@ -870,7 +870,7 @@ class AAI_Mode(tkinter.Frame):
         self.back_button.grid(row = 10, column = 1)
 class VOO_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVOO()
 
     def update_voo(self):
         global voo_vals
@@ -1063,7 +1063,7 @@ class VVI_Mode(tkinter.Frame):
 
 class AAT_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayAAT()
 
     def update_aat(self):
         global aat_vals
@@ -1179,7 +1179,7 @@ class AAT_Mode(tkinter.Frame):
 
 class VVT_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVVT()
 
     def update_vvt(self):
         global vvt_vals
@@ -1268,7 +1268,7 @@ class VVT_Mode(tkinter.Frame):
 
 class VDD_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVDD()
 
     def update_vdd(self):
         global vdd_vals
@@ -1406,7 +1406,7 @@ class VDD_Mode(tkinter.Frame):
 
 class DOO_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayDOO()
 
     def update_doo(self):
         global doo_vals
@@ -1627,7 +1627,7 @@ class DOO_Mode(tkinter.Frame):
 
 class DDI_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayDDI()
 
     def update_ddi(self):
         global ddi_vals
@@ -1849,7 +1849,7 @@ class DDI_Mode(tkinter.Frame):
 
 class DDD_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayDDD()
 
     def update_ddd(self):
         global ddd_vals
@@ -2072,7 +2072,7 @@ class DDD_Mode(tkinter.Frame):
 
 class AOOR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayAOOR()
 
     def update_aoor(self):
         global aoor_vals
@@ -2296,7 +2296,7 @@ class AOOR_Mode(tkinter.Frame):
 
 class AAIR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayAAIR()
 
     def update_aair(self):
         global aair_vals
@@ -2520,7 +2520,7 @@ class AAIR_Mode(tkinter.Frame):
 
 class VOOR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVOOR()
 
     def update_voor(self):
         global voor_vals
@@ -2744,7 +2744,7 @@ class VOOR_Mode(tkinter.Frame):
 
 class VVIR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVVIR()
 
     def update_vvir(self):
         global vvir_vals
@@ -2968,7 +2968,7 @@ class VVIR_Mode(tkinter.Frame):
 
 class VDDR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayVDDR()
 
     def update_vddr(self):
         global vddr_vals
@@ -3192,7 +3192,7 @@ class VDDR_Mode(tkinter.Frame):
 
 class DOOR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayDOOR()
 
     def update_door(self):
         global door_vals
@@ -3417,7 +3417,7 @@ class DOOR_Mode(tkinter.Frame):
 
 class DDIR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayddir()
 
     def update_ddir(self):
         global ddir_vals
@@ -3649,7 +3649,7 @@ class DDIR_Mode(tkinter.Frame):
 
 class DDDR_Mode(tkinter.Frame):
     def __init__(self,master=None):
-        self.displayAT()
+        self.displayDDDR()
 
     def update_dddr(self):
         global dddr_vals
@@ -3919,315 +3919,6 @@ def show_egram_page():
     egram_window.mainloop()
 
 
-def show_voo_mode_page():
-    def update_voo():
-        global voo_vals
-        if 30 <= int(lower_rate_entry.get()) <= 175 and 50 <= int(upper_rate_entry.get()) <= 175 and 0.0 <= float(ventricular_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(ventricular_pulse_width_entry.get()) <= 1.9 and 150<=int(arp_entry.get())<=500:
-            result = messagebox.askokcancel("Confirmation", "Are you sure?")
-            if (result):
-                voo_vals= [lower_rate_entry.get(),upper_rate_entry.get(),ventricular_amplitude_entry.get(),
-                       ventricular_pulse_width_entry.get(), arp_entry.get()]
-                voo_window.destroy()
-        else:
-            messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-
-    voo_window = Tk()
-    voo_window.geometry('%dx%d+0+0' % (width, height))
-    voo_window.title("VOO Mode")
-    voo_window.configure(background="black")
-
-    # Add a title
-    voo_label = ttk.Label(voo_window, text="VOO Mode Information", background="black", foreground="white", font=("Arial", 20))
-    voo_label.pack()
-
-    # Add the parameter here
-    lower_rate_label = ttk.Label(voo_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    lower_rate_entry = Entry(voo_window, font=("Arial", 16))
-    lower_rate_entry.insert(0,voo_vals[0])
-    lower_rate_label.grid(row = 0, column = 1)
-    lower_rate_entry.pack(pady=10)
-
-    upper_rate_label = ttk.Label(voo_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    upper_rate_entry = Entry(voo_window, font=("Arial", 16))
-    upper_rate_entry.insert(0,voo_vals[1])
-    upper_rate_label.pack(pady=10)
-    upper_rate_entry.pack(pady=10)
-
-    #atrial_amplitude_label = ttk.Label(voo_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    #atrial_amplitude_entry = Entry(voo_window, font=("Arial", 16))
-    #atrial_amplitude_label.pack(pady=10)
-    #atrial_amplitude_entry.pack(pady=10)
-
-    #atrial_pulse_width_label = ttk.Label(voo_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    #atrial_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
-    #atrial_pulse_width_label.pack(pady=10)
-    #atrial_pulse_width_entry.pack(pady=10)
-
-    ventricular_amplitude_label = ttk.Label(voo_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    ventricular_amplitude_entry = Entry(voo_window, font=("Arial", 16))
-    ventricular_amplitude_entry.insert(0,voo_vals[2])
-    ventricular_amplitude_label.pack(pady=10)
-    ventricular_amplitude_entry.pack(pady=10)
-
-    ventricular_pulse_width_label = ttk.Label(voo_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    ventricular_pulse_width_entry = Entry(voo_window, font=("Arial", 16))
-    ventricular_pulse_width_entry.insert(0,voo_vals[3])
-    ventricular_pulse_width_label.pack(pady=10)
-    ventricular_pulse_width_entry.pack(pady=10)
-
-    #vrp_label = ttk.Label(voo_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
-    #vrp_entry = Entry(voo_window, font=("Arial", 16))
-    #vrp_label.pack(pady=10)
-    #vrp_entry.pack(pady=10)
-
-    arp_label = ttk.Label(voo_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
-    arp_entry = Entry(voo_window, font=("Arial", 16))
-    arp_entry.insert(0,voo_vals[4])
-    arp_label.pack(pady=10)
-    arp_entry.pack(pady=10)
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
-                    focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-     # Create a "Save" button
-    save_button = ttk.Button(voo_window, text="Save", command=update_voo)
-    save_button.pack(pady=10)
-
-    # Create a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(voo_window, text="Back to Pacing Modes", command=voo_window.destroy)
-    back_button.pack(pady=5)
-def show_aai_mode_page():
-    def update_aai():
-        global aai_vals
-        if 30<= int(lower_rate_entry.get())<=175 and 50<= int(upper_rate_entry.get())<=175 and 0.0<= float(atrial_amplitude_entry.get())<=7\
-                and 0.05 <=float(atrial_pulse_width_entry.get())<=1.9 and 0.25<=float(atrial_sensitivity_entry.get())<=10\
-                and 150<=int(arp_entry.get())<=500 and 150<=int(pvarp_entry.get())<=500 and (30<=int(hysteresis_entry.get())<=175 or int(hysteresis_entry.get())==0)\
-                and 0<=int(rate_smoothing_entry.get())<=21:
-            result = messagebox.askokcancel("Confirmation","Are you sure?")
-            if (result):
-                aai_vals=[lower_rate_entry.get(), upper_rate_entry.get(), atrial_amplitude_entry.get(),
-                          atrial_pulse_width_entry.get(), atrial_sensitivity_entry.get(), arp_entry.get(),
-                          pvarp_entry.get(), hysteresis_entry.get(), rate_smoothing_entry.get()]
-        else:
-            messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-            aai_window.destroy()
-
-    aai_window = Tk()
-    aai_window.geometry('%dx%d+0+0' % (width, height))
-    aai_window.title("AAI Mode")
-    aai_window.configure(background="black")
-
-    # Add label
-    aai_label = ttk.Label(aai_window, text="            AAI Mode Information", background="black", foreground="white",font=("Arial", 40))
-    aai_label.grid(row=0, column=0, columnspan=9, pady=10, padx =300)
-
-    # Add the parameter here
-    lower_rate_label = ttk.Label(aai_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    lower_rate_label.grid(row=1, column=5, pady=10, padx =10)
-    lower_rate_entry = Entry(aai_window, font=("Arial", 16))
-    lower_rate_entry.insert(0,aai_vals[0])
-    lower_rate_entry.grid(row=2, column=5, pady=10, padx =10)
-
-    upper_rate_label = ttk.Label(aai_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    upper_rate_entry = Entry(aai_window, font=("Arial", 16))
-    upper_rate_entry.insert(0,aai_vals[1])
-    upper_rate_label.grid(row=1, column=6, pady=10, padx =10)
-    upper_rate_entry.grid(row=2, column=6, pady=10, padx =10)
-
-    atrial_amplitude_label = ttk.Label(aai_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    atrial_amplitude_entry = Entry(aai_window, font=("Arial", 16))
-    atrial_amplitude_entry.insert(0,aai_vals[2])
-    atrial_amplitude_label.grid(row=3, column=5, pady=10, padx =10)
-    atrial_amplitude_entry.grid(row=4, column=5, pady=10, padx =10)
-
-    atrial_pulse_width_label = ttk.Label(aai_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    atrial_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
-    atrial_pulse_width_entry.insert(0,aai_vals[3])
-    atrial_pulse_width_label.grid(row=3, column=6, pady=10, padx =10)
-    atrial_pulse_width_entry.grid(row=4, column=6, pady=10, padx =10)
-
-    atrial_sensitivity_label = ttk.Label(aai_window, text="Atrial Sensitivity:", background="black", foreground="white", font=("Arial", 16))
-    atrial_sensitivity_entry = Entry(aai_window, font=("Arial", 16))
-    atrial_sensitivity_entry.insert(0,aai_vals[4])
-    atrial_sensitivity_label.grid(row=5, column=5, pady=10, padx =10)
-    atrial_sensitivity_entry.grid(row=6, column=5, pady=10, padx =10)
-
-    #ventricular_amplitude_label = ttk.Label(aai_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    #ventricular_amplitude_entry = Entry(aai_window, font=("Arial", 16))
-    #ventricular_amplitude_label.pack(pady=10)
-    #ventricular_amplitude_entry.pack(pady=10)
-
-    #ventricular_pulse_width_label = ttk.Label(aai_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    #ventricular_pulse_width_entry = Entry(aai_window, font=("Arial", 16))
-    #ventricular_pulse_width_label.pack(pady=10)
-    #ventricular_pulse_width_entry.pack(pady=10)
-
-    #vrp_label = ttk.Label(aai_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
-    #vrp_entry = Entry(aai_window, font=("Arial", 16))
-    #vrp_label.pack(pady=10)
-    #vrp_entry.pack(pady=10)
-
-    arp_label = ttk.Label(aai_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
-    arp_entry = Entry(aai_window, font=("Arial", 16))
-    arp_entry.insert(0,aai_vals[5])
-    arp_label.grid(row=5, column=6, pady=10, padx =10)
-    arp_entry.grid(row=6, column=6, pady=10, padx =10)
-
-    pvarp_label = ttk.Label(aai_window, text="PVARP:", background="black", foreground="white", font=("Arial", 16))
-    pvarp_entry = Entry(aai_window, font=("Arial", 16))
-    pvarp_entry.insert(0,aai_vals[6])
-    pvarp_label.grid(row=7, column=5, pady=10, padx =10)
-    pvarp_entry.grid(row=8, column=5, pady=10, padx =10)
-
-    hysteresis_label = ttk.Label(aai_window, text="Hysteresis:", background="black", foreground="white", font=("Arial", 16))
-    hysteresis_entry = Entry(aai_window, font=("Arial", 16))
-    hysteresis_entry.insert(0,aai_vals[7])
-    hysteresis_label.grid(row=7, column=6, pady=10, padx=10)
-    hysteresis_entry.grid(row=8, column=6, pady=10, padx=10)
-
-    rate_smoothing_label = ttk.Label(aai_window, text="Rate Smoothing:", background="black", foreground="white", font=("Arial", 16))
-    rate_smoothing_entry = Entry(aai_window, font=("Arial", 16))
-    rate_smoothing_entry.insert(0,aai_vals[8])
-    rate_smoothing_label.grid(row=9, column=5, pady=10)
-    rate_smoothing_entry.grid(row=10, column=5, pady=10)
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
-                    focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-     # Create a "Save" button
-    save_button = ttk.Button(aai_window, text="Save", command=update_aai)
-    save_button.grid(row=12, column=5, pady=10)
-
-    # Create a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(aai_window, text="Back to Pacing Modes", command=aai_window.destroy)
-    back_button.grid(row=12, column=6, pady=10)
-def show_vvi_mode_page():
-    def update_vvi():
-        global vvi_vals
-        if 30 <= int(lower_rate_entry.get()) <= 175 and 50 <= int(upper_rate_entry.get()) <= 175 and 0.0 <= float(ventricular_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(ventricular_pulse_width_entry.get()) <= 1.9 and 0.25 <= float(ventricular_sensitivity_entry.get()) <= 10 \
-                and 150 <= int(vrp_entry.get()) <= 500 and (30 <= int(hysteresis_entry.get()) <= 175 or int(hysteresis_entry.get()) == 0) \
-                and 0 <= int(rate_smoothing_entry.get()) <= 21:
-            result = messagebox.askokcancel("Confirmation", "Are you sure?")
-            if (result):
-                vvi_vals = [lower_rate_entry.get(), upper_rate_entry.get(), ventricular_amplitude_entry.get(),
-                            ventricular_pulse_width_entry.get(), ventricular_sensitivity_entry.get(), vrp_entry.get(), hysteresis_entry.get(),
-                            rate_smoothing_entry.get()]
-        else:
-            messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
-            vvi_window.destroy()
-
-    vvi_window = Tk()
-    vvi_window.geometry('%dx%d+0+0' % (width, height))
-    vvi_window.title("VVI Mode")
-    vvi_window.configure(background="black")
-
-    # Add label
-    vvi_label = ttk.Label(vvi_window, text="            VVI Mode Information", background="black", foreground="white", font=("Arial", 40))
-    vvi_label.grid(row=0, column=0, columnspan=9, pady=10, padx=300)
-
-    # Add the parameter here
-    lower_rate_label = ttk.Label(vvi_window, text="Lower Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    lower_rate_entry = Entry(vvi_window, font=("Arial", 16))
-    lower_rate_entry.insert(0,vvi_vals[0])
-    lower_rate_label.grid(row=1, column=5, pady=10, padx =10)
-    lower_rate_entry.grid(row=2, column=5, pady=10, padx =10)
-
-    upper_rate_label = ttk.Label(vvi_window, text="Upper Rate Limit:", background="black", foreground="white", font=("Arial", 16))
-    upper_rate_entry = Entry(vvi_window, font=("Arial", 16))
-    upper_rate_entry.insert(0,vvi_vals[1])
-    upper_rate_label.grid(row=1, column=6, pady=10, padx =10)
-    upper_rate_entry.grid(row=2, column=6, pady=10, padx =10)
-
-    #atrial_amplitude_label = ttk.Label(vvi_window, text="Atrial Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    #atrial_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
-    #atrial_amplitude_label.pack(pady=10)
-    #atrial_amplitude_entry.pack(pady=10)
-
-    #atrial_pulse_width_label = ttk.Label(vvi_window, text="Atrial Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    #atrial_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
-    #atrial_pulse_width_label.pack(pady=10)
-    #atrial_pulse_width_entry.pack(pady=10)
-
-    ventricular_amplitude_label = ttk.Label(vvi_window, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
-    ventricular_amplitude_entry = Entry(vvi_window, font=("Arial", 16))
-    ventricular_amplitude_entry.insert(0,vvi_vals[2])
-    ventricular_amplitude_label.grid(row=3, column=5, pady=10, padx =10)
-    ventricular_amplitude_entry.grid(row=4, column=5, pady=10, padx =10)
-
-    ventricular_pulse_width_label = ttk.Label(vvi_window, text="Ventricular Pulse Width:", background="black", foreground="white", font=("Arial", 16))
-    ventricular_pulse_width_entry = Entry(vvi_window, font=("Arial", 16))
-    ventricular_pulse_width_entry.insert(0,vvi_vals[3])
-    ventricular_pulse_width_label.grid(row=3, column=6, pady=10, padx =10)
-    ventricular_pulse_width_entry.grid(row=4, column=6, pady=10, padx =10)
-
-
-    ventricular_sensitivity_label = ttk.Label(vvi_window, text="Ventricular Sensitivity:", background="black", foreground="white", font=("Arial", 16))
-    ventricular_sensitivity_entry = Entry(vvi_window, font=("Arial", 16))
-    ventricular_sensitivity_entry.insert(0,vvi_vals[4])
-    ventricular_sensitivity_label.grid(row=5, column=5, pady=10, padx =10)
-    ventricular_sensitivity_entry.grid(row=6, column=5, pady=10, padx =10)
-
-    vrp_label = ttk.Label(vvi_window, text="VRP:", background="black", foreground="white", font=("Arial", 16))
-    vrp_entry = Entry(vvi_window, font=("Arial", 16))
-    vrp_entry.insert(0,vvi_vals[5])
-    vrp_label.grid(row=5, column=6, pady=10, padx =10)
-    vrp_entry.grid(row=6, column=6, pady=10, padx =10)
-
-    hysteresis_label = ttk.Label(vvi_window, text="Hysteresis:", background="black", foreground="white", font=("Arial", 16))
-    hysteresis_entry = Entry(vvi_window, font=("Arial", 16))
-    hysteresis_entry.insert(0,vvi_vals[6])
-    hysteresis_label.grid(row=7, column=5, pady=10, padx =10)
-    hysteresis_entry.grid(row=8, column=5, pady=10, padx =10)
-
-    rate_smoothing_label = ttk.Label(vvi_window, text="Rate Smoothing:", background="black", foreground="white", font=("Arial", 16))
-    rate_smoothing_entry = Entry(vvi_window, font=("Arial", 16))
-    rate_smoothing_entry.insert(0,vvi_vals[7])
-    rate_smoothing_label.grid(row=7, column=6, pady=10, padx =10)
-    rate_smoothing_entry.grid(row=8, column=6, pady=10, padx =10)
-
-    #arp_label = ttk.Label(vvi_window, text="ARP:", background="black", foreground="white", font=("Arial", 16))
-    #arp_entry = Entry(vvi_window, font=("Arial", 16))
-    #arp_label.pack(pady=10)
-    #arp_entry.pack(pady=10)
-
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
-                    focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
-
-    # Create a "Save" button
-    save_button = ttk.Button(vvi_window, text="Save", command=update_vvi)
-    save_button.grid(row=12, column=5, pady=10, padx =10)
-
-    # Creat a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(vvi_window, text="Back to Pacing Modes", command=vvi_window.destroy)
-    back_button.grid(row=12, column=6, pady=10, padx =10)
-
-
-
-    # Use the grid layout manager to arrange the buttons in columns
-    #button1.grid(row=0, column=0, padx=30, pady=30)
-    #button2.grid(row=0, column=1, padx=30, pady=30)
-    #button3.grid(row=1, column=0, padx=30, pady=30)
-    #button4.grid(row=1, column=1, padx=30, pady=30)
 
 
 
