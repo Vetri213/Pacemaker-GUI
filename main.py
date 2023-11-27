@@ -630,7 +630,7 @@ class pacing_modes(tkinter.Frame):
         AAIR_Mode(master=self.master)
     def VOORPressed(self):
         VOOR_Mode(master=self.master)
-    def VVIRressed(self):
+    def VVIRPressed(self):
         VVIR_Mode(master=self.master)
     def VDDRPressed(self):
         VDDR_Mode(master=self.master)
