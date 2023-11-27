@@ -788,7 +788,7 @@ class AAI_Mode(tkinter.Frame):
                                            font=("Arial", 16))
         self.atrial_amplitude_entry = Entry(self.aai_window, font=("Arial", 16))
         self.atrial_amplitude_entry.insert(0, aai_vals[2])
-        self.atrial_amplitude_label.grid(row = 3, column = 01)
+        self.atrial_amplitude_label.grid(row = 3, column = 0)
         self.atrial_amplitude_entry.grid(row = 4, column = 0)
 
         self.atrial_pulse_width_label = ttk.Label(self.aai_window, text="Atrial Pulse Width:", background="black",
@@ -2723,7 +2723,7 @@ class VOOR_Mode(tkinter.Frame):
         self.recovery__time_entry = Entry(self.voor_window, font=("Arial", 16))
         self.recovery__time_entry.insert(0, voor_vals[8])
         self.recovery__time_label.grid(row = 9, column = 0)
-        self.recovery__time_entry.grid(row = 10, column = 01)
+        self.recovery__time_entry.grid(row = 10, column = 0)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
