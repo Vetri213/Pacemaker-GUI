@@ -269,25 +269,28 @@ class pacing_modes(tkinter.Frame):
         self.pacingmodes()
 
     # Check if there is a connection to the DCM and if so, which port
+        # Check if there is a connection to the DCM and if so, which port
     def check_connection(self):
+        port_candidates = ["COM6", "COM5", "COM4", "COM3"]
         global port
-        try:
-            serial.Serial(port="COM6", baudrate=115200)
-            port = 6
-        except:
+        for port_candidate in port_candidates:
             try:
-                serial.Serial(port="COM5", baudrate=115200)
-                port = 5
+                ser = serial.Serial(port=port_candidate, baudrate=115200)
+                ser.open()  # Open the serial port
+
+                # Add additional checks if needed, e.g., sending a test command
+                # If successful, set the port and break out of the loop
+                port = port_candidate
+                ser.close()  # Close the serial port
+                break
             except:
-                try:
-                    serial.Serial(port="COM4", baudrate=115200)
-                    port = 4
-                except:
-                    try:
-                        serial.Serial(port="COM3", baudrate=115200)
-                        port = 3
-                    except:
-                        port = 0  # not connected
+                port = 0
+
+        # Optionally, check if self.port is still 0 to determine if not connected
+        if port == 0:
+            print("Not connected")
+        else:
+            print(f"Connected to port {port}")
 
     def connect(self):
         #Calling check_connection makes port a global variable that can be accessed anywhere
@@ -654,9 +657,8 @@ class AOO_Mode(tkinter.Frame):
             if (result):
                 global aoo_vals
                 aoo_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
-                Communicate(0, self.lower_rate_entry.get(), self.atrial_pulse_width_entry.get(), 0, 0, 0, 0, self.atrial_amplitude_entry.get(), 0, 0,
-                                     175, 0, 7, 0, 2.5, 2.5)
-
+                Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0,
+                     )
 
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
@@ -3924,7 +3926,7 @@ def show_egram_page():
 
 
 #Communicating with the Pace Maker
-def Communicate(mode, LR=0, APW=0, VPW=0, VA=0, ARP=0, VRP=0, AA=0, RecovTime=0, RF=0, MSR=0, AVD=0, AT=0, ReactTime=0, ATSats=0, VS=0):
+def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0):
     if (port == 0):
         return "Pace Maker Not Connected"
     else:
@@ -3968,9 +3970,9 @@ def Communicate(mode, LR=0, APW=0, VPW=0, VA=0, ARP=0, VRP=0, AA=0, RecovTime=0,
             and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and MSR_pacemaker[0] == MSR and AVD_pacemaker[
                 0] == AVD and (AT_pacemaker[0] - AT < 0.01) and ReactTime_pacemaker[0] == ReactTime and (ATS_pacemaker[0] - ATS < 0.01) and (
                     VS_pacemaker[0] - VS < 0.01)):
-        return "Parameters Stored Successfully"
+        print("Parameters Stored Successfully")
     else:
-        return "Some Parameters Were Not Stored Correctly. Please Try Again."
+        print("Some Parameters Were Not Stored Correctly. Please Try Again.")
 
 
 
