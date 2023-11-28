@@ -3936,8 +3936,8 @@ def Communicate(mode, LR=0, APW=0, VPW=0, VA=0, ARP=0, VRP=0, AA=0, RecovTime=0,
         AA = 0
     if (VA == 'OFF'):
         VA = 0
-    data = struct.pack(Header, 0x16, 0x55, mode, LR, APW, VPW, VA, ARP, VRP, AA, RecovTime, RF, MSR, AVD, AT, ReactTime, ATS,
-                     VS)
+    data = struct.pack(Header, 0x16, 0x55, mode,APW, VPW, LR,AA, VA, ARP, VRP,AVD, AS, VS, RecovTime, RF, MSR,  AT, ReactTime, ATS,
+                     )
     print(len(data))
     pace_maker.write(data)
     print(len(data))
