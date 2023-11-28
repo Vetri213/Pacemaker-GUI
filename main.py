@@ -3876,52 +3876,167 @@ class DDDR_Mode(tkinter.Frame):
         self.back_button = ttk.Button(master=self.dddr_window, text="Back to Pacing Modes", command=self.dddr_window.destroy)
         self.back_button.grid(row = 27, column = 1)
 
-def show_egram_page():
-    width, height = 800, 600
 
-    egram_window = Tk()
-    egram_window.attributes('-fullscreen', True)
-    egram_window.title("AOO Mode")
-    egram_window.configure(background="black")
+class egram():
+    def __init__(self):
+        self.AtrialData = np.array([])
+        self.VentricleData = np.array([])
+        self.TimeData = np.array([])
 
-    # Add a title
-    egram_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
-                          font=("Arial", 80))
-    egram_label.pack()
+        self.show_egram_page()
+        self.egram_window = Tk()
+        self.egram_window.attributes('-fullscreen', True)
+        self.egram_window.title("EGRAM")
+        self.egram_window.configure(background="black")
 
-    # Style of Buttons
-    style = ttk.Style()
-    style.theme_use('alt')
-    style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
-                    focusthickness=3,
-                    focuscolor='none', font=('American typewriter', 20))
-    # When Hovering
-    style.map('TButton', background=[('active', 'teal')])
+        self.egram_window.mainloop()
 
-    # Sample data for time and voltage
-    time = np.linspace(0, 1, 1000)  # 1 second, 1000 points
-    voltage = 0.5 * np.sin(2 * np.pi * 5 * time)  # Example sine wave
 
-    # Create a figure and plot the E-gram graph
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.plot(time, voltage, label='E-gram Signal', color='blue')
-    ax.set_title('Electrogram (E-gram) Signal')
-    ax.set_xlabel('Time (s)')
-    ax.set_ylabel('Voltage (mV)')
-    ax.legend()
-    ax.grid(True)
+    def show_egram_page(self):
+        #width, height = 800, 600
+        # Add a title
+        egram_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
+                              font=("Arial", 80))
+        egram_label.pack()
 
-    # Embed the matplotlib figure in the Tkinter window
-    canvas = FigureCanvasTkAgg(fig, master=egram_window)
-    canvas_widget = canvas.get_tk_widget()
-    canvas_widget.pack()
+        # Style of Buttons
+        style = ttk.Style()
+        style.theme_use('alt')
+        style.configure('TButton', background="black", foreground="white", width=50, height=30, borderwidth=1,
+                        focusthickness=3,
+                        focuscolor='none', font=('American typewriter', 20))
+        # When Hovering
+        style.map('TButton', background=[('active', 'teal')])
 
-    # Create a "back" button to return to "Pacing mode"
-    back_button = ttk.Button(egram_window, text="Back to Pacing Modes", command=egram_window.destroy)
-    back_button.pack(pady=20)
+        # Sample data for time and voltage
+        # time = np.linspace(0, 1, 1000)  # 1 second, 1000 points
+        # voltage = 0.5 * np.sin(2 * np.pi * 5 * time)  # Example sine wave
+    # ----------------------------------------------------------------------
 
-    # Display the Tkinter window
-    egram_window.mainloop()
+        # the figure that will contain the plot
+        self.fig = Figure(figsize=(7, 7), dpi=100)
+        # adding the subplot
+        #Top
+        self.AtriumPlot = self.fig.add_subplot(311)
+        #Middle
+        self.VentriclePlot = self.fig.add_subplot(312)
+        # Bottom
+        self.AVPlot = self.fig.add_subplot(313)
+        #Creating space between the plots
+        self.fig.subplots_adjust(hspace=0.9)
+
+        # plotting the graph
+
+        #Atrium Plot
+        self.AtriumPlot.set_title('Atrium Internal Electrogram', fontsize=12)
+        self.AtriumPlot.set_xlabel("Time (sec)", fontsize=10)
+        self.AtriumPlot.set_ylabel("Voltage (V)", fontsize=10)
+        self.AtriumPlot.set_ylim(-6, 6)
+        self.AtriumPlot.set_xlim(0, 16)
+        self.linesA = self.AtriumPlot.plot([], [])[0]
+
+        #Ventricle Plot
+        self.VentriclePlot.set_title('Ventricle Internal Electrogram', fontsize=12)
+        self.VentriclePlot.set_xlabel("Time (sec)", fontsize=10)
+        self.VentriclePlot.set_ylabel("Voltage (V)", fontsize=10)
+        self.VentriclePlot.set_ylim(-6, 6)
+        self.VentriclePlot.set_xlim(0, 16)
+        self.linesV = self.VentriclePlot.plot([], [])[0]
+
+        #AV Plot
+        self.AVPlot.set_title('Atrium/Ventricle Internal Electrogram', fontsize=12)
+        self.AVPlot.set_xlabel("Time (sec)", fontsize=10)
+        self.AVPlot.set_ylabel("Voltage (V)", fontsize=10)
+        self.AtriumPlot.set_ylim(-6, 6)
+        self.AtriumPlot.set_xlim(0, 16)
+        self.linesA = self.AtriumPlot.plot([], [])[0]
+
+        # Tkinter canvas
+        # Matplotlib figure
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
+        self.canvas.draw()
+
+        # placing the canvas on the Tkinter window
+        self.canvas.get_tk_widget().pack()
+
+        # creating the Matplotlib toolbar
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.window)
+        self.toolbar.update()
+
+        # placing the toolbar on the Tkinter window
+        self.canvas.get_tk_widget().pack()
+
+        self.window.update()
+        self.abutton = tkinter.Button(self.window, text="Atrium", font=('calbiri', 12), command=lambda: self.plot_a())
+        self.abutton.place(x=100, y=280)
+
+        self.window.update()
+        self.vbutton = tkinter.Button(self.window, text="Ventricle", font=('calbiri', 12), command=lambda: self.plot_v())
+        self.vbutton.place(x=self.a.winfo_x() + self.a.winfo_reqwidth() + 20, y=280)
+        self.window.update()
+        self.stopbutton = tkinter.Button(self.window, text="Start/Stop", font=('calbiri', 12), command=lambda: self.conti())
+        self.stopbutton.place(x=self.v.winfo_x() + self.v.winfo_reqwidth() + 20, y=280)
+        self.window.update()
+        # Create a "back" button to return to "Pacing mode"
+        self.back_button = ttk.Button(self.egram_window, text="Back to Pacing Modes", command=self.egram_window.destroy)
+        self.back_button.pack(pady=20)
+
+        # Display the Tkinter window
+        egram_window.mainloop()
+        # ser.reset_input_buffer()
+        self.plot_vals()
+        self.start = time.time()
+    def plot_vals(self):
+        if (self.cont):
+            try:
+                pace_maker = serial.Serial(port="COM" + str(global_.Commu), baudrate=115200)
+                pacemaker.open
+                # pacemaker.reset_input_buffer()
+                pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+                serialdata = pacemaker.read(16)
+                pacemaker.close
+            except:
+                self.window.destroy()
+                messagebox.showinfo("Message", "Pacemaker not connected")
+            a = -6.6 * (struct.unpack('d', serialdata[0:8])[0] - 0.5)
+            v = -6.6 * (struct.unpack('d', serialdata[8:16])[0] - 0.5)
+            if (len(self.AtrialData) < 300):
+                self.AtrialData = np.append(self.AtrialData, a)
+                self.VentricleData = np.append(self.VentricleData, v)
+                self.TimeData = np.append(self.TimeData, time.time() - self.start)
+            else:
+                self.AtrialData[0:299] = self.AtrialData[1:300]
+                self.VentricleData[0:299] = self.VentricleData[1:300]
+                self.AtrialData[299] = a
+                self.VentricleData[299] = v
+                self.TimeData[0:299] = self.TimeData[1:300]
+                self.TimeData[299] = time.time() - self.start
+                self.plotA.set_xlim(self.TimeData[0], self.TimeData[299])
+                self.plotV.set_xlim(self.TimeData[0], self.TimeData[299])
+            self.linesA.set_xdata(self.TimeData)
+            self.linesA.set_ydata(self.AtrialData)
+            self.linesV.set_xdata(self.TimeData)
+            self.linesV.set_ydata(self.VentricleData)
+            self.canvas.draw()
+
+    self.window.after(5, self.plot)
+
+    def plot_a(self):
+        self.aS = not self.aS
+        self.plotA.set_visible(self.aS)
+
+    def conti(self):
+        self.cont = not self.cont
+        if (self.cont):
+            self.start = time.time() - self.TimeData[len(self.TimeData) - 1]
+
+    def plot_v(self):
+        self.vS = not self.vS
+        self.plotV.set_visible(self.vS)
+
+    #-------------------------------------------------------------------------------------------
+
+
 
 
 
