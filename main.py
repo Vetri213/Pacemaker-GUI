@@ -271,26 +271,30 @@ class pacing_modes(tkinter.Frame):
     # Check if there is a connection to the DCM and if so, which port
         # Check if there is a connection to the DCM and if so, which port
     def check_connection(self):
-        port_candidates = ["COM6", "COM5", "COM4", "COM3"]
         global port
-        for port_candidate in port_candidates:
-            try:
-                ser = serial.Serial(port=port_candidate, baudrate=115200)
-                ser.open()  # Open the serial port
-
-                # Add additional checks if needed, e.g., sending a test command
-                # If successful, set the port and break out of the loop
-                port = port_candidate
-                ser.close()  # Close the serial port
-                break
-            except:
-                port = 0
-
-        # Optionally, check if self.port is still 0 to determine if not connected
-        if port == 0:
-            print("Not connected")
-        else:
-            print(f"Connected to port {port}")
+        port = 4
+        port_candidates = "COM4"
+        ser = serial.Serial(port="COM4", baudrate=115200)
+        #ser.open()  # Open the serial port
+        # global port
+        # for port_candidate in port_candidates:
+        #     try:
+        #         ser = serial.Serial(port=COM4, baudrate=115200)
+        #         ser.open()  # Open the serial port
+        #
+        #         # Add additional checks if needed, e.g., sending a test command
+        #         # If successful, set the port and break out of the loop
+        #         port = port_candidate
+        #         ser.close()  # Close the serial port
+        #         break
+        #     except:
+        #         port = 0
+        #
+        # # Optionally, check if self.port is still 0 to determine if not connected
+        # if port == 0:
+        #     print("Not connected")
+        # else:
+        #     print(f"Connected to port {port}")
 
     def connect(self):
         #Calling check_connection makes port a global variable that can be accessed anywhere
@@ -657,8 +661,7 @@ class AOO_Mode(tkinter.Frame):
             if (result):
                 global aoo_vals
                 aoo_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
-                Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0,
-                     )
+                Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0)
 
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
@@ -3932,39 +3935,52 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
     else:
         pace_maker = serial.Serial(port="COM" + str(port), baudrate=115200)
 
-    pace_maker.open
-    Header = '<2B4Hf2Hf4HfH2f'
+    #pace_maker.open()
+    Header = '<19i'
+    #Header = '<2B4Hf2Hf4HfH3f'
     if (AA == 'OFF'):
         AA = 0
     if (VA == 'OFF'):
         VA = 0
-    data = struct.pack(Header, 0x16, 0x55, mode,APW, VPW, LR,AA, VA, ARP, VRP,AVD, AS, VS, RecovTime, RF, MSR,  AT, ReactTime, ATS,
-                     )
-    print(len(data))
-    pace_maker.write(data)
-    print(len(data))
+    AA = float(AA)
+    VA = float(VA)
+    #data = struct.pack(Header, 0x16, 0x55, mode,APW, VPW, LR,AA, VA, ARP, VRP,AVD, AS, VS, RecovTime, RF, MSR,  AT, ReactTime, ATS)
+    #print(len(data))
+    pace_maker.write(struct.pack('<Bi10fH',0x16,0x22,0,1,0,0,0,0,0,0,0,0,0))
+
+    #print(len(data))
     time.sleep(0.5)
-    serialdata = pace_maker.read(58)
-    pace_maker.close
-    print(len(data))
-    mode_pacemaker = struct.unpack('H', serialdata[16:18])
-    LR_pacemaker = struct.unpack('H', serialdata[18:20])
-    APW_pacemaker = struct.unpack('H', serialdata[20:22])
-    VPW_pacemaker = struct.unpack('H', serialdata[22:24])
-    VA_pacemaker = struct.unpack('f', serialdata[24:28])
-    ARP_pacemaker = struct.unpack('H', serialdata[28:30])
-    VRP_pacemaker = struct.unpack('H', serialdata[30:32])
-    AA_pacemaker = struct.unpack('f', serialdata[32:36])
-    RecovTime_pacemaker = struct.unpack('H', serialdata[36:38])
-    RF_pacemaker = struct.unpack('H', serialdata[38:40])
-    MSR_pacemaker = struct.unpack('H', serialdata[40:42])
-    AVD_pacemaker = struct.unpack('H', serialdata[42:44])
-    AT_pacemaker = struct.unpack('f', serialdata[44:48])
-    ReactTime_pacemaker = struct.unpack('H', serialdata[48:50])
-    ATS_pacemaker = struct.unpack('f', serialdata[50:54])
-    VS_pacemaker = struct.unpack('f', serialdata[54:58])
-    print(mode_pacemaker[0], LR_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AA_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], MSR_pacemaker[0],
-          AVD_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0], ATS_pacemaker[0], VS_pacemaker[0])
+    serialdata = pace_maker.read(25)
+    #print(serialdata)
+    #pace_maker.close()
+
+
+
+
+
+    #print(len(data))
+    mode_pacemaker = struct.unpack('B', serialdata[16:17])
+    LR_pacemaker = struct.unpack('i', serialdata[17:21])
+    APW_pacemaker = struct.unpack('f', serialdata[21:25])
+    #VPW_pacemaker = struct.unpack('f', serialdata[23:27])
+    print(mode_pacemaker)
+    print(LR_pacemaker)
+    print(APW_pacemaker)
+    #print(VPW_pacemaker)
+    # VA_pacemaker = struct.unpack('f', serialdata[24:28])
+    # ARP_pacemaker = struct.unpack('H', serialdata[28:30])
+    # VRP_pacemaker = struct.unpack('H', serialdata[30:32])
+    # AA_pacemaker = struct.unpack('f', serialdata[32:36])
+    # RecovTime_pacemaker = struct.unpack('H', serialdata[36:38])
+    # RF_pacemaker = struct.unpack('H', serialdata[38:40])
+    # MSR_pacemaker = struct.unpack('H', serialdata[40:42])
+    # AVD_pacemaker = struct.unpack('H', serialdata[42:44])
+    # AT_pacemaker = struct.unpack('f', serialdata[44:48])
+    # ReactTime_pacemaker = struct.unpack('H', serialdata[48:50])
+    # ATS_pacemaker = struct.unpack('f', serialdata[50:54])
+    # VS_pacemaker = struct.unpack('f', serialdata[54:58])
+    # print(mode_pacemaker[0], LR_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AA_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], MSR_pacemaker[0],
+     #     AVD_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0], ATS_pacemaker[0], VS_pacemaker[0])
     if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LR and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
         0] == ARP and VRP_pacemaker[0] == VRP
             and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and MSR_pacemaker[0] == MSR and AVD_pacemaker[
