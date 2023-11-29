@@ -2163,7 +2163,7 @@ class AOOR_Mode(tkinter.Frame):
                 global aoor_vals
                 aoor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),
                             self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -2352,10 +2352,10 @@ class AOOR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.aoor_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.aoor_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, aoor_vals[9])
-        self.recovery__time_label.grid(row = 9, column = 1)
-        self.recovery__time_entry.grid(row = 10, column = 1)
+        self.recovery_time_entry = Entry(self.aoor_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, aoor_vals[9])
+        self.recovery_time_label.grid(row = 9, column = 1)
+        self.recovery_time_entry.grid(row = 10, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -2399,7 +2399,7 @@ class AAIR_Mode(tkinter.Frame):
                 global aair_vals
                 aair_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.arp_entry.get(),self.pvarp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
                             self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
 
@@ -2589,10 +2589,10 @@ class AAIR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.aair_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.aair_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, aair_vals[13])
-        self.recovery__time_label.grid(row = 13, column = 1)
-        self.recovery__time_entry.grid(row = 14, column = 1)
+        self.recovery_time_entry = Entry(self.aair_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, aair_vals[13])
+        self.recovery_time_label.grid(row = 13, column = 1)
+        self.recovery_time_entry.grid(row = 14, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -2630,7 +2630,7 @@ class VOOR_Mode(tkinter.Frame):
                 global voor_vals
                 voor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),
                             self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -2819,10 +2819,10 @@ class VOOR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.voor_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.voor_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, voor_vals[8])
-        self.recovery__time_label.grid(row = 9, column = 0)
-        self.recovery__time_entry.grid(row = 10, column = 0)
+        self.recovery_time_entry = Entry(self.voor_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, voor_vals[8])
+        self.recovery_time_label.grid(row = 9, column = 0)
+        self.recovery_time_entry.grid(row = 10, column = 0)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -2865,7 +2865,7 @@ class VVIR_Mode(tkinter.Frame):
                 global vvir_vals
                 vvir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
                             self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -3054,10 +3054,10 @@ class VVIR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.vvir_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.vvir_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, vvir_vals[12])
-        self.recovery__time_label.grid(row = 13, column = 0)
-        self.recovery__time_entry.grid(row = 14, column = 0)
+        self.recovery_time_entry = Entry(self.vvir_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, vvir_vals[12])
+        self.recovery_time_label.grid(row = 13, column = 0)
+        self.recovery_time_entry.grid(row = 14, column = 0)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -3106,7 +3106,7 @@ class VDDR_Mode(tkinter.Frame):
                 vddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),
                             self.pvarp_extension_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -3295,10 +3295,10 @@ class VDDR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.vddr_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.vddr_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, vddr_vals[17])
-        self.recovery__time_label.grid(row = 17, column = 1)
-        self.recovery__time_entry.grid(row = 18, column = 1)
+        self.recovery_time_entry = Entry(self.vddr_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, vddr_vals[17])
+        self.recovery_time_label.grid(row = 17, column = 1)
+        self.recovery_time_entry.grid(row = 18, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -3340,7 +3340,7 @@ class DOOR_Mode(tkinter.Frame):
                 door_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),
                              self.atrial_amplitude_entry.get(),
                              self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.acticity_threshold_entry.get(),
-                             self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -3529,10 +3529,10 @@ class DOOR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.door_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.door_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, door_vals[11])
-        self.recovery__time_label.grid(row = 11, column = 1)
-        self.recovery__time_entry.grid(row = 12, column = 1)
+        self.recovery_time_entry = Entry(self.door_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, door_vals[11])
+        self.recovery_time_label.grid(row = 11, column = 1)
+        self.recovery_time_entry.grid(row = 12, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -3580,7 +3580,7 @@ class DDIR_Mode(tkinter.Frame):
                 ddir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
                             self.pvarp_entry.get(),self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -3776,10 +3776,10 @@ class DDIR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.ddir_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.ddir_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, ddir_vals[15])
-        self.recovery__time_label.grid(row = 15, column = 1)
-        self.recovery__time_entry.grid(row = 16, column = 1)
+        self.recovery_time_entry = Entry(self.ddir_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, ddir_vals[15])
+        self.recovery_time_label.grid(row = 15, column = 1)
+        self.recovery_time_entry.grid(row = 16, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -3835,7 +3835,7 @@ class DDDR_Mode(tkinter.Frame):
                 dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
                             self.pvarp_entry.get(),self.pvarp_extension_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
-                            self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
