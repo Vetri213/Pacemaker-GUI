@@ -660,13 +660,13 @@ class AOO_Mode(tkinter.Frame):
     def update_aoo(self):
         global aoo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+                and 0.05 <= int(self.atrial_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoo_vals
                 aoo_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
-                Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0)
-
+                #Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, UR= self.upper_rate_entry.get(),  AT=0, ReactTime=0)
+                Communicate()
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
 
@@ -1192,7 +1192,7 @@ class VVT_Mode(tkinter.Frame):
 
     def update_vvt(self):
         global vvt_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+        if 30 <= float(self.lower_rate_entry.get()) <= 175 and 50 <= float(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
                 and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
@@ -4056,14 +4056,14 @@ class egram():
 
 
 #Communicating with the Pace Maker
-def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0):
+def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, UR=0,  AT=0, ReactTime=0):
     if (port == 0):
         return "Pace Maker Not Connected"
     else:
         pace_maker = serial.Serial(port="COM" + str(port), baudrate=115200)
 
     #pace_maker.open()
-    Header = '<19i'
+    Header = '<2B4H2f3H2f3HfH'
     #Header = '<2B4Hf2Hf4HfH3f'
     if (AA == 'OFF'):
         AA = 0
@@ -4071,14 +4071,16 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
         VA = 0
     AA = float(AA)
     VA = float(VA)
-    #data = struct.pack(Header, 0x16, 0x55, mode,APW, VPW, LR,AA, VA, ARP, VRP,AVD, AS, VS, RecovTime, RF, MSR,  AT, ReactTime, ATS)
+    data = struct.pack(Header, 0x16, 0x55, int(mode),APW, VPW, LR, float(AA), float(VA), ARP, VRP,AVD, float(AS), float(VS), RecovTime, RF, UR,  float(AT), ReactTime)
     #print(len(data))
-    pace_maker.write(struct.pack('<Bi10fH',0x16,0x22,0,1,0,0,0,0,0,0,0,0,0))
+    #pace_maker.write(struct.pack('<Bi10fH',0x16,0x22,0,1,0,0,0,0,0,0,0,0,0))
 
-    #print(len(data))
-    time.sleep(0.5)
+    print(len(data))
+    #time.sleep(0.5)
+    print("1")
     serialdata = pace_maker.read(25)
-    #print(serialdata)
+    print("2")
+    print(serialdata)
     #pace_maker.close()
 
 
