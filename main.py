@@ -660,13 +660,13 @@ class AOO_Mode(tkinter.Frame):
     def update_aoo(self):
         global aoo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= int(self.atrial_pulse_width_entry.get()) <= 1.9:
+                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoo_vals
                 aoo_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get()]
-                #Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, UR= self.upper_rate_entry.get(),  AT=0, ReactTime=0)
-                Communicate()
+                Communicate(mode = 0 ,APW = self.atrial_pulse_width_entry.get(), VPW = 0, LR =self.lower_rate_entry.get() ,AA = self.atrial_amplitude_entry.get(), VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0)
+
         else:
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
 
@@ -756,7 +756,8 @@ class AAI_Mode(tkinter.Frame):
     def update_aai(self):
         global aai_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 and 150<= int(arp.entry.get()) <= 500 \
+                and 150<= int(pvarp.entry.get()) <= 500 and (int(self.hysteresis.get() )== 0 or 30<= int(self.hysteresis) <= 175) and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aai_vals
@@ -883,8 +884,10 @@ class VOO_Mode(tkinter.Frame):
 
     def update_voo(self):
         global voo_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global voo_vals
@@ -974,8 +977,15 @@ class VVI_Mode(tkinter.Frame):
 
     def update_vvi(self):
         global vvi_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
+            and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vvi_vals
@@ -1076,8 +1086,14 @@ class AAT_Mode(tkinter.Frame):
 
     def update_aat(self):
         global aat_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.arp_entry.get()) <= 500 \
+            and 150<= int(self.pvarp_entry.get()) <= 500:
+
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aat_vals
@@ -1192,8 +1208,12 @@ class VVT_Mode(tkinter.Frame):
 
     def update_vvt(self):
         global vvt_vals
-        if 30 <= float(self.lower_rate_entry.get()) <= 175 and 50 <= float(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if  30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vvt_vals
@@ -1281,8 +1301,19 @@ class VDD_Mode(tkinter.Frame):
 
     def update_vdd(self):
         global vdd_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
+            and 10 <= int(self.atr_duration_entry.get())<= 2000 \
+            and 1<= int(self.atr_fallback_time_entry.get()) <= 5 :
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vdd_vals
@@ -1419,8 +1450,13 @@ class DOO_Mode(tkinter.Frame):
 
     def update_doo(self):
         global doo_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global doo_vals
@@ -1640,8 +1676,18 @@ class DDI_Mode(tkinter.Frame):
 
     def update_ddi(self):
         global ddi_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 150<= int(self.arp_entry.get()) <= 500 \
+            and 150<= int(self.pvarp_entry.get()) <= 500:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global ddi_vals
@@ -1862,8 +1908,26 @@ class DDD_Mode(tkinter.Frame):
 
     def update_ddd(self):
         global ddd_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
+            and (int(self.sensed_av_delay_offset_entry.get()) == 0 or -100 <=int(self.sensed_av_delay_offset_entry.get()) <= -10) \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 150<= int(self.arp_entry.get()) <= 500 \
+            and 150<= int(self.pvarp_entry.get()) <= 500 \
+            and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
+            and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
+            and 10 <= int(self.atr_duration_entry.get())<= 2000 \
+            and 1<= int(self.atr_fallback_time_entry.get()) <= 5 :
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global ddd_vals
@@ -2085,8 +2149,15 @@ class AOOR_Mode(tkinter.Frame):
 
     def update_aoor(self):
         global aoor_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoor_vals
@@ -2309,8 +2380,20 @@ class AAIR_Mode(tkinter.Frame):
 
     def update_aair(self):
         global aair_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.arp_entry.get()) <= 500 \
+            and 150<= int(self.pvarp_entry.get()) <= 500 \
+            and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aair_vals
@@ -2533,8 +2616,15 @@ class VOOR_Mode(tkinter.Frame):
 
     def update_voor(self):
         global voor_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global voor_vals
@@ -2757,8 +2847,19 @@ class VVIR_Mode(tkinter.Frame):
 
     def update_vvir(self):
         global vvir_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vvir_vals
@@ -2981,8 +3082,24 @@ class VDDR_Mode(tkinter.Frame):
 
     def update_vddr(self):
         global vddr_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
+            and 10 <= int(self.atr_duration_entry.get())<= 2000 \
+            and 1<= int(self.atr_fallback_time_entry.get()) <= 5 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vddr_vals
@@ -3205,8 +3322,18 @@ class DOOR_Mode(tkinter.Frame):
 
     def update_door(self):
         global door_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global door_vals
@@ -3430,8 +3557,23 @@ class DDIR_Mode(tkinter.Frame):
 
     def update_ddir(self):
         global ddir_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 150<= int(self.arp_entry.get()) <= 500 \
+            and 150<= int(self.pvarp_entry.get()) <= 500 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global ddir_vals
@@ -3662,12 +3804,35 @@ class DDDR_Mode(tkinter.Frame):
 
     def update_dddr(self):
         global dddr_vals
-        if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+        if 30 <= int(self.lower_rate_entry.get()) <= 175 \
+            and 50 <= int(self.upper_rate_entry.get()) <= 175 \
+            and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
+            and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
+            and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
+            and (int(self.sensed_av_delay_offset_entry.get()) == 0 or -100 <=int(self.sensed_av_delay_offset_entry.get()) <= -10) \
+            and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
+            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
+            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 150<= int(self.vrp_entry.get()) <= 500 \
+            and 150<= int(self.arp_entry.get()) <= 500 \
+            and 150<= int(self.pvarp_entry.get()) <= 500 \
+            and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
+            and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
+            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
+            and 10 <= int(self.atr_duration_entry.get())<= 2000 \
+            and 1<= int(self.atr_fallback_time_entry.get()) <= 5 \
+            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 10<= int(self.reaction_time_entry.get())<= 50 \
+            and 1<= int(self.response_factor_entry.get()) <= 16\
+            and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global dddr_vals
-                dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
+                dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
                             self.pvarp_entry.get(),self.pvarp_extension_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
                             self.reaction_time_emrty.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
@@ -3859,10 +4024,10 @@ class DDDR_Mode(tkinter.Frame):
 
         self.recovery_time_label = ttk.Label(self.dddr_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.recovery__time_entry = Entry(self.dddr_window, font=("Arial", 16))
-        self.recovery__time_entry.insert(0, dddr_vals[24])
-        self.recovery__time_label.grid(row = 25, column = 0)
-        self.recovery__time_entry.grid(row = 26, column = 0)
+        self.recovery_time_entry = Entry(self.dddr_window, font=("Arial", 16))
+        self.recovery_time_entry.insert(0, dddr_vals[24])
+        self.recovery_time_label.grid(row = 25, column = 0)
+        self.recovery_time_entry.grid(row = 26, column = 0)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -4056,14 +4221,14 @@ class egram():
 
 
 #Communicating with the Pace Maker
-def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, UR=0,  AT=0, ReactTime=0):
+def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, MSR=0,  AT=0, ReactTime=0, ATS=0):
     if (port == 0):
         return "Pace Maker Not Connected"
     else:
         pace_maker = serial.Serial(port="COM" + str(port), baudrate=115200)
 
     #pace_maker.open()
-    Header = '<2B4H2f3H2f3HfH'
+    Header = '<19i'
     #Header = '<2B4Hf2Hf4HfH3f'
     if (AA == 'OFF'):
         AA = 0
@@ -4071,16 +4236,14 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
         VA = 0
     AA = float(AA)
     VA = float(VA)
-    data = struct.pack(Header, 0x16, 0x55, int(mode),APW, VPW, LR, float(AA), float(VA), ARP, VRP,AVD, float(AS), float(VS), RecovTime, RF, UR,  float(AT), ReactTime)
+    #data = struct.pack(Header, 0x16, 0x55, mode,APW, VPW, LR,AA, VA, ARP, VRP,AVD, AS, VS, RecovTime, RF, MSR,  AT, ReactTime, ATS)
     #print(len(data))
-    #pace_maker.write(struct.pack('<Bi10fH',0x16,0x22,0,1,0,0,0,0,0,0,0,0,0))
+    pace_maker.write(struct.pack('<Bi10fH',0x16,0x22,0,1,0,0,0,0,0,0,0,0,0))
 
-    print(len(data))
-    #time.sleep(0.5)
-    print("1")
+    #print(len(data))
+    time.sleep(0.5)
     serialdata = pace_maker.read(25)
-    print("2")
-    print(serialdata)
+    #print(serialdata)
     #pace_maker.close()
 
 
