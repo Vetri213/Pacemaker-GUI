@@ -5,6 +5,8 @@ from tkinter import *
 from tkinter import ttk,messagebox
 from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends._backend_tk import NavigationToolbar2Tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 import struct
@@ -592,7 +594,7 @@ class pacing_modes(tkinter.Frame):
         self.button17.grid(row=12,column = 0)
         self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=self.DDDRPressed)
         self.button18.grid(row=12,column = 2)
-        self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=show_egram_page)
+        self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
         self.button19.grid(row=13,column = 1)
         self.logout = ttk.Button(master=self, text="Logout", style='Pacing.TButton', command=self.save_and_logout)
         self.logout.grid(row=14,column = 1)
@@ -647,6 +649,8 @@ class pacing_modes(tkinter.Frame):
         DDIR_Mode(master=self.master)
     def DDDRPressed(self):
         DDDR_Mode(master=self.master)
+    def egramPressed(self):
+        egram(master = self.master)
 
 
 class AOO_Mode(tkinter.Frame):
@@ -3895,7 +3899,7 @@ class egram():
     def show_egram_page(self):
         #width, height = 800, 600
         # Add a title
-        egram_label = ttk.Label(egram_window, text="EGRAM", background="black", foreground="white",
+        egram_label = ttk.Label(self.egram_window, text="EGRAM", background="black", foreground="white",
                               font=("Arial", 80))
         egram_label.pack()
 
@@ -3967,12 +3971,17 @@ class egram():
         self.canvas.get_tk_widget().pack()
 
         self.window.update()
-        self.abutton = tkinter.Button(self.window, text="Atrium", font=('calbiri', 12), command=lambda: self.plot_a())
+        self.abutton = tkinter.Button(self.window, text="Atrial", font=('calbiri', 12), command=lambda: self.plot_a())
         self.abutton.place(x=100, y=280)
 
         self.window.update()
-        self.vbutton = tkinter.Button(self.window, text="Ventricle", font=('calbiri', 12), command=lambda: self.plot_v())
+        self.vbutton = tkinter.Button(self.window, text="Ventricular", font=('calbiri', 12), command=lambda: self.plot_v())
         self.vbutton.place(x=self.a.winfo_x() + self.a.winfo_reqwidth() + 20, y=280)
+
+        self.window.update()
+        self.avbutton = tkinter.Button(self.window, text="Atrial/Ventricular", font=('calbiri', 12), command=lambda: self.plot_av())
+        self.avbutton.place(x=self.a.winfo_x() + self.a.winfo_reqwidth() + 20, y=280)
+
         self.window.update()
         self.stopbutton = tkinter.Button(self.window, text="Start/Stop", font=('calbiri', 12), command=lambda: self.conti())
         self.stopbutton.place(x=self.v.winfo_x() + self.v.winfo_reqwidth() + 20, y=280)
@@ -3982,19 +3991,19 @@ class egram():
         self.back_button.pack(pady=20)
 
         # Display the Tkinter window
-        egram_window.mainloop()
+        self.egram_window.mainloop()
         # ser.reset_input_buffer()
         self.plot_vals()
         self.start = time.time()
     def plot_vals(self):
         if (self.cont):
             try:
-                pace_maker = serial.Serial(port="COM" + str(global_.Commu), baudrate=115200)
-                pacemaker.open
+                pacemaker = serial.Serial(port="COM" + str(port), baudrate=115200)
+                pacemaker.open()
                 # pacemaker.reset_input_buffer()
                 pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
                 serialdata = pacemaker.read(16)
-                pacemaker.close
+                pacemaker.close()
             except:
                 self.window.destroy()
                 messagebox.showinfo("Message", "Pacemaker not connected")
@@ -4018,8 +4027,7 @@ class egram():
             self.linesV.set_xdata(self.TimeData)
             self.linesV.set_ydata(self.VentricleData)
             self.canvas.draw()
-
-    self.window.after(5, self.plot)
+            self.window.after(5,self.plot)
 
     def plot_a(self):
         self.aS = not self.aS
@@ -4033,6 +4041,10 @@ class egram():
     def plot_v(self):
         self.vS = not self.vS
         self.plotV.set_visible(self.vS)
+
+    def plot_av(self):
+        self.avS = not self.avS
+        self.plot_av.set_visible(self.avS)
 
     #-------------------------------------------------------------------------------------------
 
@@ -4077,25 +4089,25 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
     mode_pacemaker = struct.unpack('B', serialdata[16:17])
     LR_pacemaker = struct.unpack('i', serialdata[17:21])
     APW_pacemaker = struct.unpack('f', serialdata[21:25])
-    #VPW_pacemaker = struct.unpack('f', serialdata[23:27])
+    VPW_pacemaker = struct.unpack('f', serialdata[23:27])
     print(mode_pacemaker)
     print(LR_pacemaker)
     print(APW_pacemaker)
-    #print(VPW_pacemaker)
-    # VA_pacemaker = struct.unpack('f', serialdata[24:28])
-    # ARP_pacemaker = struct.unpack('H', serialdata[28:30])
-    # VRP_pacemaker = struct.unpack('H', serialdata[30:32])
-    # AA_pacemaker = struct.unpack('f', serialdata[32:36])
-    # RecovTime_pacemaker = struct.unpack('H', serialdata[36:38])
-    # RF_pacemaker = struct.unpack('H', serialdata[38:40])
-    # MSR_pacemaker = struct.unpack('H', serialdata[40:42])
-    # AVD_pacemaker = struct.unpack('H', serialdata[42:44])
-    # AT_pacemaker = struct.unpack('f', serialdata[44:48])
-    # ReactTime_pacemaker = struct.unpack('H', serialdata[48:50])
-    # ATS_pacemaker = struct.unpack('f', serialdata[50:54])
-    # VS_pacemaker = struct.unpack('f', serialdata[54:58])
-    # print(mode_pacemaker[0], LR_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AA_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], MSR_pacemaker[0],
-     #     AVD_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0], ATS_pacemaker[0], VS_pacemaker[0])
+    print(VPW_pacemaker)
+    VA_pacemaker = struct.unpack('f', serialdata[24:28])
+    ARP_pacemaker = struct.unpack('H', serialdata[28:30])
+    VRP_pacemaker = struct.unpack('H', serialdata[30:32])
+    AA_pacemaker = struct.unpack('f', serialdata[32:36])
+    RecovTime_pacemaker = struct.unpack('H', serialdata[36:38])
+    RF_pacemaker = struct.unpack('H', serialdata[38:40])
+    MSR_pacemaker = struct.unpack('H', serialdata[40:42])
+    AVD_pacemaker = struct.unpack('H', serialdata[42:44])
+    AT_pacemaker = struct.unpack('f', serialdata[44:48])
+    ReactTime_pacemaker = struct.unpack('H', serialdata[48:50])
+    ATS_pacemaker = struct.unpack('f', serialdata[50:54])
+    VS_pacemaker = struct.unpack('f', serialdata[54:58])
+    print(mode_pacemaker[0], LR_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AA_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], MSR_pacemaker[0],
+         AVD_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0], ATS_pacemaker[0], VS_pacemaker[0])
     if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LR and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
         0] == ARP and VRP_pacemaker[0] == VRP
             and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and MSR_pacemaker[0] == MSR and AVD_pacemaker[
