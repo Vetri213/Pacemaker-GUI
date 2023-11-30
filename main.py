@@ -179,8 +179,7 @@ class Register(tkinter.Frame):
             elif self.is_username_taken(username):
                 self.changing_label.configure(text="Username is already taken")
             else:
-                default_vals = "{30,50,0,0.05},{30,50,0,0.05},{30,50,0,0.05,0.25,150,150,0,0},{30,50,0,0.05,0.35,150,0,0},{30,50,0,0.05,0.25,150,150},{30,50,0,0.05,0.25,150},{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1},{30,50,70,0,0,0.05,0.05},{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150},{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1},{30,50,50,0,0.05,0,10,1,2},{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2},{30,50,50,0,0.05,0,10,1,2},{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2},{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2},{30,50,50,70,0,0,0.05,0.05,0,10,1,2},{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2},{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
-                #"{30,50,0,0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
+                default_vals = "{30,50,0,0.05}{30,50,0,0.05}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
                 # Creating a New Entry to be added to the file of Users (in the same format)
                 new_entry = username + "|" + password + "|" + default_vals + "\n" #{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
                 # Opening File in Append Mode (So as not to delete other users)
@@ -669,7 +668,7 @@ class AOO_Mode(tkinter.Frame):
     def update_aoo(self):
         global aoo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= int(self.atrial_pulse_width_entry.get()) <= 1.9:
+                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoo_vals
@@ -765,12 +764,12 @@ class AAI_Mode(tkinter.Frame):
     def update_aai(self):
         global aai_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 and 150<= int(arp.entry.get()) <= 500 \
-                and 150<= int(pvarp.entry.get()) <= 500 and (int(self.hysteresis.get() )== 0 or 30<= int(self.hysteresis) <= 175) and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25:
+                and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 and 150<= int(self.arp_entry.get()) <= 500 \
+                and 150<= int(self.pvarp_entry.get()) <= 500 and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aai_vals
-                aai_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.arp_entry.get(),self.pvarp_label.get(),self.hysteresis_entry.get(),self.rate_smooth_entry.get()]
+                aai_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.arp_entry.get(),self.pvarp_label.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get()]
 
 
         else:
@@ -847,10 +846,10 @@ class AAI_Mode(tkinter.Frame):
 
         self.rate_smooth_label = ttk.Label(self.aai_window, text="Rate Smooth:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.rate_smooth_entry = Entry(self.aai_window, font=("Arial", 16))
-        self.rate_smooth_entry.insert(0, aai_vals[8])
+        self.rate_smoothing_entry = Entry(self.aai_window, font=("Arial", 16))
+        self.rate_smoothing_entry.insert(0, aai_vals[8])
         self.rate_smooth_label.grid(row = 9, column = 0)
-        self.rate_smooth_entry.grid(row = 9, column = 1)
+        self.rate_smoothing_entry.grid(row = 9, column = 1)
         #    ventricular_amplitude_label = ttk.Label(self, text="Ventricular Amplitude:", background="black", foreground="white", font=("Arial", 16))
         #    ventricular_amplitude_entry = Entry(self, font=("Arial", 16))
         #    ventricular_amplitude_label.grid(row = 0, column = 1)
@@ -895,7 +894,7 @@ class VOO_Mode(tkinter.Frame):
         global voo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
@@ -988,17 +987,17 @@ class VVI_Mode(tkinter.Frame):
         global vvi_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500 \
             and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
             and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25:
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vvi_vals
-                vvi_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.hysteresis_entry.get(),self.rate_smooth_entry.get()]
+                vvi_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get()]
 
 
         else:
@@ -1068,10 +1067,10 @@ class VVI_Mode(tkinter.Frame):
 
         self.rate_smooth_label = ttk.Label(self.vvi_window, text="Rate Smooth:", background="black",
                                              foreground="white", font=("Arial", 16))
-        self.rate_smooth_entry = Entry(self.vvi_window, font=("Arial", 16))
-        self.rate_smooth_entry.insert(0, vvi_vals[7])
+        self.rate_smoothing_entry = Entry(self.vvi_window, font=("Arial", 16))
+        self.rate_smoothing_entry.insert(0, vvi_vals[7])
         self.rate_smooth_label.grid(row = 7, column = 1)
-        self.rate_smooth_entry.grid(row = 8, column = 1)
+        self.rate_smoothing_entry.grid(row = 8, column = 1)
         # Style of Buttons
         self.style = ttk.Style()
         self.style.theme_use('alt')
@@ -1204,7 +1203,7 @@ class AAT_Mode(tkinter.Frame):
 
         # Create a "Save" button
         self.save_button = ttk.Button(master=self.aat_window, text="Save", style='TButton', command=self.update_aat)
-        self.save_button.grid(row = 9, column = 1)
+        self.save_button.grid(row = 9, column = 0)
 
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.aat_window, text="Back to Pacing Modes", command=self.aat_window.destroy)
@@ -1218,7 +1217,7 @@ class VVT_Mode(tkinter.Frame):
         global vvt_vals
         if  30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500:
@@ -1313,12 +1312,12 @@ class VDD_Mode(tkinter.Frame):
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
             and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
             and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500 \
             and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
             and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
             and 10 <= int(self.atr_duration_entry.get())<= 2000 \
             and 1<= int(self.atr_fallback_time_entry.get()) <= 5 :
@@ -1462,7 +1461,7 @@ class DOO_Mode(tkinter.Frame):
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
             and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
@@ -1695,7 +1694,7 @@ class DDI_Mode(tkinter.Frame):
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
             and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
@@ -1929,7 +1928,7 @@ class DDD_Mode(tkinter.Frame):
             and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
             and (int(self.sensed_av_delay_offset_entry.get()) == 0 or -100 <=int(self.sensed_av_delay_offset_entry.get()) <= -10) \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
@@ -1939,7 +1938,7 @@ class DDD_Mode(tkinter.Frame):
             and 150<= int(self.pvarp_entry.get()) <= 500 \
             and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
             and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
             and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
             and 10 <= int(self.atr_duration_entry.get())<= 2000 \
             and 1<= int(self.atr_fallback_time_entry.get()) <= 5 :
@@ -2007,8 +2006,8 @@ class DDD_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.sensed_av_delay_offset_entry = Entry(self.ddd_window, font=("Arial", 16))
         self.sensed_av_delay_offset_entry.insert(0, ddd_vals[4])
-        self.sensed_av_delay_offset.grid(row = 5, column = 0)
-        self.sensed_av_delay_offset.grid(row = 6, column = 0)
+        self.sensed_av_delay_offset_label.grid(row = 5, column = 0)
+        self.sensed_av_delay_offset_entry.grid(row = 6, column = 0)
 
         self.atrial_amplitude_label = ttk.Label(self.ddd_window, text="Atrial Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
@@ -2169,7 +2168,7 @@ class AOOR_Mode(tkinter.Frame):
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -2177,7 +2176,7 @@ class AOOR_Mode(tkinter.Frame):
             if (result):
                 global aoor_vals
                 aoor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),
-                            self.acticity_threshold_entry.get(),
+                            self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -2404,8 +2403,8 @@ class AAIR_Mode(tkinter.Frame):
             and 150<= int(self.arp_entry.get()) <= 500 \
             and 150<= int(self.pvarp_entry.get()) <= 500 \
             and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -2413,7 +2412,7 @@ class AAIR_Mode(tkinter.Frame):
             if (result):
                 global aair_vals
                 aair_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.arp_entry.get(),self.pvarp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
-                            self.acticity_threshold_entry.get(),
+                            self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -2634,9 +2633,9 @@ class VOOR_Mode(tkinter.Frame):
         if 30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -2644,7 +2643,7 @@ class VOOR_Mode(tkinter.Frame):
             if (result):
                 global voor_vals
                 voor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),
-                            self.acticity_threshold_entry.get(),
+                            self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -2865,13 +2864,13 @@ class VVIR_Mode(tkinter.Frame):
         if 30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500 \
             and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -2879,7 +2878,7 @@ class VVIR_Mode(tkinter.Frame):
             if (result):
                 global vvir_vals
                 vvir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
-                            self.acticity_threshold_entry.get(),
+                            self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -3102,16 +3101,16 @@ class VDDR_Mode(tkinter.Frame):
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
             and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
             and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500 \
             and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
             and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
             and 10 <= int(self.atr_duration_entry.get())<= 2000 \
             and 1<= int(self.atr_fallback_time_entry.get()) <= 5 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -3120,7 +3119,7 @@ class VDDR_Mode(tkinter.Frame):
                 global vddr_vals
                 vddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),
-                            self.pvarp_extension_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
+                            self.pvarp_extension_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -3342,10 +3341,10 @@ class DOOR_Mode(tkinter.Frame):
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
             and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -3354,7 +3353,7 @@ class DOOR_Mode(tkinter.Frame):
                 global door_vals
                 door_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),
                              self.atrial_amplitude_entry.get(),
-                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.acticity_threshold_entry.get(),
+                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.activity_threshold_entry.get(),
                              self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -3577,7 +3576,7 @@ class DDIR_Mode(tkinter.Frame):
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
             and 70 <= int(self.fixed_av_delay_entry.get()) <= 300 \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
@@ -3585,7 +3584,7 @@ class DDIR_Mode(tkinter.Frame):
             and 150<= int(self.vrp_entry.get()) <= 500 \
             and 150<= int(self.arp_entry.get()) <= 500 \
             and 150<= int(self.pvarp_entry.get()) <= 500 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
@@ -3594,7 +3593,7 @@ class DDIR_Mode(tkinter.Frame):
                 global ddir_vals
                 ddir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
-                            self.pvarp_entry.get(),self.acticity_threshold_entry.get(),
+                            self.pvarp_entry.get(),self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -3826,7 +3825,7 @@ class DDDR_Mode(tkinter.Frame):
             and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
             and (int(self.sensed_av_delay_offset_entry.get()) == 0 or -100 <=int(self.sensed_av_delay_offset_entry.get()) <= -10) \
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
-            and 0.0 <= float(self.ventriular_amplitude_entry.get()) <= 7 \
+            and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
@@ -3836,20 +3835,20 @@ class DDDR_Mode(tkinter.Frame):
             and 150<= int(self.pvarp_entry.get()) <= 500 \
             and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
             and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
-            and 0.0 <= float(self.rate_smooth_entry.get()) <= 0.25 \
+            and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
             and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
             and 10 <= int(self.atr_duration_entry.get())<= 2000 \
             and 1<= int(self.atr_fallback_time_entry.get()) <= 5 \
-            and 0 <= int(self.acticity_threshold_entry.get()) <= 6 \
+            and 0 <= int(self.activity_threshold_entry.get()) <= 6 \
             and 10<= int(self.reaction_time_entry.get())<= 50 \
             and 1<= int(self.response_factor_entry.get()) <= 16\
             and 2 <=int(self.recovery_time_entry.get()) <= 16:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global dddr_vals
-                dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
+                dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
-                            self.pvarp_entry.get(),self.pvarp_extension_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
+                            self.pvarp_entry.get(),self.pvarp_extension_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
@@ -3909,8 +3908,8 @@ class DDDR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.sensed_av_delay_offset_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.sensed_av_delay_offset_entry.insert(0, dddr_vals[5])
-        self.sensed_av_delay_offset.grid(row = 5, column = 1)
-        self.sensed_av_delay_offset.grid(row = 6, column = 1)
+        self.sensed_av_delay_offset_label.grid(row = 5, column = 1)
+        self.sensed_av_delay_offset_entry.grid(row = 6, column = 1)
 
         self.atrial_amplitude_label = ttk.Label(self.dddr_window, text="Atrial Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
