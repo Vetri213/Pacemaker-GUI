@@ -4178,29 +4178,41 @@ class egram(tkinter.Frame):
                 pacemaker.open()
                 # pacemaker.reset_input_buffer()
                 if (self.mode == 0):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=aoo_vals[0], URL=aoo_vals[1], AA=aoo_vals[2], APW=aoo_vals[3]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=aoo_vals[0], URL=aoo_vals[1], AA=aoo_vals[2], APW=aoo_vals[3]))
                 elif (self.mode == 1):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=voo_vals[0], URL=voo_vals[1], VA=voo_vals[2], VPW=voo_vals[3]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=voo_vals[0], URL=voo_vals[1], VA=voo_vals[2], VPW=voo_vals[3]))
                 elif (self.mode == 2):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=aai_vals[0], URL=aai_vals[1], AA=aai_vals[2], APW=aai_vals[3], AS=aai_vals[4], ARP=aai_vals[5], PVARP=aai_vals[6], H=aai_vals[7], RS=aai_vals[8]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=aai_vals[0], URL=aai_vals[1], AA=aai_vals[2], APW=aai_vals[3], AS=aai_vals[4], ARP=aai_vals[5], PVARP=aai_vals[6], H=aai_vals[7], RS=aai_vals[8]))
                 elif (self.mode == 3):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=vvi_vals[0], URL=vvi_vals[1], VA=vvi_vals[2], VPW=vvi_vals[3], VS=vvi_vals[4], VRP=vvi_vals[5], PVARPext=vvi_vals[6], H=vvi_vals[7],RS=vvi_vals[8]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=vvi_vals[0], URL=vvi_vals[1], VA=vvi_vals[2], VPW=vvi_vals[3], VS=vvi_vals[4], VRP=vvi_vals[5], PVARPext=vvi_vals[6], H=vvi_vals[7],RS=vvi_vals[8]))
                 elif (self.mode == 4):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=aat_vals[0], URL=aat_vals[1], AA=aat_vals[2], APW=aat_vals[3], AS=aat_vals[4], ARP=aat_vals[5], PVARP=aat_vals[6]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=aat_vals[0], URL=aat_vals[1], AA=aat_vals[2], APW=aat_vals[3], AS=aat_vals[4], ARP=aat_vals[5], PVARP=aat_vals[6]))
                 elif (self.mode == 5):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=vvt_vals[0], URL=vvt_vals[1], VA=vvt_vals[2], VPW=vvt_vals[3], VS=vvt_vals[4], VRP=vvt_vals[5]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vvt_vals[0], URL=vvt_vals[1], VA=vvt_vals[2], VPW=vvt_vals[3], VS=vvt_vals[4], VRP=vvt_vals[5]))
                 elif (self.mode == 6):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=vdd_vals[0], URL=vdd_vals[1], FAVD=vdd_vals[2],DAVD=vdd_vals[3], VA=vdd_vals[4],  VPW=vdd_vals[5], VS=vdd_vals[6], VRP=vdd_vals[7],PVARPext=vdd_vals[8], RS=vdd_vals[9], FBM=vdd_vals[10], ATRD=vdd_vals[11], ATRFB=vdd_vals[12]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vdd_vals[0], URL=vdd_vals[1], FAVD=vdd_vals[2],DAVD=vdd_vals[3], VA=vdd_vals[4],  VPW=vdd_vals[5], VS=vdd_vals[6], VRP=vdd_vals[7],PVARPext=vdd_vals[8], RS=vdd_vals[9], FBM=vdd_vals[10], ATRD=vdd_vals[11], ATRFB=vdd_vals[12]))
                 elif (self.mode == 7):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=doo_vals[0], URL=doo_vals[1], FAVD=doo_vals[2], AA=doo_vals[3],VA=doo_vals[4], APW=doo_vals[5], VPW=doo_vals[6]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=doo_vals[0], URL=doo_vals[1], FAVD=doo_vals[2], AA=doo_vals[3],VA=doo_vals[4], APW=doo_vals[5], VPW=doo_vals[6]))
                 elif (self.mode == 8):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=ddi_vals[0], URL=ddi_vals[1], FAVD=ddi_vals[2], AA=ddi_vals[3],VA=ddi_vals[4], APW=ddi_vals[5], VPW=ddi_vals[6], AS=ddi_vals[7], VS=ddi_vals[8], VRP=ddi_vals[9], ARP=ddi_vals[10], PVARP=ddi_vals[11]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=ddi_vals[0], URL=ddi_vals[1], FAVD=ddi_vals[2], AA=ddi_vals[3],VA=ddi_vals[4], APW=ddi_vals[5], VPW=ddi_vals[6], AS=ddi_vals[7], VS=ddi_vals[8], VRP=ddi_vals[9], ARP=ddi_vals[10], PVARP=ddi_vals[11]))
                 elif (self.mode == 9):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=ddd_vals[0], URL=ddd_vals[1], FAVD=ddd_vals[2], DAVD=ddd_vals[3],SAVD=ddd_vals[4], AA=ddd_vals[5],VA=ddd_vals[5], APW=ddd_vals[6], VPW=ddd_vals[7], AS=ddd_vals[8], VS=ddd_vals[9], VRP=ddd_vals[10], ARP=ddd_vals[11], PVARP=ddd_vals[12], PVARPext=ddd_vals[13], H=ddd_vals[14], RD=ddd_vals[15], ATRFM=ddd_vals[16], ATRD=ddd_vals[17], ATRFB=ddd_vals[18]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=ddd_vals[0], URL=ddd_vals[1], FAVD=ddd_vals[2], DAVD=ddd_vals[3],SAVD=ddd_vals[4], AA=ddd_vals[5],VA=ddd_vals[5], APW=ddd_vals[6], VPW=ddd_vals[7], AS=ddd_vals[8], VS=ddd_vals[9], VRP=ddd_vals[10], ARP=ddd_vals[11], PVARP=ddd_vals[12], PVARPext=ddd_vals[13], H=ddd_vals[14], RS=ddd_vals[15], ATRFM=ddd_vals[16], ATRD=ddd_vals[17], ATRFB=ddd_vals[18]))
                 elif (self.mode == 10):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=aoor_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=aoor_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8]))
                 elif (self.mode == 11):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=aair_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], AS=, ARP=, PVARP=, H=, RS=,  RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8]))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=aair_vals[0], URL=aair_vals[1], MSR=aair_vals[2], AA=aair_vals[3], APW=aair_vals[4], AS=aair_vals[5], ARP=aair_vals[6], PVARP=aair_vals[7], H=aair_vals[8], RS=aair_vals[9], ACTT=aair_vals[10], RT=aair_vals[11], RF=aair_vals[12], RecT=aair_vals[13]))
+                elif (self.mode == 12):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=voor_vals[0], URL=voor_vals[1], MSR=voor_vals[2], VA=voor_vals[3], VPW=voor_vals[4], ACTT=voor_vals[5], RT=voor_vals[6], RF=voor_vals[7], RecT=voor_vals[8]))
+                elif (self.mode == 13):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vvir_vals[0], URL=vvir_vals[1], MSR=vvir_vals[2], VA=vvir_vals[3], VPW=vvir_vals[4],VS=vvir_vals[5], VRP=vvir_vals[6], H=vvir_vals[7], RS=vvir_vals[8], ACTT=vvir_vals[9], RT=vvir_vals[10], RF=vvir_vals[11], RecT=vvir_vals[12]))
+                elif (self.mode == 14):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vddr_vals[0], URL=vddr_vals[1], MSR=vddr_vals[2], FAVD=vddr_vals[3], DAVD=vddr_vals[4], VA=vddr_vals[5], VPW=vddr_vals[6],VS=vddr_vals[7], VRP=vddr_vals[8], PVARPext=vddr_vals[9], RS=vddr_vals[10], FBM= vddr_vals[11],ATRD=vddr_vals[12], ATRFB=vddr_vals[13], ACTT=vddr_vals[14], RT=vddr_vals[15], RF=vddr_vals[16], RecT=vddr_vals[17]))
+                elif (self.mode == 15):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=door_vals[0], URL=door_vals[1], MSR=door_vals[2], FAVD=door_vals[3], AA=door_vals[4],VA=door_vals[5],APW=door_vals[6], VPW=door_vals[7],ACTT=door_vals[8], RT=door_vals[9], RF=door_vals[10], RecT=door_vals[11]))
+                elif (self.mode == 16):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=ddir_vals[0], URL=ddir_vals[1], MSR=ddir_vals[2], FAVD=ddir_vals[3], AA=ddir_vals[4],VA=ddir_vals[5],APW=ddir_vals[6], VPW=ddir_vals[7], AS=ddir_vals[8], VS=ddir_vals[9], VRP=ddir_vals[10], ARP=ddir_vals[11], PVARP=ddir_vals[12], ACTT=ddir_vals[13], RT=ddir_vals[14], RF=ddir_vals[15], RecT=ddir_vals[16]))
+                elif (self.mode == 17):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=dddr_vals[0], URL=dddr_vals[1], MSR=dddr_vals[2], FAVD=dddr_vals[3], DAVD=dddr_vals[4], SAVD=dddr_vals[5], AA=dddr_vals[6],VA=dddr_vals[7],APW=dddr_vals[8], VPW=dddr_vals[9], AS=dddr_vals[10], VS=dddr_vals[11], VRP=dddr_vals[12], ARP=dddr_vals[13], PVARP=dddr_vals[14], PVARPext=dddr_vals[15], H=dddr_vals[16], RS=dddr_vals[17], FBM=dddr_vals[18], ATRD=dddr_vals[19], ATRFB=dddr_vals[20], ACTT=dddr_vals[21], RT=dddr_vals[22], RF=dddr_vals[23], RecT=dddr_vals[24]))
 
 
                 serialdata = pacemaker.read(16)
