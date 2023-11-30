@@ -179,7 +179,8 @@ class Register(tkinter.Frame):
             elif self.is_username_taken(username):
                 self.changing_label.configure(text="Username is already taken")
             else:
-                default_vals = "{30,50,0,0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,V-Low,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,V-Low,10,1,2}{30,50,50,0,0.05,V-Low,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,V-Low,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,V-Low,10,1,2}{30,50,50,70,0,0,0.05,0.05,V-Low,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,V-Low,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,V-Low,10,1,2}"#"{30,50,0,0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
+                default_vals = "{30,50,0,0.05},{30,50,0,0.05},{30,50,0,0.05,0.25,150,150,0,0},{30,50,0,0.05,0.35,150,0,0},{30,50,0,0.05,0.25,150,150},{30,50,0,0.05,0.25,150},{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1},{30,50,70,0,0,0.05,0.05},{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150},{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1},{30,50,50,0,0.05,0,10,1,2},{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2},{30,50,50,0,0.05,0,10,1,2},{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2},{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2},{30,50,50,70,0,0,0.05,0.05,0,10,1,2},{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2},{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
+                #"{30,50,0,0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
                 # Creating a New Entry to be added to the file of Users (in the same format)
                 new_entry = username + "|" + password + "|" + default_vals + "\n" #{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
                 # Opening File in Append Mode (So as not to delete other users)
@@ -328,7 +329,7 @@ class pacing_modes(tkinter.Frame):
 
     #Globalizing the variables to be used by all the modes
     def globalize_vals(self):
-        aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,aat_vals_str,vvt_vals_str,vdd_vals_str,doo_vals_str,ddi_vals_str,ddd_vals_str,ddd_vals_str,aoor_vals_str,aair_vals_str,voor_vals_str,vvir_vals_str,vddr_vals_str,door_vals_str,ddir_vals_str,dddr_vals_str = self.vals.split("}")
+        aoo_vals_str,voo_vals_str,aai_vals_str,vvi_vals_str,aat_vals_str,vvt_vals_str,vdd_vals_str,doo_vals_str,ddi_vals_str,ddd_vals_str,aoor_vals_str,aair_vals_str,voor_vals_str,vvir_vals_str,vddr_vals_str,door_vals_str,ddir_vals_str,dddr_vals_str,temp = self.vals.split("}")
         aoo_vals_str = aoo_vals_str.strip("{")
         voo_vals_str = voo_vals_str.strip("{")
         aai_vals_str = aai_vals_str.strip("{")
@@ -1331,15 +1332,15 @@ class VDD_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.vdd_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, vdd_vals[1])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         self.dynamic_av_delay_label = ttk.Label(self.vdd_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.vdd_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, vdd_vals[1])
-        self.dynamic_av_delay.grid(row = 3, column = 1)
-        self.dynamic_av_delay.grid(row = 4, column = 1)
+        self.dynamic_av_delay_label.grid(row = 3, column = 1)
+        self.dynamic_av_delay_entry.grid(row = 4, column = 1)
 
         self.ventricular_amplitude_label = ttk.Label(self.vdd_window, text="Ventricular Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
@@ -1477,8 +1478,8 @@ class DOO_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.doo_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, doo_vals[2])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         # self.dynamic_av_delay_label = ttk.Label(self.doo_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -1699,8 +1700,8 @@ class DDI_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.ddi_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, ddi_vals[2])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         # self.dynamic_av_delay_label = ttk.Label(self.ddi_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -1922,15 +1923,15 @@ class DDD_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.ddd_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, ddd_vals[2])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         self.dynamic_av_delay_label = ttk.Label(self.ddd_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.ddd_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, ddd_vals[3])
-        self.dynamic_av_delay.grid(row = 3, column = 1)
-        self.dynamic_av_delay.grid(row = 4, column = 1)
+        self.dynamic_av_delay_label.grid(row = 3, column = 1)
+        self.dynamic_av_delay_entry.grid(row = 4, column = 1)
 
         self.sensed_av_delay_offset_label = ttk.Label(self.ddd_window, text="Sensed AV Delay Offset:", background="black", foreground="white",
                                      font=("Arial", 16))
@@ -2137,8 +2138,8 @@ class AOOR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.aoor_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, aoor_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.aoor_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -2585,8 +2586,8 @@ class VOOR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.voor_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, voor_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.voor_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -2809,8 +2810,8 @@ class VVIR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.vvir_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, vvir_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.vvir_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -3013,7 +3014,7 @@ class VDDR_Mode(tkinter.Frame):
         # Add a title
         self.vddr_label = ttk.Label(self.vddr_window, text="VDDR Mode Information", background="black", foreground="white",
                               font=("Arial", 20))
-        self.vddr_label.pgrid(row = 0, column = 0, columnspan = 19, pady = 10, padx = 10)
+        self.vddr_label.grid(row = 0, column = 0, columnspan = 19, pady = 10, padx = 10)
 
         # Add the parameter here
         self.lower_rate_label = ttk.Label(self.vddr_window, text="Lower Rate Limit:", background="black", foreground="white",
@@ -3034,23 +3035,23 @@ class VDDR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.vddr_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, vddr_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.vddr_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.vddr_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, vddr_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         self.dynamic_av_delay_label = ttk.Label(self.vddr_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.vddr_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, vddr_vals[4])
-        self.dynamic_av_delay.grid(row = 5, column = 0)
-        self.dynamic_av_delay.grid(row = 6, column = 0)
+        self.dynamic_av_delay_label.grid(row = 5, column = 0)
+        self.dynamic_av_delay_entry.grid(row = 6, column = 0)
 
         # self.sensed_av_delay_offset_label = ttk.Label(self.vddr_window, text="Sensed AV Delay Offset:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -3258,16 +3259,16 @@ class DOOR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.door_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, door_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.door_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.door_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, door_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         # self.dynamic_av_delay_label = ttk.Label(self.door_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -3490,16 +3491,16 @@ class DDIR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.ddir_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, ddir_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.ddir_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.ddir_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, ddir_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         # self.dynamic_av_delay_label = ttk.Label(self.ddir_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -3715,23 +3716,23 @@ class DDDR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, dddr_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.dddr_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, dddr_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         self.dynamic_av_delay_label = ttk.Label(self.dddr_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, dddr_vals[4])
-        self.dynamic_av_delay.grid(row = 5, column = 0)
-        self.dynamic_av_delay.grid(row = 6, column = 0)
+        self.dynamic_av_delay_label.grid(row = 5, column = 0)
+        self.dynamic_av_delay_entry.grid(row = 6, column = 0)
 
         self.sensed_av_delay_offset_label = ttk.Label(self.dddr_window, text="Sensed AV Delay Offset:", background="black", foreground="white",
                                      font=("Arial", 16))
