@@ -179,7 +179,7 @@ class Register(tkinter.Frame):
             elif self.is_username_taken(username):
                 self.changing_label.configure(text="Username is already taken")
             else:
-                default_vals = "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}"
+                default_vals = "{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
                 # Creating a New Entry to be added to the file of Users (in the same format)
                 new_entry = username + "|" + password + "|" + default_vals + "\n" #{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
                 # Opening File in Append Mode (So as not to delete other users)
@@ -274,9 +274,17 @@ class pacing_modes(tkinter.Frame):
         # Check if there is a connection to the DCM and if so, which port
     def check_connection(self):
         global port
-        port = 3 #4
+        try:
+            ser = serial.Serial(port="COM3", baudrate=115200)
+            port = 3 #4
+        except:
+            try:
+                ser = serial.Serial(port="COM4", baudrate=115200)
+                port = 3  # 4
+            except:
+                port = 0
         port_candidates = "COM3"
-        ser = serial.Serial(port="COM3", baudrate=115200)
+
         #ser.open()  # Open the serial port
         # global port
         # for port_candidate in port_candidates:
@@ -2354,8 +2362,8 @@ class AAIR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.aair_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, aair_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.aair_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -3881,27 +3889,33 @@ class DDDR_Mode(tkinter.Frame):
         self.back_button.grid(row = 27, column = 1)
 
 
-class egram():
-    def __init__(self):
+class egram(tkinter.Frame):
+    def __init__(self, master=None):
         self.AtrialData = np.array([])
         self.VentricleData = np.array([])
         self.TimeData = np.array([])
-
-        self.show_egram_page()
+        self.cont = True
+        self.vS = True
+        self.aS = True
+        self.avS = True
         self.egram_window = Tk()
-        self.egram_window.attributes('-fullscreen', True)
+        self.egram_window.geometry('%dx%d+0+0' % (width, height))
         self.egram_window.title("EGRAM")
         self.egram_window.configure(background="black")
+        self.show_egram_page()
 
         self.egram_window.mainloop()
 
 
     def show_egram_page(self):
+
+
+
         #width, height = 800, 600
         # Add a title
-        egram_label = ttk.Label(self.egram_window, text="EGRAM", background="black", foreground="white",
+        self.egram_label = ttk.Label(self.egram_window, text="EGRAM", background="black", foreground="white",
                               font=("Arial", 80))
-        egram_label.pack()
+        self.egram_label.pack()
 
         # Style of Buttons
         style = ttk.Style()
@@ -3911,6 +3925,13 @@ class egram():
                         focuscolor='none', font=('American typewriter', 20))
         # When Hovering
         style.map('TButton', background=[('active', 'teal')])
+
+        # Create a "back" button to return to "Pacing mode"
+        self.back_button = ttk.Button(master=self.egram_window, text="Back to Pacing Modes",
+                                      command=self.egram_window.destroy)
+        self.back_button.pack()
+
+
 
         # Sample data for time and voltage
         # time = np.linspace(0, 1, 1000)  # 1 second, 1000 points
@@ -3951,44 +3972,41 @@ class egram():
         self.AVPlot.set_title('Atrium/Ventricle Internal Electrogram', fontsize=12)
         self.AVPlot.set_xlabel("Time (sec)", fontsize=10)
         self.AVPlot.set_ylabel("Voltage (V)", fontsize=10)
-        self.AtriumPlot.set_ylim(-6, 6)
-        self.AtriumPlot.set_xlim(0, 16)
-        self.linesA = self.AtriumPlot.plot([], [])[0]
+        self.AVPlot.set_ylim(-6, 6)
+        self.AVPlot.set_xlim(0, 16)
+        self.linesAV = self.AtriumPlot.plot([], [])[0]
 
         # Tkinter canvas
         # Matplotlib figure
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
+        self.canvas = FigureCanvasTkAgg(self.fig,master = self.egram_window)
         self.canvas.draw()
 
         # placing the canvas on the Tkinter window
         self.canvas.get_tk_widget().pack()
 
         # creating the Matplotlib toolbar
-        self.toolbar = NavigationToolbar2Tk(self.canvas, self.window)
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.egram_window)
         self.toolbar.update()
 
         # placing the toolbar on the Tkinter window
         self.canvas.get_tk_widget().pack()
 
-        self.window.update()
-        self.abutton = tkinter.Button(self.window, text="Atrial", font=('calbiri', 12), command=lambda: self.plot_a())
+        self.egram_window.update()
+        self.abutton = tkinter.Button(self.egram_window, text="Atrial", font=('calbiri', 12), command=lambda: self.plot_a())
         self.abutton.place(x=100, y=280)
 
-        self.window.update()
-        self.vbutton = tkinter.Button(self.window, text="Ventricular", font=('calbiri', 12), command=lambda: self.plot_v())
-        self.vbutton.place(x=self.a.winfo_x() + self.a.winfo_reqwidth() + 20, y=280)
+        self.egram_window.update()
+        self.vbutton = tkinter.Button(self.egram_window, text="Ventricular", font=('calbiri', 12), command=lambda: self.plot_v())
+        self.vbutton.place(x=self.abutton.winfo_x() + self.abutton.winfo_reqwidth() + 20, y=280)
 
-        self.window.update()
-        self.avbutton = tkinter.Button(self.window, text="Atrial/Ventricular", font=('calbiri', 12), command=lambda: self.plot_av())
-        self.avbutton.place(x=self.a.winfo_x() + self.a.winfo_reqwidth() + 20, y=280)
+        self.egram_window.update()
+        self.avbutton = tkinter.Button(self.egram_window, text="Atrial/Ventricular", font=('calbiri', 12), command=lambda: self.plot_av())
+        self.avbutton.place(x=self.abutton.winfo_x() + self.abutton.winfo_reqwidth() + 20, y=280)
 
-        self.window.update()
-        self.stopbutton = tkinter.Button(self.window, text="Start/Stop", font=('calbiri', 12), command=lambda: self.conti())
-        self.stopbutton.place(x=self.v.winfo_x() + self.v.winfo_reqwidth() + 20, y=280)
-        self.window.update()
-        # Create a "back" button to return to "Pacing mode"
-        self.back_button = ttk.Button(self.egram_window, text="Back to Pacing Modes", command=self.egram_window.destroy)
-        self.back_button.pack(pady=20)
+        self.egram_window.update()
+        self.stopbutton = tkinter.Button(self.egram_window, text="Start/Stop", font=('calbiri', 12), command=lambda: self.conti())
+        self.stopbutton.place(x=self.vbutton.winfo_x() + self.vbutton.winfo_reqwidth(), y=320)
+        self.egram_window.update()
 
         # Display the Tkinter window
         self.egram_window.mainloop()
@@ -4005,7 +4023,7 @@ class egram():
                 serialdata = pacemaker.read(16)
                 pacemaker.close()
             except:
-                self.window.destroy()
+                self.egram_window.destroy()
                 messagebox.showinfo("Message", "Pacemaker not connected")
             a = -6.6 * (struct.unpack('d', serialdata[0:8])[0] - 0.5)
             v = -6.6 * (struct.unpack('d', serialdata[8:16])[0] - 0.5)
@@ -4020,18 +4038,18 @@ class egram():
                 self.VentricleData[299] = v
                 self.TimeData[0:299] = self.TimeData[1:300]
                 self.TimeData[299] = time.time() - self.start
-                self.plotA.set_xlim(self.TimeData[0], self.TimeData[299])
-                self.plotV.set_xlim(self.TimeData[0], self.TimeData[299])
+                self.AtriumPlot.set_xlim(self.TimeData[0], self.TimeData[299])
+                self.VentriclePlot.set_xlim(self.TimeData[0], self.TimeData[299])
             self.linesA.set_xdata(self.TimeData)
             self.linesA.set_ydata(self.AtrialData)
             self.linesV.set_xdata(self.TimeData)
             self.linesV.set_ydata(self.VentricleData)
             self.canvas.draw()
-            self.window.after(5,self.plot)
+            self.egram_window.after(5,self.plot)
 
     def plot_a(self):
         self.aS = not self.aS
-        self.plotA.set_visible(self.aS)
+        self.AtriumPlot.set_visible(self.aS)
 
     def conti(self):
         self.cont = not self.cont
@@ -4040,11 +4058,11 @@ class egram():
 
     def plot_v(self):
         self.vS = not self.vS
-        self.plotV.set_visible(self.vS)
+        self.VentriclePlot.set_visible(self.vS)
 
     def plot_av(self):
         self.avS = not self.avS
-        self.plot_av.set_visible(self.avS)
+        self.AVPlot.set_visible(self.avS)
 
     #-------------------------------------------------------------------------------------------
 
@@ -4083,13 +4101,19 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
     print("2")
     print(serialdata)
     #pace_maker.close()
-    print(struct.unpack(Header,serialdata))
+    unpacked_data = struct.unpack(Header,serialdata)
+    print(unpacked_data)
 
 
-
+    #ORDER IS CORRECT
+    #THE FIRST TWO INPUTS ARE THE GRAPH DATA!!!!!!!!
 
 
     #print(len(data))
+    graph1 = unpacked_data[0]#struct.unpack('f', serialdata[0:4])#??
+    graph2 = unpacked_data[1]#struct.unpack('H', serialdata[0:2])#??
+    print("Graph1: ",graph1)
+    print("Graph2: ",graph2)
     mode_pacemaker = struct.unpack('H', serialdata[2:4])
     APW_pacemaker = struct.unpack('H', serialdata[4:6])
     VPW_pacemaker = struct.unpack('H', serialdata[6:8])
