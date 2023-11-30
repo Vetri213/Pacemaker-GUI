@@ -179,7 +179,7 @@ class Register(tkinter.Frame):
             elif self.is_username_taken(username):
                 self.changing_label.configure(text="Username is already taken")
             else:
-                default_vals = "{30,50,0,0.05}{30,50,0,0.05}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0,0.05,0.25,150,0,0,10,0,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
+                default_vals = "{30,50,0,0.05}{30,50,0,0.05}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0.0,0.05,0.25,150,0,0.0,10,1,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0.0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
                 # Creating a New Entry to be added to the file of Users (in the same format)
                 new_entry = username + "|" + password + "|" + default_vals + "\n" #{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
                 # Opening File in Append Mode (So as not to delete other users)
@@ -345,8 +345,8 @@ class pacing_modes(tkinter.Frame):
         vvir_vals_str = vvir_vals_str.strip("{")
         vddr_vals_str = vddr_vals_str.strip("{")
         door_vals_str = door_vals_str.strip("{")
-        ddir_vals_str = vddr_vals_str.strip("{")
-        dddr_vals_str = door_vals_str.strip("{")
+        ddir_vals_str = ddir_vals_str.strip("{")
+        dddr_vals_str = dddr_vals_str.strip("{")
         global aoo_vals
         global voo_vals
         global aai_vals
@@ -381,8 +381,9 @@ class pacing_modes(tkinter.Frame):
         vvir_vals = vvir_vals_str.split(",")
         vddr_vals = vddr_vals_str.split(",")
         door_vals = door_vals_str.split(",")
-        ddir_vals = vddr_vals_str.split(",")
-        dddr_vals = door_vals_str.split(",")
+        ddir_vals = ddir_vals_str.split(",")
+        dddr_vals = dddr_vals_str.split(",")
+        print(dddr_vals)
         # print(aoo_vals)
         # print(voo_vals)
         # print(aai_vals)
@@ -991,7 +992,6 @@ class VVI_Mode(tkinter.Frame):
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
             and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500 \
-            and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
             and (int(self.hysteresis_entry.get() )== 0 or 30<= int(self.hysteresis_entry.get()) <= 175) \
             and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
@@ -1306,7 +1306,7 @@ class VDD_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVDD()
 
-    def update_vdd(self):
+    def update_vdd(self): #{30,50,70,0,0.0,0.05,0.25,150,0,0.0,10,1,1}
         global vdd_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
@@ -1314,12 +1314,12 @@ class VDD_Mode(tkinter.Frame):
             and (int(self.dynamic_av_delay_entry.get()) == 0 or int(self.dynamic_av_delay_entry.get()== 1)) \
             and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
-            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
+            and 0.25 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
             and 150<= int(self.vrp_entry.get()) <= 500 \
             and 0<= int(self.pvarp_extension_entry.get()) <= 400 \
             and 0.0 <= float(self.rate_smoothing_entry.get()) <= 0.25 \
+            and 10 <= int(self.atr_duration_entry.get()) <= 2000 \
             and (int(self.atr_fallback_mode_entry.get()) == 0 or int(self.atr_fallback_mode_entry.get()== 1))\
-            and 10 <= int(self.atr_duration_entry.get())<= 2000 \
             and 1<= int(self.atr_fallback_time_entry.get()) <= 5 :
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
@@ -1360,77 +1360,77 @@ class VDD_Mode(tkinter.Frame):
         self.fixed_av_delay_label = ttk.Label(self.vdd_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.fixed_av_delay_entry.insert(0, vdd_vals[1])
+        self.fixed_av_delay_entry.insert(0, vdd_vals[2])
         self.fixed_av_delay_label.grid(row = 3, column = 0)
         self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         self.dynamic_av_delay_label = ttk.Label(self.vdd_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.dynamic_av_delay_entry.insert(0, vdd_vals[1])
+        self.dynamic_av_delay_entry.insert(0, vdd_vals[3])
         self.dynamic_av_delay_label.grid(row = 3, column = 1)
         self.dynamic_av_delay_entry.grid(row = 4, column = 1)
 
         self.ventricular_amplitude_label = ttk.Label(self.vdd_window, text="Ventricular Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
         self.ventricular_amplitude_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.ventricular_amplitude_entry.insert(0, vdd_vals[2])
+        self.ventricular_amplitude_entry.insert(0, vdd_vals[4])
         self.ventricular_amplitude_label.grid(row = 5, column = 0)
         self.ventricular_amplitude_entry.grid(row = 6, column = 0)
 
         self.ventricular_pulse_width_label = ttk.Label(self.vdd_window, text="Ventricular Pulse Width:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.ventricular_pulse_width_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.ventricular_pulse_width_entry.insert(0, vdd_vals[3])
+        self.ventricular_pulse_width_entry.insert(0, vdd_vals[5])
         self.ventricular_pulse_width_label.grid(row = 5, column = 1)
         self.ventricular_pulse_width_entry.grid(row = 6, column = 1)
 
         self.ventricular_sensitivity_label = ttk.Label(self.vdd_window, text="Ventricular Sensitivity:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.ventricular_sensitivity_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.ventricular_sensitivity_entry.insert(0, vdd_vals[3])
+        self.ventricular_sensitivity_entry.insert(0, vdd_vals[6])
         self.ventricular_sensitivity_label.grid(row = 7, column = 0)
         self.ventricular_sensitivity_entry.grid(row = 8, column = 0)
 
         self.vrp_label = ttk.Label(self.vdd_window, text="VRP:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.vrp_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.vrp_entry.insert(0, vdd_vals[3])
+        self.vrp_entry.insert(0, vdd_vals[7])
         self.vrp_label.grid(row = 7, column = 1)
         self.vrp_entry.grid(row = 8, column = 1)
 
         self.pvarp_extension_label = ttk.Label(self.vdd_window, text="PVARP Extension:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.pvarp_extension_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.pvarp_extension_entry.insert(0, vdd_vals[3])
+        self.pvarp_extension_entry.insert(0, vdd_vals[8])
         self.pvarp_extension_label.grid(row = 9, column = 0)
         self.pvarp_extension_entry.grid(row = 10, column = 0)
 
         self.rate_smoothing_label = ttk.Label(self.vdd_window, text="Rate Smoothing:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.rate_smoothing_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.rate_smoothing_entry.insert(0, vdd_vals[3])
+        self.rate_smoothing_entry.insert(0, vdd_vals[9])
         self.rate_smoothing_label.grid(row = 9, column = 1)
         self.rate_smoothing_entry.grid(row = 10, column = 1)
 
         self.atr_duration_label = ttk.Label(self.vdd_window, text="ATR Duration:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.atr_duration_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.atr_duration_entry.insert(0, vdd_vals[3])
+        self.atr_duration_entry.insert(0, vdd_vals[10])
         self.atr_duration_label.grid(row = 11, column = 0)
         self.atr_duration_entry.grid(row = 12, column = 0)
 
         self.atr_fallback_mode_label = ttk.Label(self.vdd_window, text="ATR Fallback Mode:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.atr_fallback_mode_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.atr_fallback_mode_entry.insert(0, vdd_vals[3])
+        self.atr_fallback_mode_entry.insert(0, vdd_vals[11])
         self.atr_fallback_mode_label.grid(row = 11, column = 1)
         self.atr_fallback_mode_entry.grid(row = 12, column = 1)
 
         self.atr_fallback_time_label = ttk.Label(self.vdd_window, text="ATR Fallback Time:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.atr_fallback_time_entry = Entry(self.vdd_window, font=("Arial", 16))
-        self.atr_fallback_time_entry.insert(0, vdd_vals[3])
+        self.atr_fallback_time_entry.insert(0, vdd_vals[12])
         self.atr_fallback_time_label.grid(row = 13, column = 0)
         self.atr_fallback_time_entry.grid(row = 14, column = 0)
         # Style of Buttons
@@ -1463,12 +1463,7 @@ class DOO_Mode(tkinter.Frame):
             and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
             and 0.0 <= float(self.ventricular_amplitude_entry.get()) <= 7 \
             and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9 \
-            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9 \
-            and 0.0 <= float(self.atrial_sensitivity_entry.get()) <= 10 \
-            and 0.0 <= float(self.ventricular_sensitivity_entry.get()) <= 10 \
-            and 150<= int(self.vrp_entry.get()) <= 500 \
-            and 150<= int(self.arp_entry.get()) <= 500 \
-            and 150<= int(self.pvarp_entry.get()) <= 500:
+            and 0.05 <= float(self.ventricular_pulse_width_entry.get()) <= 1.9:
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 result = messagebox.askokcancel("Confirmation", "Are you sure?")
@@ -2162,7 +2157,7 @@ class AOOR_Mode(tkinter.Frame):
         self.displayAOOR()
 
     def update_aoor(self):
-        global aoor_vals
+        global aoor_vals #{30,50,50,0.0,0.05,0,10,1,2}
         if 30 <= int(self.lower_rate_entry.get()) <= 175 \
             and 50 <= int(self.upper_rate_entry.get()) <= 175 \
             and 50 <= int(self.maximum_sensor_rate_entry.get()) <= 175 \
@@ -2175,9 +2170,8 @@ class AOOR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoor_vals
-                aoor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),
-                            self.activity_threshold_entry.get(),
-                            self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
+                aoor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),
+                            self.activity_threshold_entry.get(), self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
 
         else:
@@ -2265,14 +2259,6 @@ class AOOR_Mode(tkinter.Frame):
         # self.ventricular_pulse_width_entry.insert(0, aoor_vals[9])
         # self.ventricular_pulse_width_label.grid(row = 0, column = 1)
         # self.ventricular_pulse_width_entry.grid(row = 0, column = 1)
-
-        self.atrial_sensitivity_label = ttk.Label(self.aoor_window, text="Atrial Sensitivity:", background="black",
-                                             foreground="white", font=("Arial", 16))
-        self.atrial_sensitivity_entry = Entry(self.aoor_window, font=("Arial", 16))
-        self.atrial_sensitivity_entry.insert(0, aoor_vals[5])
-        self.atrial_sensitivity_label.grid(row = 5, column = 1)
-        self.atrial_sensitivity_entry.grid(row = 6, column = 1)
-
         # self.ventricular_sensitivity_label = ttk.Label(self.aoor_window, text="Ventricular Sensitivity:", background="black",
         #                                      foreground="white", font=("Arial", 16))
         # self.ventricular_sensitivity_entry = Entry(self.aoor_window, font=("Arial", 16))
@@ -2346,28 +2332,28 @@ class AOOR_Mode(tkinter.Frame):
         self.activity_threshold_label = ttk.Label(self.aoor_window, text="Activity Threshold:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.activity_threshold_entry = Entry(self.aoor_window, font=("Arial", 16))
-        self.activity_threshold_entry.insert(0, aoor_vals[6])
+        self.activity_threshold_entry.insert(0, aoor_vals[5])
         self.activity_threshold_label.grid(row = 7, column = 0)
         self.activity_threshold_entry.grid(row = 8, column = 0)
 
         self.reaction_time_label = ttk.Label(self.aoor_window, text="Reaction Time:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.reaction_time_entry = Entry(self.aoor_window, font=("Arial", 16))
-        self.reaction_time_entry.insert(0, aoor_vals[7])
+        self.reaction_time_entry.insert(0, aoor_vals[6])
         self.reaction_time_label.grid(row = 7, column = 1)
         self.reaction_time_entry.grid(row = 8, column = 1)
 
         self.response_factor_label = ttk.Label(self.aoor_window, text="Response Factor:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.response_factor_entry = Entry(self.aoor_window, font=("Arial", 16))
-        self.response_factor_entry.insert(0, aoor_vals[8])
+        self.response_factor_entry.insert(0, aoor_vals[7])
         self.response_factor_label.grid(row = 9, column = 0)
         self.response_factor_entry.grid(row = 10, column = 0)
 
         self.recovery_time_label = ttk.Label(self.aoor_window, text="Recovery_ Time:", background="black",
                                              foreground="white", font=("Arial", 16))
         self.recovery_time_entry = Entry(self.aoor_window, font=("Arial", 16))
-        self.recovery_time_entry.insert(0, aoor_vals[9])
+        self.recovery_time_entry.insert(0, aoor_vals[8])
         self.recovery_time_label.grid(row = 9, column = 1)
         self.recovery_time_entry.grid(row = 10, column = 1)
         # Style of Buttons
