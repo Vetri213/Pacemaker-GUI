@@ -4090,37 +4090,27 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
 
 
     #print(len(data))
-    mode_pacemaker = struct.unpack('B', serialdata[16:17])
-    print("Mode")
-    print(mode_pacemaker)
-    LR_pacemaker = struct.unpack('H', serialdata[18:20])
-    print("LR")
-    print(LR_pacemaker)
-    APW_pacemaker = struct.unpack('f', serialdata[21:25])
-    VPW_pacemaker = struct.unpack('f', serialdata[26:30])
-    print(mode_pacemaker)
-    print(LR_pacemaker)
-    print(APW_pacemaker)
-    print(VPW_pacemaker)
-    VA_pacemaker = struct.unpack('f', serialdata[24:28])
-    ARP_pacemaker = struct.unpack('H', serialdata[28:30])
-    VRP_pacemaker = struct.unpack('H', serialdata[30:32])
-    AA_pacemaker = struct.unpack('f', serialdata[32:36])
-    RecovTime_pacemaker = struct.unpack('H', serialdata[36:38])
-    RF_pacemaker = struct.unpack('H', serialdata[38:40])
-    MSR_pacemaker = struct.unpack('H', serialdata[40:42])
-    AVD_pacemaker = struct.unpack('H', serialdata[42:44])
-    AT_pacemaker = struct.unpack('f', serialdata[45:48])
-    ReactTime_pacemaker = struct.unpack('H', serialdata[48:50])
-    ATS_pacemaker = struct.unpack('f', serialdata[50:54])
-    VS_pacemaker = struct.unpack('f', serialdata[54:58])
-    print(mode_pacemaker[0], LR_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AA_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], MSR_pacemaker[0],
-         AVD_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0], ATS_pacemaker[0], VS_pacemaker[0])
+    mode_pacemaker = struct.unpack('H', serialdata[2:4])
+    APW_pacemaker = struct.unpack('H', serialdata[4:6])
+    VPW_pacemaker = struct.unpack('H', serialdata[6:8])
+    LR_pacemaker = struct.unpack('H', serialdata[8:10])
+    AA_pacemaker = struct.unpack('f', serialdata[10:14])
+    VA_pacemaker = struct.unpack('f', serialdata[14:18])
+    ARP_pacemaker = struct.unpack('H', serialdata[18:20])
+    VRP_pacemaker = struct.unpack('H', serialdata[20:22])
+    AVD_pacemaker = struct.unpack('H', serialdata[22:24])
+    AS_pacemaker = struct.unpack('f', serialdata[24:28])
+    VS_pacemaker = struct.unpack('f', serialdata[28:32])
+    RecovTime_pacemaker = struct.unpack('H', serialdata[32:34])
+    RF_pacemaker = struct.unpack('H', serialdata[34:36])
+    UR_pacemaker = struct.unpack('H', serialdata[36:38])
+    AT_pacemaker = struct.unpack('f', serialdata[38:42])
+    ReactTime_pacemaker = struct.unpack('H', serialdata[42:44])
+    print(mode_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], LR_pacemaker[0], AA_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AVD_pacemaker[0], AS_pacemaker[0], VS_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], UR_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0])
     if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LR and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
         0] == ARP and VRP_pacemaker[0] == VRP
-            and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and MSR_pacemaker[0] == MSR and AVD_pacemaker[
-                0] == AVD and (AT_pacemaker[0] - AT < 0.01) and ReactTime_pacemaker[0] == ReactTime and (ATS_pacemaker[0] - ATS < 0.01) and (
-                    VS_pacemaker[0] - VS < 0.01)):
+            and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and UR_pacemaker[0] == UR and AVD_pacemaker[
+                0] == AVD and (AT_pacemaker[0] - AT < 0.01) and ReactTime_pacemaker[0] == ReactTime and (VS_pacemaker[0] - VS < 0.01)):
         print("Parameters Stored Successfully")
     else:
         print("Some Parameters Were Not Stored Correctly. Please Try Again.")
