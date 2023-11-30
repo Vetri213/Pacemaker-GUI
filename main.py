@@ -4180,19 +4180,28 @@ class egram(tkinter.Frame):
                 if (self.mode == 0):
                     pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=aoo_vals[0], URL=aoo_vals[1], AA=aoo_vals[2], APW=aoo_vals[3]))
                 elif (self.mode == 1):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=voo_vals[0], URL=voo_vals[1], VA=voo_vals[2], VPW=voo_vals[3]))
                 elif (self.mode == 2):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=aai_vals[0], URL=aai_vals[1], AA=aai_vals[2], APW=aai_vals[3], AS=aai_vals[4], ARP=aai_vals[5], PVARP=aai_vals[6], H=aai_vals[7], RS=aai_vals[8]))
                 elif (self.mode == 3):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=vvi_vals[0], URL=vvi_vals[1], VA=vvi_vals[2], VPW=vvi_vals[3], VS=vvi_vals[4], VRP=vvi_vals[5], PVARPext=vvi_vals[6], H=vvi_vals[7],RS=vvi_vals[8]))
                 elif (self.mode == 4):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRW=aat_vals[0], URL=aat_vals[1], AA=aat_vals[2], APW=aat_vals[3], AS=aat_vals[4], ARP=aat_vals[5], PVARP=aat_vals[6]))
                 elif (self.mode == 5):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=vvt_vals[0], URL=vvt_vals[1], VA=vvt_vals[2], VPW=vvt_vals[3], VS=vvt_vals[4], VRP=vvt_vals[5]))
                 elif (self.mode == 6):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=vdd_vals[0], URL=vdd_vals[1], FAVD=vdd_vals[2],DAVD=vdd_vals[3], VA=vdd_vals[4],  VPW=vdd_vals[5], VS=vdd_vals[6], VRP=vdd_vals[7],PVARPext=vdd_vals[8], RS=vdd_vals[9], FBM=vdd_vals[10], ATRD=vdd_vals[11], ATRFB=vdd_vals[12]))
                 elif (self.mode == 7):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, ))
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=doo_vals[0], URL=doo_vals[1], FAVD=doo_vals[2], AA=doo_vals[3],VA=doo_vals[4], APW=doo_vals[5], VPW=doo_vals[6]))
+                elif (self.mode == 8):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=ddi_vals[0], URL=ddi_vals[1], FAVD=ddi_vals[2], AA=ddi_vals[3],VA=ddi_vals[4], APW=ddi_vals[5], VPW=ddi_vals[6], AS=ddi_vals[7], VS=ddi_vals[8], VRP=ddi_vals[9], ARP=ddi_vals[10], PVARP=ddi_vals[11]))
+                elif (self.mode == 9):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=ddd_vals[0], URL=ddd_vals[1], FAVD=ddd_vals[2], DAVD=ddd_vals[3],SAVD=ddd_vals[4], AA=ddd_vals[5],VA=ddd_vals[5], APW=ddd_vals[6], VPW=ddd_vals[7], AS=ddd_vals[8], VS=ddd_vals[9], VRP=ddd_vals[10], ARP=ddd_vals[11], PVARP=ddd_vals[12], PVARPext=ddd_vals[13], H=ddd_vals[14], RD=ddd_vals[15], ATRFM=ddd_vals[16], ATRD=ddd_vals[17], ATRFB=ddd_vals[18]))
+                elif (self.mode == 10):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=aoor_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8]))
+                elif (self.mode == 11):
+                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRW=aair_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], AS=, ARP=, PVARP=, H=, RS=,  RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8]))
+
 
                 serialdata = pacemaker.read(16)
                 pacemaker.close()
