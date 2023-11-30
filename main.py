@@ -602,8 +602,6 @@ class pacing_modes(tkinter.Frame):
         self.button17.grid(row=12,column = 0)
         self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=self.DDDRPressed)
         self.button18.grid(row=12,column = 2)
-        self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
-        self.button19.grid(row=13,column = 1)
         self.logout = ttk.Button(master=self, text="Logout", style='Pacing.TButton', command=self.save_and_logout)
         self.logout.grid(row=14,column = 1)
 
@@ -657,14 +655,14 @@ class pacing_modes(tkinter.Frame):
         DDIR_Mode(master=self.master)
     def DDDRPressed(self):
         DDDR_Mode(master=self.master)
-    def egramPressed(self):
-        egram(master = self.master)
+
 
 
 class AOO_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayAOO()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 0)
     def update_aoo(self):
         global aoo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -752,15 +750,22 @@ class AOO_Mode(tkinter.Frame):
         self.save_button.grid(row = 5, column = 0)
 
         # Create a "back" button to return to "Pacing mode"
-        self.back_button = ttk.Button(master=self.aoo_window, text="Back to Pacing Modes", command=self.aoo_window.destroy)
-        self.back_button.grid(row = 5, column = 1)
+        self.back_button = ttk.Button(master=self.aoo_window, text="Back to Pacing Modes", command=self.back_to_pacing_modes)
+        self.back_button.grid(row=5, column=1)
+        self.egram_button = ttk.Button(master=self.aoo_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
+    def back_to_pacing_modes(self):
+        # Destroy the AOO_Mode window and show the PacingModes page
+        self.aoo_window.destroy()
+        self.parent.lift()
 
 
 
 class AAI_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayAAI()
-
+        def egramPressed(self):
+        egram(master = self.master, mode = 1)
     def update_aai(self):
         global aai_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -885,10 +890,13 @@ class AAI_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.aai_window, text="Back to Pacing Modes", command=self.aai_window.destroy)
         self.back_button.grid(row = 10, column = 1)
+        self.egram_button = ttk.Button(master=self.aai_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class VOO_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVOO()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 2)
     def update_voo(self):
         global voo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -975,11 +983,13 @@ class VOO_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.voo_window, text="Back to Pacing Modes", command=self.voo_window.destroy)
         self.back_button.grid(row = 5, column = 1)
-
+        self.egram_button = ttk.Button(master=self.voo_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class VVI_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVVI()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 3)
     def update_vvi(self):
         global vvi_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1077,11 +1087,13 @@ class VVI_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.vvi_window, text="Back to Pacing Modes", command=self.vvi_window.destroy)
         self.back_button.grid(row = 9, column = 1)
-
+        self.egram_button = ttk.Button(master=self.vvi_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class AAT_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayAAT()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 4)
     def update_aat(self):
         global aat_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1193,11 +1205,13 @@ class AAT_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.aat_window, text="Back to Pacing Modes", command=self.aat_window.destroy)
         self.back_button.grid(row = 9, column = 1)
-
+        self.egram_button = ttk.Button(master=self.aat_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class VVT_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVVT()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 5)
     def update_vvt(self):
         global vvt_vals
         if 30 <= float(self.lower_rate_entry.get()) <= 175 and 50 <= float(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1282,11 +1296,13 @@ class VVT_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.vvt_window, text="Back to Pacing Modes", command=self.vvt_window.destroy)
         self.back_button.grid(row = 8, column = 1)
-
+        self.egram_button = ttk.Button(master=self.vvt_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class VDD_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVDD()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 6)
     def update_vdd(self):
         global vdd_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1331,15 +1347,15 @@ class VDD_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.vdd_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, vdd_vals[1])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         self.dynamic_av_delay_label = ttk.Label(self.vdd_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.vdd_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, vdd_vals[1])
-        self.dynamic_av_delay.grid(row = 3, column = 1)
-        self.dynamic_av_delay.grid(row = 4, column = 1)
+        self.dynamic_av_delay_label.grid(row = 3, column = 1)
+        self.dynamic_av_delay_entry.grid(row = 4, column = 1)
 
         self.ventricular_amplitude_label = ttk.Label(self.vdd_window, text="Ventricular Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
@@ -1419,12 +1435,14 @@ class VDD_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.vdd_window, text="Back to Pacing Modes", command=self.vdd_window.destroy)
         self.back_button.grid(row = 15, column = 1)
-
+        self.egram_button = ttk.Button(master=self.vdd_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class DOO_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayDOO()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 7)
     def update_doo(self):
         global doo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1477,8 +1495,8 @@ class DOO_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.doo_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, doo_vals[2])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         # self.dynamic_av_delay_label = ttk.Label(self.doo_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -1641,11 +1659,13 @@ class DOO_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.doo_window, text="Back to Pacing Modes", command=self.doo_window.destroy)
         self.back_button.grid(row = 9, column = 1)
-
+        self.egram_button = ttk.Button(master=self.doo_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class DDI_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayDDI()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 8)
     def update_ddi(self):
         global ddi_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1699,8 +1719,8 @@ class DDI_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.ddi_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, ddi_vals[2])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         # self.dynamic_av_delay_label = ttk.Label(self.ddi_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -1863,11 +1883,13 @@ class DDI_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.ddi_window, text="Back to Pacing Modes", command=self.ddi_window.destroy)
         self.back_button.grid(row = 13, column = 1)
-
+        self.egram_button = ttk.Button(master=self.ddi_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class DDD_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayDDD()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 9)
     def update_ddd(self):
         global ddd_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -1915,29 +1937,29 @@ class DDD_Mode(tkinter.Frame):
         # self.maximum_sensor_rate_entry = Entry(self.ddd_window, font=("Arial", 16))
         # self.maximum_sensor_rate_entry.insert(0, ddd_vals[2])
         # self.maximum_sensor_rate.grid(row = 0, column = 1)
-        # self.maximum_sensor_rate.grid(row = 0, column = 1)
+        # self.maximum_sensor_rate_entry.grid(row = 0, column = 1)
 
 
         self.fixed_av_delay_label = ttk.Label(self.ddd_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.ddd_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, ddd_vals[2])
-        self.fixed_av_delay.grid(row = 3, column = 0)
-        self.fixed_av_delay.grid(row = 4, column = 0)
+        self.fixed_av_delay_label.grid(row = 3, column = 0)
+        self.fixed_av_delay_entry.grid(row = 4, column = 0)
 
         self.dynamic_av_delay_label = ttk.Label(self.ddd_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.ddd_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, ddd_vals[3])
-        self.dynamic_av_delay.grid(row = 3, column = 1)
-        self.dynamic_av_delay.grid(row = 4, column = 1)
+        self.dynamic_av_delay_label.grid(row = 3, column = 1)
+        self.dynamic_av_delay_label.grid(row = 4, column = 1)
 
         self.sensed_av_delay_offset_label = ttk.Label(self.ddd_window, text="Sensed AV Delay Offset:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.sensed_av_delay_offset_entry = Entry(self.ddd_window, font=("Arial", 16))
         self.sensed_av_delay_offset_entry.insert(0, ddd_vals[4])
-        self.sensed_av_delay_offset.grid(row = 5, column = 0)
-        self.sensed_av_delay_offset.grid(row = 6, column = 0)
+        self.sensed_av_delay_offset_label.grid(row = 5, column = 0)
+        self.sensed_av_delay_offset_entry.grid(row = 6, column = 0)
 
         self.atrial_amplitude_label = ttk.Label(self.ddd_window, text="Atrial Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
@@ -2086,11 +2108,13 @@ class DDD_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.ddd_window, text="Back to Pacing Modes", command=self.ddd_window.destroy)
         self.back_button.grid(row = 21, column = 1)
-
+        self.egram_button = ttk.Button(master=self.ddd_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class AOOR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayAOOR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 10)
     def update_aoor(self):
         global aoor_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -2098,7 +2122,7 @@ class AOOR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoor_vals
-                aoor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),
+                aoor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),
                             self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
@@ -2137,8 +2161,8 @@ class AOOR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.aoor_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, aoor_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.aoor_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -2309,12 +2333,14 @@ class AOOR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.aoor_window, text="Back to Pacing Modes", command=self.aoor_window.destroy)
         self.back_button.grid(row = 11, column = 1)
-
+        self.egram_button = ttk.Button(master=self.aoor_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class AAIR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayAAIR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 11)
     def update_aair(self):
         global aair_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -2322,7 +2348,7 @@ class AAIR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aair_vals
-                aair_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.arp_entry.get(),self.pvarp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
+                aair_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.atrial_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.arp_entry.get(),self.pvarp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
                             self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
@@ -2534,11 +2560,13 @@ class AAIR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.aair_window, text="Back to Pacing Modes", command=self.aair_window.destroy)
         self.back_button.grid(row = 15, column = 1)
-
+        self.egram_button = ttk.Button(master=self.aair_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class VOOR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVOOR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 12)
     def update_voor(self):
         global voor_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -2546,7 +2574,7 @@ class VOOR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global voor_vals
-                voor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),
+                voor_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),
                             self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
@@ -2585,8 +2613,8 @@ class VOOR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.voor_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, voor_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.voor_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -2757,12 +2785,14 @@ class VOOR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.voor_window, text="Back to Pacing Modes", command=self.voor_window.destroy)
         self.back_button.grid(row = 11, column = 1)
-
+        self.egram_button = ttk.Button(master=self.voor_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class VVIR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVVIR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 13)
     def update_vvir(self):
         global vvir_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -2770,7 +2800,7 @@ class VVIR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vvir_vals
-                vvir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
+                vvir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),
                             self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
 
@@ -2809,8 +2839,8 @@ class VVIR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.vvir_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, vvir_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         # self.fixed_av_delay_label = ttk.Label(self.vvir_window, text="Fixed AV Delay:", background="black", foreground="white",
@@ -2981,12 +3011,14 @@ class VVIR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.vvir_window, text="Back to Pacing Modes", command=self.vvir_window.destroy)
         self.back_button.grid(row = 15, column = 1)
-
+        self.egram_button = ttk.Button(master=self.vvir_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class VDDR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayVDDR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 14)
     def update_vddr(self):
         global vddr_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -2994,7 +3026,7 @@ class VDDR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global vddr_vals
-                vddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),
+                vddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.ventricular_pulse_width_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),
                             self.pvarp_extension_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
@@ -3034,23 +3066,23 @@ class VDDR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.vddr_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, vddr_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.vddr_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.vddr_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, vddr_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         self.dynamic_av_delay_label = ttk.Label(self.vddr_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.vddr_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, vddr_vals[4])
-        self.dynamic_av_delay.grid(row = 5, column = 0)
-        self.dynamic_av_delay.grid(row = 6, column = 0)
+        self.dynamic_av_delay_label.grid(row = 5, column = 0)
+        self.dynamic_av_delay_entry.grid(row = 6, column = 0)
 
         # self.sensed_av_delay_offset_label = ttk.Label(self.vddr_window, text="Sensed AV Delay Offset:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -3206,11 +3238,13 @@ class VDDR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.vddr_window, text="Back to Pacing Modes", command=self.vddr_window.destroy)
         self.back_button.grid(row = 19, column = 1)
-
+        self.egram_button = ttk.Button(master=self.vddr_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 class DOOR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayDOOR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 15)
     def update_door(self):
         global door_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -3218,7 +3252,7 @@ class DOOR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global door_vals
-                door_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),
+                door_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),
                              self.atrial_amplitude_entry.get(),
                              self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.acticity_threshold_entry.get(),
                              self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
@@ -3258,16 +3292,16 @@ class DOOR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.door_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, door_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.door_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.door_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, door_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         # self.dynamic_av_delay_label = ttk.Label(self.door_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -3430,12 +3464,14 @@ class DOOR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.door_window, text="Back to Pacing Modes", command=self.door_window.destroy)
         self.back_button.grid(row = 13, column = 1)
-
+        self.egram_button = ttk.Button(master=self.door_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class DDIR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayddir()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 16)
     def update_ddir(self):
         global ddir_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -3443,7 +3479,7 @@ class DDIR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global ddir_vals
-                ddir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.atrial_amplitude_entry.get(),
+                ddir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
                             self.pvarp_entry.get(),self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
@@ -3490,16 +3526,16 @@ class DDIR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.ddir_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, ddir_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.ddir_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.ddir_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, ddir_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         # self.dynamic_av_delay_label = ttk.Label(self.ddir_window, text="Dynamic AV Delay:", background="black", foreground="white",
         #                              font=("Arial", 16))
@@ -3662,12 +3698,14 @@ class DDIR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.ddir_window, text="Back to Pacing Modes", command=self.ddir_window.destroy)
         self.back_button.grid(row = 17, column = 1)
-
+        self.egram_button = ttk.Button(master=self.ddir_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class DDDR_Mode(tkinter.Frame):
     def __init__(self,master=None):
         self.displayDDDR()
-
+    def egramPressed(self):
+        egram(master = self.master, mode = 17)
     def update_dddr(self):
         global dddr_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
@@ -3675,7 +3713,7 @@ class DDDR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global dddr_vals
-                dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
+                dddr_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.dynamic_av_delay_entry.get(),self.sensed_av_delay_offset_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
                             self.pvarp_entry.get(),self.pvarp_extension_entry.get(),self.hysteresis_entry.get(),self.rate_smoothing_entry.get(),self.atr_duration_entry.get(),self.atr_fallback_mode_entry.get(),self.atr_fallback_time_entry.get(),self.acticity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
@@ -3715,30 +3753,30 @@ class DDDR_Mode(tkinter.Frame):
                                      font=("Arial", 16))
         self.maximum_sensor_rate_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.maximum_sensor_rate_entry.insert(0, dddr_vals[2])
-        self.maximum_sensor_rate.grid(row = 3, column = 0)
-        self.maximum_sensor_rate.grid(row = 4, column = 0)
+        self.maximum_sensor_rate_label.grid(row = 3, column = 0)
+        self.maximum_sensor_rate_entry.grid(row = 4, column = 0)
 
 
         self.fixed_av_delay_label = ttk.Label(self.dddr_window, text="Fixed AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.fixed_av_delay_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.fixed_av_delay_entry.insert(0, dddr_vals[3])
-        self.fixed_av_delay.grid(row = 3, column = 1)
-        self.fixed_av_delay.grid(row = 4, column = 1)
+        self.fixed_av_delay_label.grid(row = 3, column = 1)
+        self.fixed_av_delay_entry.grid(row = 4, column = 1)
 
         self.dynamic_av_delay_label = ttk.Label(self.dddr_window, text="Dynamic AV Delay:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.dynamic_av_delay_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.dynamic_av_delay_entry.insert(0, dddr_vals[4])
-        self.dynamic_av_delay.grid(row = 5, column = 0)
-        self.dynamic_av_delay.grid(row = 6, column = 0)
+        self.dynamic_av_delay_label.grid(row = 5, column = 0)
+        self.dynamic_av_delay_entry.grid(row = 6, column = 0)
 
         self.sensed_av_delay_offset_label = ttk.Label(self.dddr_window, text="Sensed AV Delay Offset:", background="black", foreground="white",
                                      font=("Arial", 16))
         self.sensed_av_delay_offset_entry = Entry(self.dddr_window, font=("Arial", 16))
         self.sensed_av_delay_offset_entry.insert(0, dddr_vals[5])
-        self.sensed_av_delay_offset.grid(row = 5, column = 1)
-        self.sensed_av_delay_offset.grid(row = 6, column = 1)
+        self.sensed_av_delay_offset_label.grid(row = 5, column = 1)
+        self.sensed_av_delay_offset_entry.grid(row = 6, column = 1)
 
         self.atrial_amplitude_label = ttk.Label(self.dddr_window, text="Atrial Amplitude:", background="black", foreground="white",
                                            font=("Arial", 16))
@@ -3887,7 +3925,8 @@ class DDDR_Mode(tkinter.Frame):
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.dddr_window, text="Back to Pacing Modes", command=self.dddr_window.destroy)
         self.back_button.grid(row = 27, column = 1)
-
+        self.egram_button = ttk.Button(master=self.dddr_window, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egram_button.pack()
 
 class egram(tkinter.Frame):
     def __init__(self, master=None):
