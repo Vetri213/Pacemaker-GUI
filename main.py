@@ -1440,7 +1440,7 @@ class DOO_Mode(tkinter.Frame):
             messagebox.showerror("Input is not in range", "Please enter valid values for all parameters.")
             self.doo_window.destroy()
 
-    def DOO_Mode(self):
+    def displayDOO(self):
         self.doo_window = Tk()
         self.doo_window.geometry('%dx%d+0+0' % (width, height))
         self.doo_window.title("DOO Mode")
