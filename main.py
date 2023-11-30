@@ -759,7 +759,7 @@ class AOO_Mode(tkinter.Frame):
         self.aoo_window.destroy()
         self.parent.lift()
 
-
+#
 
 class AAI_Mode(tkinter.Frame):
     def __init__(self,master=None):
