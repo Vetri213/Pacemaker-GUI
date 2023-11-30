@@ -4106,7 +4106,7 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
     UR_pacemaker = struct.unpack('H', serialdata[36:38])
     AT_pacemaker = struct.unpack('f', serialdata[38:42])
     ReactTime_pacemaker = struct.unpack('H', serialdata[42:44])
-    print(mode_pacemaker[0], APW_pacemaker[6], VPW_pacemaker[0], LR_pacemaker[0], AA_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AVD_pacemaker[0], AS_pacemaker[0], VS_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], UR_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0])
+    print(mode_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], LR_pacemaker[0], AA_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AVD_pacemaker[0], AS_pacemaker[0], VS_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], UR_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0])
     if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LR and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
         0] == ARP and VRP_pacemaker[0] == VRP
             and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and UR_pacemaker[0] == UR and AVD_pacemaker[
