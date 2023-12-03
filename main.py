@@ -152,15 +152,14 @@ class Register(tkinter.Frame):
         self.register()
 
     def is_username_taken(self,username):
+        print(username)
         try:
             # open the file anc check if the username has already been taken
             with open("text.txt", "r") as file:
-                for line in file:
-                    parts = line.strip().split(',')
-                    if len(parts) == 2:  # make sure every line has two parts( username and password)
-                        existing_username, _ = parts
-                        if existing_username == username:
-                            return True
+                for user in users[0]:
+                    print(user)
+                    if username == user:
+                        return True
         except Exception as e:
             print(f"Error checking username: {str(e)}")
         return False
@@ -170,16 +169,16 @@ class Register(tkinter.Frame):
     def register_submit(self):
         # print(len(users))
 
-        if (len(users) < 10):
+        if (len(users) < 3):
             # Getting Username and Password from the Textboxes
             username = self.user_text.get()
             password = self.password_text.get()
             if not username or not password:
                 self.changing_label.configure(text="Username or password cannot be empty")
-            elif self.is_username_taken(username):
+            if self.is_username_taken(username):
                 self.changing_label.configure(text="Username is already taken")
             else:
-                default_vals = "{30,50,0,0.05}{30,50,0,0.05}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{30,50,0,0.05,0.25,150,150}{30,50,0,0.05,0.25,150}{30,50,70,0,0.0,0.05,0.25,150,0,0.0,10,1,1}{30,50,70,0,0,0.05,0.05}{30,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0.0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,0.05,0,10,1,2}{30,50,50,0,0.05,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,0.05,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0,10,1,2}{30,50,50,70,0,0,0.05,0.05,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,0.05,0.05,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
+                default_vals = "{30,50,0,1}{30,50,0,1}{30,50,0,1,0.25,150,150,0,0}{30,50,0,1,0.35,150,0,0}{30,50,0,1,0.25,150,150}{30,50,0,1,0.25,150}{30,50,70,0,0.0,1,0.25,150,0,0.0,10,1,1}{30,50,70,0,0,1,1}{30,50,70,0,0,1,1,0.25,0.25,150,150,150}{30,50,70,0,0,0,0,1,1,0.25,0.25,150,150,150,0,0,0,10,0,1}{30,50,50,0.0,1,0,10,1,2}{30,50,50,0,1,0.25,150,150,0,0,0,10,1,2}{30,50,50,0,1,0,10,1,2}{30,50,50,0,1,0.25,150,0,0,0,10,1,2}{30,50,50,70,0,0,1,0.25,150,0,0,10,0,1,0,10,1,2}{30,50,50,70,0,0,1,1,0,10,1,2}{30,50,50,70,0,0,1,1,0.25,0.25,150,150,150,0,10,1,2}{30,50,50,70,0,0,0,0,1,1,0.25,0.25,150,150,150,0,0,0,10,0,1,0,10,1,2}"
                 # Creating a New Entry to be added to the file of Users (in the same format)
                 new_entry = username + "|" + password + "|" + default_vals + "\n" #{30, 50, 0, 0.05}{30,50,0,0.05,150}{30,50,0,0.05,0.25,150,150,0,0}{30,50,0,0.05,0.35,150,0,0}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
                 # Opening File in Append Mode (So as not to delete other users)
@@ -277,10 +276,14 @@ class pacing_modes(tkinter.Frame):
         try:
             ser = serial.Serial(port="COM3", baudrate=115200)
             port = 3 #4
+            print(3333333333)
+            ser.close()
         except:
             try:
                 ser = serial.Serial(port="COM4", baudrate=115200)
-                port = 3  # 4
+                port = 4  # 4
+                print(444444)
+                ser.close()
             except:
                 port = 0
         port_candidates = "COM3"
@@ -383,7 +386,7 @@ class pacing_modes(tkinter.Frame):
         door_vals = door_vals_str.split(",")
         ddir_vals = ddir_vals_str.split(",")
         dddr_vals = dddr_vals_str.split(",")
-        print(dddr_vals)
+        #print(dddr_vals)
         # print(aoo_vals)
         # print(voo_vals)
         # print(aai_vals)
@@ -603,8 +606,8 @@ class pacing_modes(tkinter.Frame):
         self.button17.grid(row=12,column = 0)
         self.button18 = ttk.Button(master = self, text="DDDR", style='Pacing.TButton',command=self.DDDRPressed)
         self.button18.grid(row=12,column = 2)
-        self.button19 = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
-        self.button19.grid(row=13,column = 1)
+        self.egrambutton = ttk.Button(master=self, text="EGRAM", style='Pacing.TButton', command=self.egramPressed)
+        self.egrambutton.grid(row=13,column = 1)
         self.logout = ttk.Button(master=self, text="Logout", style='Pacing.TButton', command=self.save_and_logout)
         self.logout.grid(row=14,column = 1)
 
@@ -4159,7 +4162,7 @@ class egram(tkinter.Frame):
 
         self.egram_window.update()
         self.avbutton = tkinter.Button(self.egram_window, text="Atrial/Ventricular", font=('calbiri', 12), command=lambda: self.plot_av())
-        self.avbutton.place(x=self.abutton.winfo_x() + self.abutton.winfo_reqwidth() + 20, y=280)
+        self.avbutton.place(x=self.abutton.winfo_x() + self.abutton.winfo_reqwidth() + 20, y=320)
 
         self.egram_window.update()
         self.stopbutton = tkinter.Button(self.egram_window, text="Start/Stop", font=('calbiri', 12), command=lambda: self.conti())
@@ -4167,61 +4170,65 @@ class egram(tkinter.Frame):
         self.egram_window.update()
 
         # Display the Tkinter window
-        self.egram_window.mainloop()
+        self.egram_window.update()
         # ser.reset_input_buffer()
-        self.plot_vals()
         self.start = time.time()
+        print("TIME SET")
+        self.plot_vals()
     def plot_vals(self):
         if (self.cont):
+            vals00 = self.pacemaker_write(mode=self.mode)
+            print(vals00)
             try:
-                pacemaker = serial.Serial(port="COM" + str(port), baudrate=115200)
-                pacemaker.open()
+                a_val = float(vals00[0])
+                v_val = float(vals00[1])
+            except:
+                print("Pacemaker not Connected")
+
+            try:
                 # pacemaker.reset_input_buffer()
                 if (self.mode == 0):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=aoo_vals[0], URL=aoo_vals[1], AA=aoo_vals[2], APW=aoo_vals[3]))
+                    a_val, v_val = self.pacemaker_write(mode = self.mode, LRL=aoo_vals[0], URL=aoo_vals[1], AA=aoo_vals[2], APW=aoo_vals[3])
                 elif (self.mode == 1):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=voo_vals[0], URL=voo_vals[1], VA=voo_vals[2], VPW=voo_vals[3]))
+                    a_val, v_val = self.pacemaker_write(mode = self.mode, LRL=voo_vals[0], URL=voo_vals[1], VA=voo_vals[2], VPW=voo_vals[3])
                 elif (self.mode == 2):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=aai_vals[0], URL=aai_vals[1], AA=aai_vals[2], APW=aai_vals[3], AS=aai_vals[4], ARP=aai_vals[5], PVARP=aai_vals[6], H=aai_vals[7], RS=aai_vals[8]))
+                    a_val, v_val = self.pacemaker_write(mode = self.mode, LRL=aai_vals[0], URL=aai_vals[1], AA=aai_vals[2], APW=aai_vals[3], AS=aai_vals[4], ARP=aai_vals[5], PVARP=aai_vals[6], H=aai_vals[7], RS=aai_vals[8])
                 elif (self.mode == 3):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=vvi_vals[0], URL=vvi_vals[1], VA=vvi_vals[2], VPW=vvi_vals[3], VS=vvi_vals[4], VRP=vvi_vals[5], PVARPext=vvi_vals[6], H=vvi_vals[7],RS=vvi_vals[8]))
+                    a_val, v_val = self.pacemaker_write(mode = self.mode, LRL=vvi_vals[0], URL=vvi_vals[1], VA=vvi_vals[2], VPW=vvi_vals[3], VS=vvi_vals[4], VRP=vvi_vals[5], PVARPext=vvi_vals[6], H=vvi_vals[7],RS=vvi_vals[8])
                 elif (self.mode == 4):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode = self.mode, LRL=aat_vals[0], URL=aat_vals[1], AA=aat_vals[2], APW=aat_vals[3], AS=aat_vals[4], ARP=aat_vals[5], PVARP=aat_vals[6]))
+                    a_val, v_val = self.pacemaker_write(mode = self.mode, LRL=aat_vals[0], URL=aat_vals[1], AA=aat_vals[2], APW=aat_vals[3], AS=aat_vals[4], ARP=aat_vals[5], PVARP=aat_vals[6])
                 elif (self.mode == 5):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vvt_vals[0], URL=vvt_vals[1], VA=vvt_vals[2], VPW=vvt_vals[3], VS=vvt_vals[4], VRP=vvt_vals[5]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=vvt_vals[0], URL=vvt_vals[1], VA=vvt_vals[2], VPW=vvt_vals[3], VS=vvt_vals[4], VRP=vvt_vals[5])
                 elif (self.mode == 6):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vdd_vals[0], URL=vdd_vals[1], FAVD=vdd_vals[2],DAVD=vdd_vals[3], VA=vdd_vals[4],  VPW=vdd_vals[5], VS=vdd_vals[6], VRP=vdd_vals[7],PVARPext=vdd_vals[8], RS=vdd_vals[9], FBM=vdd_vals[10], ATRD=vdd_vals[11], ATRFB=vdd_vals[12]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=vdd_vals[0], URL=vdd_vals[1], FAVD=vdd_vals[2],DAVD=vdd_vals[3], VA=vdd_vals[4],  VPW=vdd_vals[5], VS=vdd_vals[6], VRP=vdd_vals[7],PVARPext=vdd_vals[8], RS=vdd_vals[9], FBM=vdd_vals[10], ATRD=vdd_vals[11], ATRFB=vdd_vals[12])
                 elif (self.mode == 7):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=doo_vals[0], URL=doo_vals[1], FAVD=doo_vals[2], AA=doo_vals[3],VA=doo_vals[4], APW=doo_vals[5], VPW=doo_vals[6]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=doo_vals[0], URL=doo_vals[1], FAVD=doo_vals[2], AA=doo_vals[3],VA=doo_vals[4], APW=doo_vals[5], VPW=doo_vals[6])
                 elif (self.mode == 8):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=ddi_vals[0], URL=ddi_vals[1], FAVD=ddi_vals[2], AA=ddi_vals[3],VA=ddi_vals[4], APW=ddi_vals[5], VPW=ddi_vals[6], AS=ddi_vals[7], VS=ddi_vals[8], VRP=ddi_vals[9], ARP=ddi_vals[10], PVARP=ddi_vals[11]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=ddi_vals[0], URL=ddi_vals[1], FAVD=ddi_vals[2], AA=ddi_vals[3],VA=ddi_vals[4], APW=ddi_vals[5], VPW=ddi_vals[6], AS=ddi_vals[7], VS=ddi_vals[8], VRP=ddi_vals[9], ARP=ddi_vals[10], PVARP=ddi_vals[11])
                 elif (self.mode == 9):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=ddd_vals[0], URL=ddd_vals[1], FAVD=ddd_vals[2], DAVD=ddd_vals[3],SAVD=ddd_vals[4], AA=ddd_vals[5],VA=ddd_vals[5], APW=ddd_vals[6], VPW=ddd_vals[7], AS=ddd_vals[8], VS=ddd_vals[9], VRP=ddd_vals[10], ARP=ddd_vals[11], PVARP=ddd_vals[12], PVARPext=ddd_vals[13], H=ddd_vals[14], RS=ddd_vals[15], ATRFM=ddd_vals[16], ATRD=ddd_vals[17], ATRFB=ddd_vals[18]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=ddd_vals[0], URL=ddd_vals[1], FAVD=ddd_vals[2], DAVD=ddd_vals[3],SAVD=ddd_vals[4], AA=ddd_vals[5],VA=ddd_vals[5], APW=ddd_vals[6], VPW=ddd_vals[7], AS=ddd_vals[8], VS=ddd_vals[9], VRP=ddd_vals[10], ARP=ddd_vals[11], PVARP=ddd_vals[12], PVARPext=ddd_vals[13], H=ddd_vals[14], RS=ddd_vals[15], ATRFM=ddd_vals[16], ATRD=ddd_vals[17], ATRFB=ddd_vals[18])
                 elif (self.mode == 10):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=aoor_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=aoor_vals[0], URL=aoor_vals[1], MSR=aoor_vals[2], AA=aoor_vals[3], APW=aoor_vals[4], ACTT=aoor_vals[5], RT=aoor_vals[6], RF=aoor_vals[7], RecT=aoor_vals[8])
                 elif (self.mode == 11):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=aair_vals[0], URL=aair_vals[1], MSR=aair_vals[2], AA=aair_vals[3], APW=aair_vals[4], AS=aair_vals[5], ARP=aair_vals[6], PVARP=aair_vals[7], H=aair_vals[8], RS=aair_vals[9], ACTT=aair_vals[10], RT=aair_vals[11], RF=aair_vals[12], RecT=aair_vals[13]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=aair_vals[0], URL=aair_vals[1], MSR=aair_vals[2], AA=aair_vals[3], APW=aair_vals[4], AS=aair_vals[5], ARP=aair_vals[6], PVARP=aair_vals[7], H=aair_vals[8], RS=aair_vals[9], ACTT=aair_vals[10], RT=aair_vals[11], RF=aair_vals[12], RecT=aair_vals[13])
                 elif (self.mode == 12):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=voor_vals[0], URL=voor_vals[1], MSR=voor_vals[2], VA=voor_vals[3], VPW=voor_vals[4], ACTT=voor_vals[5], RT=voor_vals[6], RF=voor_vals[7], RecT=voor_vals[8]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=voor_vals[0], URL=voor_vals[1], MSR=voor_vals[2], VA=voor_vals[3], VPW=voor_vals[4], ACTT=voor_vals[5], RT=voor_vals[6], RF=voor_vals[7], RecT=voor_vals[8])
                 elif (self.mode == 13):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vvir_vals[0], URL=vvir_vals[1], MSR=vvir_vals[2], VA=vvir_vals[3], VPW=vvir_vals[4],VS=vvir_vals[5], VRP=vvir_vals[6], H=vvir_vals[7], RS=vvir_vals[8], ACTT=vvir_vals[9], RT=vvir_vals[10], RF=vvir_vals[11], RecT=vvir_vals[12]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=vvir_vals[0], URL=vvir_vals[1], MSR=vvir_vals[2], VA=vvir_vals[3], VPW=vvir_vals[4],VS=vvir_vals[5], VRP=vvir_vals[6], H=vvir_vals[7], RS=vvir_vals[8], ACTT=vvir_vals[9], RT=vvir_vals[10], RF=vvir_vals[11], RecT=vvir_vals[12])
                 elif (self.mode == 14):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=vddr_vals[0], URL=vddr_vals[1], MSR=vddr_vals[2], FAVD=vddr_vals[3], DAVD=vddr_vals[4], VA=vddr_vals[5], VPW=vddr_vals[6],VS=vddr_vals[7], VRP=vddr_vals[8], PVARPext=vddr_vals[9], RS=vddr_vals[10], FBM= vddr_vals[11],ATRD=vddr_vals[12], ATRFB=vddr_vals[13], ACTT=vddr_vals[14], RT=vddr_vals[15], RF=vddr_vals[16], RecT=vddr_vals[17]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=vddr_vals[0], URL=vddr_vals[1], MSR=vddr_vals[2], FAVD=vddr_vals[3], DAVD=vddr_vals[4], VA=vddr_vals[5], VPW=vddr_vals[6],VS=vddr_vals[7], VRP=vddr_vals[8], PVARPext=vddr_vals[9], RS=vddr_vals[10], FBM= vddr_vals[11],ATRD=vddr_vals[12], ATRFB=vddr_vals[13], ACTT=vddr_vals[14], RT=vddr_vals[15], RF=vddr_vals[16], RecT=vddr_vals[17])
                 elif (self.mode == 15):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=door_vals[0], URL=door_vals[1], MSR=door_vals[2], FAVD=door_vals[3], AA=door_vals[4],VA=door_vals[5],APW=door_vals[6], VPW=door_vals[7],ACTT=door_vals[8], RT=door_vals[9], RF=door_vals[10], RecT=door_vals[11]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=door_vals[0], URL=door_vals[1], MSR=door_vals[2], FAVD=door_vals[3], AA=door_vals[4],VA=door_vals[5],APW=door_vals[6], VPW=door_vals[7],ACTT=door_vals[8], RT=door_vals[9], RF=door_vals[10], RecT=door_vals[11])
                 elif (self.mode == 16):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=ddir_vals[0], URL=ddir_vals[1], MSR=ddir_vals[2], FAVD=ddir_vals[3], AA=ddir_vals[4],VA=ddir_vals[5],APW=ddir_vals[6], VPW=ddir_vals[7], AS=ddir_vals[8], VS=ddir_vals[9], VRP=ddir_vals[10], ARP=ddir_vals[11], PVARP=ddir_vals[12], ACTT=ddir_vals[13], RT=ddir_vals[14], RF=ddir_vals[15], RecT=ddir_vals[16]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=ddir_vals[0], URL=ddir_vals[1], MSR=ddir_vals[2], FAVD=ddir_vals[3], AA=ddir_vals[4],VA=ddir_vals[5],APW=ddir_vals[6], VPW=ddir_vals[7], AS=ddir_vals[8], VS=ddir_vals[9], VRP=ddir_vals[10], ARP=ddir_vals[11], PVARP=ddir_vals[12], ACTT=ddir_vals[13], RT=ddir_vals[14], RF=ddir_vals[15], RecT=ddir_vals[16])
                 elif (self.mode == 17):
-                    pacemaker.write(struct.pack('<2B10fH', 0x16, 0x22, mode=self.mode, LRL=dddr_vals[0], URL=dddr_vals[1], MSR=dddr_vals[2], FAVD=dddr_vals[3], DAVD=dddr_vals[4], SAVD=dddr_vals[5], AA=dddr_vals[6],VA=dddr_vals[7],APW=dddr_vals[8], VPW=dddr_vals[9], AS=dddr_vals[10], VS=dddr_vals[11], VRP=dddr_vals[12], ARP=dddr_vals[13], PVARP=dddr_vals[14], PVARPext=dddr_vals[15], H=dddr_vals[16], RS=dddr_vals[17], FBM=dddr_vals[18], ATRD=dddr_vals[19], ATRFB=dddr_vals[20], ACTT=dddr_vals[21], RT=dddr_vals[22], RF=dddr_vals[23], RecT=dddr_vals[24]))
+                    a_val, v_val = self.pacemaker_write(mode=self.mode, LRL=dddr_vals[0], URL=dddr_vals[1], MSR=dddr_vals[2], FAVD=dddr_vals[3], DAVD=dddr_vals[4], SAVD=dddr_vals[5], AA=dddr_vals[6],VA=dddr_vals[7],APW=dddr_vals[8], VPW=dddr_vals[9], AS=dddr_vals[10], VS=dddr_vals[11], VRP=dddr_vals[12], ARP=dddr_vals[13], PVARP=dddr_vals[14], PVARPext=dddr_vals[15], H=dddr_vals[16], RS=dddr_vals[17], FBM=dddr_vals[18], ATRD=dddr_vals[19], ATRFB=dddr_vals[20], ACTT=dddr_vals[21], RT=dddr_vals[22], RF=dddr_vals[23], RecT=dddr_vals[24])
 
-
-                serialdata = pacemaker.read(16)
-                pacemaker.close()
             except:
                 self.egram_window.destroy()
                 messagebox.showinfo("Message", "Pacemaker not connected")
-            a = -6.6 * (struct.unpack('d', serialdata[0:8])[0] - 0.5)
-            v = -6.6 * (struct.unpack('d', serialdata[8:16])[0] - 0.5)
+            a = -6.6 * (a_val - 0.5)
+            v = -6.6 * (v_val - 0.5)
             if (len(self.AtrialData) < 300):
                 self.AtrialData = np.append(self.AtrialData, a)
                 self.VentricleData = np.append(self.VentricleData, v)
@@ -4240,7 +4247,7 @@ class egram(tkinter.Frame):
             self.linesV.set_xdata(self.TimeData)
             self.linesV.set_ydata(self.VentricleData)
             self.canvas.draw()
-            self.egram_window.after(5,self.plot)
+            self.egram_window.after(5,self.plot_vals)
 
     def plot_a(self):
         self.aS = not self.aS
@@ -4259,6 +4266,47 @@ class egram(tkinter.Frame):
         self.avS = not self.avS
         self.AVPlot.set_visible(self.avS)
 
+
+    def pacemaker_write(self, mode = 0 ,APW =0, VPW = 0, LRL = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, URL=0,  AT=0, ReactTime=0, MSR = 0):
+        print("Port is:",port)
+        if (port == 0):
+            return (0,0) #"Pace Maker Not Connected"
+        else:
+            pace_maker = serial.Serial(port="COM" + str(port), baudrate=115200)
+        #pace_maker.open()
+        Header = '<2B4H2f3H2f3Hf2H'
+
+
+        data = struct.pack(Header, 0x16, 0x55, int(mode), int(APW), int(VPW), int(LRL), float(AA), float(VA), int(ARP),
+                           int(VRP), int(AVD), float(AS), float(VS), int(RecovTime), int(RF), int(MSR), float(AT),
+                           int(ReactTime), int(URL))
+
+        # print(len(data))
+        pace_maker.write(data)
+
+        print(len(data))
+
+        try:
+            serialdata = pace_maker.read(pace_maker.in_waiting)
+            print(serialdata)
+            pace_maker.close()
+            unpacked_data = struct.unpack(Header, serialdata)
+            print(unpacked_data)
+
+            # ORDER IS CORRECT
+            # THE FIRST TWO INPUTS ARE THE GRAPH DATA!!!!!!!!
+
+            # print(len(data))
+            graph1 = unpacked_data[0]  # struct.unpack('f', serialdata[0:4])#??
+            graph2 = unpacked_data[1]  # struct.unpack('H', serialdata[0:2])#??
+
+        except:
+            graph1, graph2 = 0,0
+
+        print("Graph1: ", graph1)
+        print("Graph2: ", graph2)
+        return(graph1,graph2)
+
     #-------------------------------------------------------------------------------------------
 
 
@@ -4269,14 +4317,17 @@ class egram(tkinter.Frame):
 
 
 #Communicating with the Pace Maker
-def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, UR=0,  AT=0, ReactTime=0):
+def Communicate(mode = 0 ,APW =0, VPW = 0, LRL = 0 ,AA = 0, VA = 0, ARP =0, VRP=0,AVD=0, AS = 0, VS = 0, RecovTime=0, RF=0, URL=0,  AT=0, ReactTime=0,MSR = 0):
     if (port == 0):
         return "Pace Maker Not Connected"
     else:
         pace_maker = serial.Serial(port="COM" + str(port), baudrate=115200)
 
-    #pace_maker.open()
-    Header = '<2B4H2f3H2f3HfH'
+    try:
+        pace_maker.open()
+    except:
+        print("Already Open")
+    Header = '<2B4H2f3H2f3Hf2H'
     #Header = '<2B4Hf2Hf4HfH3f'
     if (AA == 'OFF'):
         AA = 0
@@ -4284,15 +4335,16 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
         VA = 0
     AA = float(AA)
     VA = float(VA)
-    data = struct.pack(Header, 0x16, 0x55, int(mode),APW, VPW, LR, float(AA), float(VA), ARP, VRP,AVD, float(AS), float(VS), RecovTime, RF, UR,  float(AT), ReactTime)
+    data = struct.pack(Header, 0x16, 0x55, int(mode),int(APW), int(VPW), int(LRL), float(AA), float(VA), int(ARP), int(VRP),int(AVD), float(AS), float(VS), int(RecovTime), int(RF), int(MSR),  float(AT), int(ReactTime),int(URL))
     #print(len(data))
     pace_maker.write(data)
+
 
     print(len(data))
     #time.sleep(0.5)
     print("1")
 
-    serialdata = pace_maker.read(44)
+    serialdata = pace_maker.read(2)
     print("2")
     print(serialdata)
     #pace_maker.close()
@@ -4326,9 +4378,9 @@ def Communicate(mode = 0 ,APW =0, VPW = 0, LR = 0 ,AA = 0, VA = 0, ARP =0, VRP=0
     AT_pacemaker = struct.unpack('f', serialdata[38:42])
     ReactTime_pacemaker = struct.unpack('H', serialdata[42:44])
     print(mode_pacemaker[0], APW_pacemaker[0], VPW_pacemaker[0], LR_pacemaker[0], AA_pacemaker[0], VA_pacemaker[0], ARP_pacemaker[0], VRP_pacemaker[0], AVD_pacemaker[0], AS_pacemaker[0], VS_pacemaker[0], RecovTime_pacemaker[0], RF_pacemaker[0], UR_pacemaker[0], AT_pacemaker[0], ReactTime_pacemaker[0])
-    if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LR and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
+    if (mode_pacemaker[0] == mode and LR_pacemaker[0] == LRL and APW_pacemaker[0] == APW and VPW_pacemaker[0] == VPW and (VA_pacemaker[0] - VA < 0.01) and ARP_pacemaker[
         0] == ARP and VRP_pacemaker[0] == VRP
-            and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and UR_pacemaker[0] == UR and AVD_pacemaker[
+            and (AA_pacemaker[0] - AA < 0.01) and RecovTime_pacemaker[0] == RecovTime and RF_pacemaker[0] == RF and UR_pacemaker[0] == URL and AVD_pacemaker[
                 0] == AVD and (AT_pacemaker[0] - AT < 0.01) and ReactTime_pacemaker[0] == ReactTime and (VS_pacemaker[0] - VS < 0.01)):
         print("Parameters Stored Successfully")
     else:
@@ -4396,10 +4448,10 @@ if __name__=='__main__':
 
     # # Initializing lists for each pacing mode type
     # # AOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width
-    # aoo_vals = [30, 50, 0, 0.05]
+    # aoo_vals = [30, 50, 0, 1]
     # # VOO - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, ARP
-    # voo_vals = [30, 50, 0, 0.05, 150]
+    # voo_vals = [30, 50, 0, 1, 150]
     # # AAI - Lower Rate Limit, Upper Rate Limit, Atrial Amplitude, Atrial Pulse Width, Atrial Sensitivty, ARP, PVARP, Hysterisis, Rate Smoothing
-    # aai_vals = [30, 50, 0, 0.05, 0.25, 150, 150, 0, 0]
+    # aai_vals = [30, 50, 0, 1, 0.25, 150, 150, 0, 0]
     # # VVI - Lower Rate Limit, Upper Rate Limit, Ventricular Amplitude, Ventricular Pulse Width, Ventricular Sensitivity, VRP, Hysterisis, Rate Smoothing
-    # vvi_vals = [30, 50, 0, 0.05, 0.35, 150, 0, 0]
+    # vvi_vals = [30, 50, 0, 1, 0.35, 150, 0, 0]
