@@ -673,6 +673,7 @@ class AOO_Mode(tkinter.Frame):
         global aoo_vals
         if 30 <= int(self.lower_rate_entry.get()) <= 175 and 50 <= int(self.upper_rate_entry.get()) <= 175 and 0.0 <= float(self.atrial_amplitude_entry.get()) <= 7 \
                 and 0.05 <= float(self.atrial_pulse_width_entry.get()) <= 1.9:
+
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global aoo_vals
@@ -3580,7 +3581,7 @@ class DDIR_Mode(tkinter.Frame):
             result = messagebox.askokcancel("Confirmation", "Are you sure?")
             if (result):
                 global ddir_vals
-                ddir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entr.get(),self.fixed_av_delay_entry.get(),self.atrial_amplitude_entry.get(),
+                ddir_vals= [self.lower_rate_entry.get(),self.upper_rate_entry.get(),self.maximum_sensor_rate_entry.get(),self.fixed_av_delay_entry.get(),self.atrial_amplitude_entry.get(),
                             self.ventricular_amplitude_entry.get(),self.atrial_pulse_width_entry.get(),self.ventricular_pulse_width_entry.get(),self.atrial_sensitivity_entry.get(),self.ventricular_sensitivity_entry.get(),self.vrp_entry.get(),self.arp_entry.get(),
                             self.pvarp_entry.get(),self.activity_threshold_entry.get(),
                             self.reaction_time_entry.get(),self.response_factor_entry.get(),self.recovery_time_entry.get()]
@@ -3794,7 +3795,7 @@ class DDIR_Mode(tkinter.Frame):
 
         # Create a "Save" button
         self.save_button = ttk.Button(master=self.ddir_window, text="Save", style='TButton', command=self.update_ddir)
-        self.save_button.grid(row = 17, column = 1)
+        self.save_button.grid(row = 17, column = 0)
 
         # Create a "back" button to return to "Pacing mode"
         self.back_button = ttk.Button(master=self.ddir_window, text="Back to Pacing Modes", command=self.ddir_window.destroy)
